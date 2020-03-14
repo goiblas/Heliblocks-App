@@ -1,0 +1,42 @@
+:root {
+  --spinner-animation-duration: 1.8s;
+  --spinner-color: #65b448;
+  --spinner-size: 38px;
+  --spinner-border-width: 5px;
+}
+.spinner-loading {
+  vertical-align: middle;
+  animation: rotate var(--spinner-animation-duration) infinite linear;
+  align-self: center;
+  stroke: var(--spinner-color);
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+}
+
+.spinner-loading__path {
+  animation: dash calc(var(--spinner-animation-duration) * 0.8) ease-in-out
+    infinite;
+  stroke-linecap: square;
+  stroke-width: var(--spinner-border-width);
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

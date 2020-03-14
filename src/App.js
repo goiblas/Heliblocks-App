@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Routes from "./routes";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { Provider } from "react-redux";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { createFirestoreInstance } from "redux-firestore";
+import firebaseConfig from "./config/firebase";
+import customTheme from "./config/theme";
+import store from "./store";
+
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+};
+
+const rrfProps = {
+  firebase: firebaseConfig,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <ThemeProvider theme={customTheme}>
+          <CSSReset />
+          <Routes />
+        </ThemeProvider>
+      </ReactReduxFirebaseProvider>
+    </Provider>
   );
 }
 

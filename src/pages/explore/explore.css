@@ -1,0 +1,36 @@
+.ais-Hits-item,
+.ais-InfiniteHits-item,
+.ais-InfiniteResults-item,
+.ais-Results-item {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  width: calc(25% - 1rem);
+
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.ais-Hits-list,
+.ais-InfiniteHits-list,
+.ais-InfiniteResults-list,
+.ais-Results-list {
+  padding: 20px 0;
+}
+.card {
+  border: 1px solid #c4c8d8;
+  box-shadow: 0 2px 5px 0 #e3e5ec;
+  display: block;
+}
+.card__preview {
+  height: 160px;
+  overflow: hidden;
+}
+.card__photo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.card__body {
+  padding: 20px;
+}
