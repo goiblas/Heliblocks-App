@@ -1,6 +1,5 @@
-const config = {
-    classname: "hb-block-container",
-    themes: [
+export const classname = "hb-block-container";
+export const themes = [
       {
         id: "twentytwenty",
         name: "Twenty Twenty",
@@ -21,8 +20,9 @@ const config = {
         name: "None",
         stylesheet: ""
       }
-    ],
-    alignments: [
+    ];
+  
+export const alignments = [
       {
         id: "normal",
         name: "Normal",
@@ -38,8 +38,6 @@ const config = {
         name: "Full",
         clasname: "alignfull"
       }
-    ],
-    stylesheets_shared: ["/themes/variables.css", "/themes/shared.css"]
-  }
+    ];
 
-export default config;
+export const stylesheets_shared =  ["/themes/variables.css", "/themes/shared.css"]

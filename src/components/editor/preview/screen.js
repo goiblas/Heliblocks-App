@@ -1,18 +1,20 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
-import { PreviewContext } from './previewContext';
 import ZoomOut from "./zoomOut";
+import useMockup from "./useMockup";
+import { connect } from "react-redux";
 
-const Screen = () => {
+const Screen = ({html, css, alignment, theme}) => {
   const iframeRef = useRef(null);
-  const { html } = useContext(PreviewContext);
-
+  const content = `<style>${css}</style>${html}`;
+  const [ mockup ] = useMockup({content, css, alignment, theme});
+  
   useEffect(() => {
     const iframe = iframeRef.current.contentWindow.document;
     iframe.open();
-    iframe.writeln(html);
+    iframe.writeln(mockup);
     iframe.close();
-  }, [html]);
+  },[mockup]);
 
   return (
     <ZoomOut>
@@ -24,7 +26,13 @@ const Screen = () => {
   );
 };
 
-export default Screen;
+const mapStateToProps = state =>({
+  html: state.creation.html.processed,
+  css: state.creation.css.processed,
+  alignment: state.creation.alignment,
+  theme: state.creation.theme
+})
+export default connect(mapStateToProps)(Screen);
 
 const IframeStyled = styled.iframe`
   border: 0;

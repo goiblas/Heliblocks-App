@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import PreviewConfig from "./config";
-const {
+import {
   themes,
   stylesheets_shared,
   classname,
   alignments
-} = PreviewConfig;
+} from "./config";
 
-const getAlignmentClassname = alignmentId => {
+function getAlignmentClassname(alignmentId) {
   const { clasname } =  alignments.filter( alignment =>  alignment.id === alignmentId)[0];
   return clasname
 };
@@ -20,11 +19,8 @@ function getStylesheetTheme(themeId) {
   return `<link rel="stylesheet" href="${stylesheet}">`;
 }
 
-const useMockup = (initialContent, config) => {
+const useMockup = ({content, theme, alignment}) => {
   const [html, setHtml] = useState("");
-  const [theme, setTheme] = useState(config.theme);
-  const [content, setContent] = useState(initialContent);
-  const [alignment, setAlignment] = useState(config.alignment);
   
   useEffect(() => {
     setHtml(`
@@ -43,14 +39,7 @@ const useMockup = (initialContent, config) => {
         `);
   }, [theme, content, alignment]);
 
-  return {
-    html,
-    setHtml: setContent,
-    theme,
-    setTheme,
-    alignment,
-    setAlignment
-  };
+  return [html];
 };
 
 export default useMockup;
