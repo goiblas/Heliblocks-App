@@ -6,7 +6,7 @@ import { options, theme } from "./config";
 // https://monaco-react.surenatoyan.com/
 // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html
 
-const Controller = ({ language, value, onChange, ...rest }) => {
+const BaseEditor = ({ language, value, onChange, ...rest }) => {
   const handleEditorChange = (ev, newValue) => {
     onChange(newValue);
   };
@@ -22,9 +22,9 @@ const Controller = ({ language, value, onChange, ...rest }) => {
     />
   );
 };
-Controller.propTypes = {
+BaseEditor.propTypes = {
   language: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
-export default Controller;
+export default BaseEditor;

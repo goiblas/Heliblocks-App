@@ -11,7 +11,7 @@ import {
   Link,
   IconButton
 } from "@chakra-ui/core";
-import Controller from "./controller";
+import BaseEditor from "./baseEditor";
 import { useDebouncedCallback } from "use-debounce";
 import { debounceTime } from "./config";
 
@@ -54,7 +54,7 @@ const Panel = ({
           </Menu>
         )}
       </Box>
-      <Controller
+      <BaseEditor
         language={language}
         value={value}
         onChange={debouncedCallback}

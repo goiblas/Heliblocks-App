@@ -3,7 +3,7 @@ import { setHtmlSource } from "./../../../store/creation/actions";
 import CodeEditor from "./panel";
 import { connect } from "react-redux";
 
-const HtmlEditor = ({ html, setHtml }) => (
+const HtmlEditorComponent = ({ html, setHtml }) => (
     <CodeEditor
         language={html.preprocessor}
         value={html.source}
@@ -16,5 +16,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     setHtml: setHtmlSource,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HtmlEditor);
-  
+export const HtmlEditor = connect(mapStateToProps, mapDispatchToProps)(HtmlEditorComponent);

@@ -3,7 +3,7 @@ import { setCssPreprocessor, setCssSource } from "./../../../store/creation/acti
 import CodeEditor from "./panel";
 import { connect } from "react-redux";
 
-const HtmlEditor = ({ css, setCss, setCssPreprocessor }) => (
+const cssEditorComponent = ({ css, setCss, setCssPreprocessor }) => (
     <CodeEditor
         language={css.preprocessor}
         availableLanguages={["css", "scss"]}
@@ -20,5 +20,5 @@ const mapDispatchToProps = {
     setCssPreprocessor
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HtmlEditor);
+export const CssEditor = connect(mapStateToProps, mapDispatchToProps)(cssEditorComponent);
   
