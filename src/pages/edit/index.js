@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import Loading from "../../components/loading";
 import NotFound from "../notFound";
-import { saveCreation, getCreationById } from "./../../store/creation/actions";
-import { ProtectedButton } from "./../../components/menus";
+import { getCreationById } from "./../../store/creation/actions";
+
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
 );
 
-const EditCreation = ({ creation, auth, getCreationById, save }) => {
+const EditCreation = ({ creation, auth, getCreationById }) => {
   const { heliblockId } = useParams();
 
   useEffect(() => {
@@ -26,13 +26,7 @@ const EditCreation = ({ creation, auth, getCreationById, save }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <Editor action={ 
-          <ProtectedButton
-            onClick={save}
-            disabled={!creation.hasUnsavedChanges}
-          >
-            Save
-          </ProtectedButton>} />
+      <Editor />
     </Suspense>
   );
 };
@@ -43,7 +37,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getCreationById: id => dispatch(getCreationById(id)),
-  save: id => dispatch(saveCreation())
+  getCreationById: id => dispatch(getCreationById(id))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditCreation);

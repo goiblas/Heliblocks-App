@@ -1,6 +1,5 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import PropTypes from "prop-types";
-
 import {
   Modal,
   ModalOverlay,
@@ -13,13 +12,13 @@ import {
   Button,
   FormLabel,
   FormControl,
-  Input,
   Textarea
 } from "@chakra-ui/core";
-
 import SelectTags from "./selectTags";
+import { updateCreation } from "./../../../store/creation/actions";
+import { connect } from "react-redux";
 
-const ModalSettings = ({ aditional, description, tags, setProp, ...props }) => {
+const Settings = ({ description, tags, setProp, ...props }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
 
@@ -59,17 +58,10 @@ const ModalSettings = ({ aditional, description, tags, setProp, ...props }) => {
               <FormLabel>Tags</FormLabel>
               <SelectTags
                 onChange={tags => setState({ tags })}
-                placeholder="Add tags"
                 value={state.tags}
               />
             </FormControl>
 
-            {aditional && (
-              <FormControl mt={4}>
-                <FormLabel>{aditional.label}</FormLabel>
-                {aditional.node}
-              </FormControl>
-            )}
           </ModalBody>
 
           <ModalFooter>
@@ -82,16 +74,18 @@ const ModalSettings = ({ aditional, description, tags, setProp, ...props }) => {
     </>
   );
 };
+const mapStateToProps = state => ({
+  tags: state.creation.tags,
+  description: state.creation.description
+})
+const mapDispatchToProps = {
+  setProp: updateCreation
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 
-export default ModalSettings;
-
-ModalSettings.propTypes = {
+Settings.propTypes = {
   ...Button.propTypes,
   tags: PropTypes.arrayOf(PropTypes.string),
   description: PropTypes.string,
   setProp: PropTypes.func,
-  aditional: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    node: PropTypes.node.isRequired
-  })
 };

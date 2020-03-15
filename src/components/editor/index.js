@@ -1,77 +1,128 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Layout from "./layout";
-import NavBar from "./navBar";
+import useMediaQuery from "react-use-media-query-hook";
+import Settings from "./settings";
 import Title from "./title";
-import CodeEditor from "./codeEditor";
+import Save from "./save";
+import Copycode from "./copycode";
+import {CssEditor, HtmlEditor } from "./codeEditors";
 import Preview from "./preview";
-import { connect } from "react-redux";
+import { Logo, UserMenu } from "./../menus";
+import { Box, Flex, useTheme, Tabs,
+  Grid,
+  TabPanel,
+  TabPanels,
+  TabList,
+  Tab } from "@chakra-ui/core";
+import { Container, Section, Bar } from "react-simple-resizer";
 import {
-  updateCreation,
   setCssSource,
   setHtmlSource,
   setCssPreprocessor
 } from "../../store/creation/actions";
 
-import { UserMenu } from "./../menus";
-
-const Editor = ({
-  action,
-  creation,
-  setProp,
-  setHtml,
-  setCss,
-  setCssPreprocessor
-}) => (
-  <Layout
-    title={
-      <Title value={creation.title} onChange={title => setProp({ title })} />
-    }
-    navBar={
-      <NavBar
-        tags={creation.tags}
-        setProp={setProp}
-        description={creation.description}
-        action={action}
-        id={creation.id}
-      />
-    }
-    menuUser={<UserMenu ml="2" />}
-    css={
-      <CodeEditor
-        language={creation.css.preprocessor}
-        availableLanguages={["css", "scss"]}
-        onChangeLanguage={setCssPreprocessor}
-        value={creation.css.source}
-        onChange={setCss}
-      />
-    }
-    html={
-      <CodeEditor
-        language={creation.html.preprocessor}
-        value={creation.html.source}
-        onChange={setHtml}
-      />
-    }
-    preview={<Preview 
-      theme={creation.theme}
-      alignment={creation.alignment}
-      html={creation.html.processed} css={creation.css.processed} />}
-  />
-);
-
-const mapStateToProps = state => ({
-  creation: state.creation
-});
-const mapDispatchToProps = {
-  setProp: updateCreation,
-  setHtml: setHtmlSource,
-  setCss: setCssSource,
-  setCssPreprocessor
+const Divider = ({ style, ...rest }) => {
+  const theme = useTheme();
+  return (
+    <Bar
+      size={7}
+      style={{ background: theme.colors.gray[100], ...style }}
+      {...rest}
+    />
+  );
+};
+  
+const tabStyled = {
+  borderTopWidth: "3px",
+  borderColor: "white",
+  fontSize: "sm",
+  paddingX: [2, 6],
+  _selected: { color: "blue.500", borderColor: "blue.500" }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+const Editor = ({ action }) => {
+  const isDesktop = useMediaQuery("(min-width: 880px)");
+  const [dragging, setDragging] = useState(false);
+  const { colors } = useTheme();
 
-Editor.protoTypes = {
-  action: PropTypes.node.isRequired
-};
+  return isDesktop ? (
+    <>
+    <Box borderBottomWidth="1px" px="4">
+      <Flex height="55px" justifyContent="space-between" alignItems="center">
+        <Logo />
+        <Title />
+        <Copycode />
+        <Flex justifyContent="space-between" flexGrow="1">
+          <Box ml="auto">
+            <Settings mr="2" />
+            <Save />
+            <UserMenu />
+          </Box>
+        </Flex>
+      </Flex>
+    </Box>
+    <Box as={Container} h="calc(100vh - 56px)">
+      <Section defaultSize={620} minSize={100}>
+        <Container vertical={true} style={{ height: "100%" }}>
+          <Section minSize={48}>
+            <HtmlEditor />
+          </Section>
+          <Divider />
+          <Section minSize={48}>
+            <CssEditor />
+          </Section>
+        </Container>
+      </Section>
+      <Divider onStatusChanged={setDragging} />
+      <Section
+        style={{
+          borderLeft: `1px solid ${colors.gray["200"]}`,
+          background: "#fff",
+          pointerEvents: dragging ? "none" : "auto"
+        }}
+        minSize={220}
+      >
+        <Preview />
+      </Section>
+    </Box>
+  </>
+  ) : (
+    <Grid h="100vh" templateRows="56px 1fr">
+    <Box borderBottomWidth="1px" px="4">
+      <Flex height="55px" justifyContent="space-between" alignItems="center">
+        <Logo />
+        <Title />
+        <Copycode narrow />
+        <UserMenu />
+      </Flex>
+    </Box>
+
+    <Tabs variant="unstyled" d="flex" flexDir="column">
+      <TabPanels flexGrow="1">
+        <TabPanel h="100%"><HtmlEditor /></TabPanel>
+        <TabPanel h="100%"><CssEditor /></TabPanel>
+        <TabPanel h="100%"><Preview /></TabPanel>
+      </TabPanels>
+      <Flex justifyContent="space-between" borderTopWidth="1px">
+        <TabList>
+          <Tab {...tabStyled}>HMTL</Tab>
+          <Tab {...tabStyled}>CSS</Tab>
+          <Tab {...tabStyled}>Preview</Tab>
+        </TabList>
+        <Flex p="2" justifyContent="space-between" flexGrow="1">
+          <Box ml="auto">
+            <Settings
+                size="sm"
+                mr="3"
+                variant="link" 
+              />
+            <Save />
+          </Box>
+        </Flex>
+      </Flex>
+    </Tabs>
+  </Grid>
+  )
+}
+
+export default Editor;

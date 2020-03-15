@@ -3,31 +3,30 @@ import PropTypes from "prop-types";
 import CreatableSelect from "react-select/creatable";
 import { useTheme } from "@chakra-ui/core";
 
-const SelectTags = props => {
+const mapStringsToTags = stringTag => ({
+  label: stringTag,
+  value: stringTag
+});
+const clearOptions = options => options.map(({ value }) => value);
+const defaultTags = [
+  "Hero",
+  "Testimonials",
+  "Team",
+  "Features",
+  "Princing",
+  "Gallery",
+  "Content",
+  "Card"
+].map(mapStringsToTags);
+
+const SelectTags = ({ value, onChange }) => {
   const theme = useTheme();
   const [tags, setTags] = useState([]);
 
-  const mapStringsToTags = stringTag => ({
-    label: stringTag,
-    value: stringTag
-  });
-  const clearOptions = options => options.map(({ value }) => value);
-
-  const defaultTags = [
-    "Hero",
-    "Testimonials",
-    "Team",
-    "Features",
-    "Princing",
-    "Gallery",
-    "Content",
-    "Card"
-  ].map(mapStringsToTags);
-
   useEffect(() => {
-    const tagsParsed = props.value.map(mapStringsToTags);
+    const tagsParsed = value.map(mapStringsToTags);
     setTags(tagsParsed);
-  }, [props.value]);
+  }, [value]);
 
   // https://react-select.com/styles
   const customStyles = {
@@ -49,16 +48,16 @@ const SelectTags = props => {
   const handleChange = (newValue, actionMeta) => {
     if (newValue) {
       const options = clearOptions(newValue);
-      props.onChange(options);
+      onChange(options);
     } else {
-      props.onChange([]);
+      onChange([]);
     }
   };
   return (
     <CreatableSelect
       isMulti
       styles={customStyles}
-      placeholder={props.placeholder}
+      placeholder="Add tags"
       value={tags}
       theme={selecteTheme => ({
         ...selecteTheme,
@@ -98,6 +97,5 @@ export default SelectTags;
 
 SelectTags.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string),
-  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired
 };

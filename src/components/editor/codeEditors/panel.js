@@ -11,7 +11,7 @@ import {
   Link,
   IconButton
 } from "@chakra-ui/core";
-import CodeEditor from "./codeEditor";
+import Controller from "./controller";
 import { useDebouncedCallback } from "use-debounce";
 import { debounceTime } from "./config";
 
@@ -26,10 +26,7 @@ const Panel = ({
   return (
     <Grid templateRows="56px 1fr" h="100%">
       <Box px="4" py="3">
-        <Text as="span" fontWeight="semibold" fontSize="sm">
-          {" "}
-          {language.toUpperCase()}{" "}
-        </Text>
+        <Text as="span" fontWeight="semibold" fontSize="sm">{language.toUpperCase()}</Text>
         {availableLanguages && (
           <Menu>
             <MenuButton size="sm" as={Link}>
@@ -57,7 +54,7 @@ const Panel = ({
           </Menu>
         )}
       </Box>
-      <CodeEditor
+      <Controller
         language={language}
         value={value}
         onChange={debouncedCallback}

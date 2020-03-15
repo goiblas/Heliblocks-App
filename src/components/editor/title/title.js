@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Editable, EditablePreview, EditableInput } from "@chakra-ui/core";
+import { connect } from "react-redux";
+import { updateCreation } from "./../../../store/creation/actions";
 
 const Title = ({ value, onChange, ...props }) => (
   <Editable
@@ -22,7 +24,14 @@ const Title = ({ value, onChange, ...props }) => (
   </Editable>
 );
 
-export default Title;
+const mapStateToProps = state => ({
+  value: state.creation.title
+});
+const mapDispatchToProps = {
+  onChange: title => updateCreation({ title }),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Title);
 
 Title.propTypes = {
   ...Editable.propTypes,
