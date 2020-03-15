@@ -3,18 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Loading from "./../../components/loading";
-import { saveNewCreation } from "./../../store/creation/actions";
-import { ProtectedButton } from "./../../components/menus";
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
 );
 
-const Create = ({ auth, creation, save }) => {
+const Create = ({ auth, creationId }) => {
   const history = useHistory();
 
-  if (creation.id) {
-    history.push(`/heliblock/${creation.id}`);
+  if (creationId) {
+    history.push(`/heliblock/${creationId}`);
   }
 
   if (!auth.isLoaded) {
@@ -24,13 +22,7 @@ const Create = ({ auth, creation, save }) => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <Editor action={ 
-          <ProtectedButton
-            onClick={save}
-            disabled={!creation.hasUnsavedChanges}
-          >
-            Save
-          </ProtectedButton>} />
+        <Editor />
       </Suspense>
     </>
   );
@@ -40,14 +32,10 @@ Create.prototype = {
     id: PropTypes.string
   }).isRequired,
   auth: PropTypes.object.isRequired,
-  save: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   auth: state.firebase.auth,
-  creation: state.creation
+  creationId: state.creation.id
 });
 
-const mapDispathToProps = dispatch => ({
-  save: () => dispatch(saveNewCreation())
-});
-export default connect(mapStateToProps, mapDispathToProps)(Create);
+export default connect(mapStateToProps)(Create);

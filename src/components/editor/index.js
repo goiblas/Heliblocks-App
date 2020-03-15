@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import useMediaQuery from "react-use-media-query-hook";
 import Settings from "./settings";
 import Title from "./title";
+import Save from "./save";
 import Copycode from "./copycode";
 import {CssEditor, HtmlEditor } from "./codeEditors";
 import Preview from "./preview";
@@ -54,7 +55,7 @@ const Editor = ({ action }) => {
         <Flex justifyContent="space-between" flexGrow="1">
           <Box ml="auto">
             <Settings mr="2" />
-            {action}
+            <Save />
             <UserMenu />
           </Box>
         </Flex>
@@ -115,7 +116,7 @@ const Editor = ({ action }) => {
                 mr="3"
                 variant="link" 
               />
-            {action}
+            <Save />
           </Box>
         </Flex>
       </Flex>
@@ -125,7 +126,3 @@ const Editor = ({ action }) => {
 }
 
 export default Editor;
-
-Editor.protoTypes = {
-  action: PropTypes.node.isRequired
-};
