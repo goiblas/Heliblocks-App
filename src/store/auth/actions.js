@@ -9,13 +9,18 @@ export const signIn = () => async (
   const provider = new firebase.auth.GithubAuthProvider();
   try {
     const { user } = await firebase.auth().signInWithPopup(provider);
+
     await firestore
       .collection("users")
       .doc(user.uid)
-      .set({
-        photoURL: user.photoURL,
-        displayName: user.displayName
-      });
+      .set(
+        {
+          photoURL: user.photoURL,
+          displayName: user.displayName,
+          githubID: user.providerData[0].uid
+        },
+        { merge: true }
+      );
   } catch (error) {}
 };
 

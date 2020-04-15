@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "./../../store/auth/actions";
 import {
@@ -9,7 +9,6 @@ import {
   MenuList,
   Avatar,
   MenuItem,
-  MenuDivider,
   Text
 } from "@chakra-ui/core";
 import useMediaQuery from "react-use-media-query-hook";
@@ -44,11 +43,10 @@ export const UserMenu = ({ profile, auth, signOut }) => {
           </Text>
         )}
       </MenuButton>
-      <MenuList placement="bottom-end">
-        <MenuItem as={NavLink} to={`/user/${auth.uid}`}>
+      <MenuList placement="bottom-end" zIndex="tooltip">
+        <MenuItem as={Link} to={`/user/${auth.uid}`}>
           Profile
         </MenuItem>
-        <MenuDivider />
         <MenuItem data-testid="logout-button" onClick={signOut}>
           Log Out
         </MenuItem>
