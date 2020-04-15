@@ -23,6 +23,7 @@
     "react-scripts": "3.4.0",
     "react-select": "^3.0.8",
     "react-simple-resizer": "^2.1.0",
+    "react-timeago": "^4.4.0",
     "react-use-media-query-hook": "0.0.1",
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
