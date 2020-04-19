@@ -27,7 +27,7 @@ const DesktopEditor = () => {
 
   return (
     <>
-      <Box borderBottomWidth="1px" px="4">
+      <Box borderBottomWidth="1px" px="4" data-testid="desktop-editor">
         <Flex height="55px" justifyContent="space-between" alignItems="center">
           <Logo narrow />
           <Title />
