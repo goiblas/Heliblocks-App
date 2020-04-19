@@ -24,7 +24,8 @@ const Panel = ({
 }) => {
   const [debouncedCallback] = useDebouncedCallback(onChange, debounceTime);
   return (
-    <Grid templateRows="56px 1fr" h="100%">
+    // 400px => 1fr
+    <Grid templateRows="56px 400px" h="100%">
       <Box px="4" py="3">
         <Text as="span" fontWeight="semibold" fontSize="sm">{language.toUpperCase()}</Text>
         {availableLanguages && (

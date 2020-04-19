@@ -1,6 +1,4 @@
-import React, { Suspense, lazy } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useState, Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
 import Loading from "./../../components/loading";
 
@@ -8,34 +6,24 @@ const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
 );
 
-const Create = ({ auth, creationId }) => {
+const Create = () => {
   const history = useHistory();
+  const [ saving, setSaving ] = useState(false)
 
-  if (creationId) {
-    history.push(`/heliblock/${creationId}`);
+  const onSave = ( heliblock) => {
+    // save then recive id 
+    // id  push to edit url
+    console.log('save..')
+    console.log(heliblock)
+    //history.push(`/heliblock/${creationId}`);
   }
-
-  if (!auth.isLoaded) {
-    return <Loading />;
-  }
-
+  
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <Editor />
+        <Editor onSave={ onSave } />
       </Suspense>
     </>
   );
 };
-Create.prototype = {
-  create: PropTypes.shape({
-    id: PropTypes.string
-  }).isRequired,
-  auth: PropTypes.object.isRequired,
-};
-const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  creationId: state.creation.id
-});
-
-export default connect(mapStateToProps)(Create);
+export default Create;

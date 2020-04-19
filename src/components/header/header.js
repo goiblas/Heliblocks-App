@@ -5,12 +5,10 @@ import styled from "@emotion/styled";
 import { Global, css } from "@emotion/core";
 import { UserMenu, SignIn } from "./../menus";
 import useMediaQuery from "react-use-media-query-hook";
-// import Logo from "../logo";
-import { Box, Button, useTheme, Flex } from "@chakra-ui/core";
+import { Box, Button, useTheme } from "@chakra-ui/core";
 import { Logo } from "./../../theme/logo";
 
-export const Header = ({ auth }) => {
-  const { isLoaded, uid } = auth;
+export const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery("(max-width: 700px)");
 
@@ -40,7 +38,7 @@ export const Header = ({ auth }) => {
           </Button>
         )}
 
-        {isLoaded && (uid ? <UserMenu /> : <SignIn />)}
+        <UserMenu />
       </StickyMenu>
     </WrapperHeader>
   );
@@ -51,7 +49,7 @@ const mapStateToProps = state => ({
   profile: state.firebase.profile
 });
 
-export default connect(mapStateToProps)(Header);
+export default Header;
 
 const DesktopSpace = styled.div`
   display: none;

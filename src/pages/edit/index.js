@@ -1,29 +1,32 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
 import Loading from "../../components/loading";
 import NotFound from "../notFound";
-import { getCreationById } from "./../../store/creation/actions";
-
+import { getHeliblock } from "./../../services/database"
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
 );
 
-const EditCreation = ({ creation, auth, getCreationById }) => {
+const EditCreation = () => {
   const { heliblockId } = useParams();
+  const [ heliblock, setHeliblock ] =  useState(null);
 
   useEffect(() => {
-    getCreationById(heliblockId);
-  }, []);
+    getHeliblock(heliblockId)
+            .then( setHeliblock)
+            .catch( error => {
+              // @TODO send to sentry.io ¿?
+            });
+  }, [heliblockId]);
 
-  if (creation.notFound) {
-    return <NotFound />;
-  }
-
-  if (!creation || !auth.isLoaded) {
+  if (!heliblock) {
     return <Loading />;
   }
 
+  if (heliblock.notFound) {
+    return <NotFound />;
+  }
+  console.log(heliblock)
   return (
     <Suspense fallback={<Loading />}>
       <Editor />
@@ -31,12 +34,4 @@ const EditCreation = ({ creation, auth, getCreationById }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  creation: state.creation,
-  auth: state.firebase.auth
-});
-
-const mapDispatchToProps = dispatch => ({
-  getCreationById: id => dispatch(getCreationById(id))
-});
-export default connect(mapStateToProps, mapDispatchToProps)(EditCreation);
+export default EditCreation;

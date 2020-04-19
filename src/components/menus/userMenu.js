@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { signOut } from "./../../store/auth/actions";
 import {
   Button,
   Menu,
@@ -13,16 +11,17 @@ import {
 } from "@chakra-ui/core";
 import useMediaQuery from "react-use-media-query-hook";
 import SignIn from "./signIn";
+import { AuthContext, signOut } from "./../../services/auth";
 
-export const UserMenu = ({ profile, auth, signOut }) => {
+export const UserMenu = () => {
   const isTablet = useMediaQuery("(min-width: 600px)");
-  const { isLoaded, uid } = auth;
+  const { isLoaded, user } = useContext(AuthContext);
 
   if (!isLoaded) {
     return null;
   }
 
-  if (!uid) {
+  if (!user) {
     return <SignIn ml="4" />;
   }
 
@@ -36,15 +35,15 @@ export const UserMenu = ({ profile, auth, signOut }) => {
         variant="link"
         rightIcon="chevron-down"
       >
-        <Avatar name="Kent Dodds" size="sm" src={profile.photoURL} />
+        <Avatar name="Kent Dodds" size="sm" src={user.photoURL} />
         {isTablet && (
           <Text as="span" ml="2">
-            {profile.displayName}
+            {user.displayName}
           </Text>
         )}
       </MenuButton>
       <MenuList placement="bottom-end" zIndex="tooltip">
-        <MenuItem as={Link} to={`/user/${auth.uid}`}>
+        <MenuItem as={Link} to={`/user/${user.uid}`}>
           Profile
         </MenuItem>
         <MenuItem data-testid="logout-button" onClick={signOut}>
@@ -55,8 +54,4 @@ export const UserMenu = ({ profile, auth, signOut }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  profile: state.firebase.profile,
-  auth: state.firebase.auth
-});
-export default connect(mapStateToProps, { signOut })(UserMenu);
+export default UserMenu;

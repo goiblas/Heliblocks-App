@@ -1,36 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { saveNewCreation, saveCreation } from "./../../../store/creation/actions";
+import React, { useContext } from "react";
 import { ProtectedButton } from "./../../menus";
+import { EditorContext } from "./../editorContext"
 
-const Save = ( {profile, hasUnsavedChanges, saveNew, save, creationId, ...props } ) => {
-    const { isLoaded } = profile;
+const Save = ( props ) => {
+    const { save, hasUnsavedChanges } = useContext(EditorContext);
+    const disabled = !hasUnsavedChanges;
     
-    if (!isLoaded) {
-        return null;
-    }
-
-    const clickHandle = () => {
-        if(!creationId) {
-            saveNew()
-            return
-        }
-        if(Array.isArray(profile.heliblocks) && profile.heliblocks.includes(creationId)) {
-            save()
-            return 
-        }
-
-        // @todo fork action
-        console.log('Fork!!')
-    }
-
-    const isOwner = !creationId || (Array.isArray(profile.heliblocks) && profile.heliblocks.includes(creationId));
-    const disabled = isOwner && !hasUnsavedChanges;
-
     const buttonProps = {
-        variantColor: isOwner ? "blue": "teal",
+        variantColor: "blue",
         fontWeight: "normal",
-        leftIcon: isOwner ? "cloud": "copy",
+        leftIcon: "cloud",
         size: "md",
         ...props
       };
@@ -38,25 +17,13 @@ const Save = ( {profile, hasUnsavedChanges, saveNew, save, creationId, ...props 
     return (
         <ProtectedButton
             {...buttonProps}
-            onClick={clickHandle}
+            onClick={save}
             disabled={disabled}
             >
-            {isOwner ? "Save": "Fork"}
+            {"Save"}
         </ProtectedButton>
     )
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  creationId: state.creation.id,
-  hasUnsavedChanges: state.creation.hasUnsavedChanges,
-  profile: state.firebase.profile
-});
-
-const mapDispatchToProps = {
-    saveNew: saveNewCreation,
-    save: saveCreation
-}
-  
-export default connect(mapStateToProps, mapDispatchToProps)(Save);
+export default Save;
   

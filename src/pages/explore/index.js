@@ -1,18 +1,15 @@
 import React from "react";
 import algoliasearch from "algoliasearch/lite";
-import { Link } from "react-router-dom";
 import Header from "./../../components/header";
 import {
   InstantSearch,
-  Hits,
   SearchBox,
   Pagination,
-  connectStateResults
+  connectStateResults,
 } from "react-instantsearch-dom";
-import PropTypes from "prop-types";
 import "./explore.css";
 import { Box } from "@chakra-ui/core";
-import { Card } from "./../../components/card";
+import Results from "./results";
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -30,13 +27,16 @@ const Explore = porps => (
         <div className="search-panel">
           <div className="search-panel__results">
             <Box mb="4" py="40px" maxW="1400px" mx="auto">
-              <SearchBox
-                className="searchbox"
-                translations={{
-                  placeholder: ""
-                }}
-              />
-              <Hits hitComponent={Hit} />
+
+                <SearchBox
+                  className="searchbox"
+                  translations={{
+                    placeholder: ""
+                  }}
+                  submit={null}
+                />
+              <Results />
+ 
               <ResultNotFound />
               <div className="pagination">
                 <Pagination />
@@ -48,18 +48,6 @@ const Explore = porps => (
     </div>
   </>
 );
-
-const Hit = props => {
-  const { title, description, screenshot, objectID, author } = props.hit;
-  console.log(author);
-  return (
-    <Card title={title} screenshot={screenshot} id={objectID} author={author} />
-  );
-};
-
-Hit.propTypes = {
-  hit: PropTypes.object.isRequired
-};
 
 const ResultNotFound = connectStateResults(props => {
   const { searchResults, searchState } = props;

@@ -1,24 +1,34 @@
-import React from "react";
-import { setCssPreprocessor, setCssSource } from "./../../../store/creation/actions";
+import React, { useEffect, useContext } from "react";
 import CodeEditor from "./panel";
-import { connect } from "react-redux";
+import { EditorContext } from "./../editorContext"
+import { usePreprocess } from "../../../services/preprocess/";
 
-const cssEditorComponent = ({ css, setCss, setCssPreprocessor }) => (
-    <CodeEditor
-        language={css.preprocessor}
-        availableLanguages={["css", "scss"]}
-        onChangeLanguage={setCssPreprocessor}
-        value={css.source}
-        onChange={setCss}
-  />
-) 
-const mapStateToProps = state => ({
-    css: state.creation.css
-});
-const mapDispatchToProps = {
-    setCss: setCssSource,
-    setCssPreprocessor
-};
 
-export const CssEditor = connect(mapStateToProps, mapDispatchToProps)(cssEditorComponent);
-  
+export const CssEditor = () => {
+    const { css, setCss } = useContext(EditorContext)
+    const { processed, preprocess } = usePreprocess(css.preprocessor)
+    
+    const onChange = (source) => {
+        setCss({ source })
+        preprocess(source)
+    }
+
+    useEffect( () => {
+        if( processed !== null) {
+            setCss({ processed })
+        }
+    }, [ processed ])
+
+    const setCssPreprocessor = (preprocessor) =>  setCss({preprocessor})
+
+    return (
+        <CodeEditor
+            language={css.preprocessor}
+            availableLanguages={["css", "scss"]}
+            onChangeLanguage={setCssPreprocessor}
+            value={css.source}
+            onChange={onChange}
+        />
+    )
+
+}  

@@ -9,11 +9,6 @@ import { UserMenu } from "./../menus";
 import Logo from "./../logo";
 import { Box, Flex, useTheme } from "@chakra-ui/core";
 import { Container, Section, Bar } from "react-simple-resizer";
-import {
-  setCssSource,
-  setHtmlSource,
-  setCssPreprocessor
-} from "../../store/creation/actions";
 
 const Divider = ({ style, ...rest }) => {
   const theme = useTheme();

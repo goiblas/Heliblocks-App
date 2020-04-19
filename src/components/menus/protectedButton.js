@@ -1,7 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
-import { signIn } from "./../../store/auth/actions";
-
+import React, { useContext } from "react";
+import { signInWithGithub, AuthContext } from "./../../services/auth" 
 import {
   Modal,
   ModalOverlay,
@@ -15,14 +13,10 @@ import {
   Heading
 } from "@chakra-ui/core";
 
-const ProtectedButton = ({ auth, signIn, ...props }) => {
+const ProtectedButton = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
-  const { isLoaded, uid } = auth;
-
-  if (!isLoaded) {
-    return null;
-  }
+  const { isLoaded, user } = useContext(AuthContext);
 
   const buttonProps = {
     variantColor: "blue",
@@ -32,32 +26,29 @@ const ProtectedButton = ({ auth, signIn, ...props }) => {
     ...props
   };
 
-  if (uid) {
-    return <Button {...buttonProps} />;
+  if (!user) {
+    return (
+      <>
+        <Button {...buttonProps} isDisabled={!isLoaded} onClick={onOpen} />
+        <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader />
+            <ModalCloseButton />
+            <ModalBody textAlign="center" pb={6}>
+              <Heading size="lg">Ups!</Heading>
+              <Text mb="4">Need to be register</Text>
+              <Button variantColor="blue" leftIcon="github" onClick={signInWithGithub}>
+                Login with Github
+              </Button>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </>
+     );
   }
-
-  return (
-    <>
-      <Button {...buttonProps} onClick={onOpen} />
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader />
-          <ModalCloseButton />
-          <ModalBody textAlign="center" pb={6}>
-            <Heading size="lg">Ups!</Heading>
-            <Text mb="4">Need to be register</Text>
-            <Button variantColor="blue" leftIcon="github" onClick={signIn}>
-              Login with Github
-            </Button>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+  
+  return <Button {...buttonProps} />;
 };
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
-export default connect(mapStateToProps, { signIn })(ProtectedButton);
+export default ProtectedButton;

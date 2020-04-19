@@ -3,7 +3,7 @@ import "./loading.css";
 
 const Loading = () => {
   return (
-    <svg viewBox="0 0 50 50" className="spinner-loading" shapeRendering="auto">
+    <svg viewBox="0 0 50 50" className="spinner-loading" shapeRendering="auto" data-testid="loading">
       <circle
         className="spinner-loading__path"
         cx="25"

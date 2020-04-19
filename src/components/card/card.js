@@ -1,15 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 import {
   Box,
-  Avatar,
-  Text,
-  Menu,
-  MenuButton,
-  Flex,
-  Image,
-  Icon
+  Text
 } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import Auhtor from "./author";

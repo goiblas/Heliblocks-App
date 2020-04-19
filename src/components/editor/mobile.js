@@ -17,11 +17,6 @@ import {
   TabList,
   Tab
 } from "@chakra-ui/core";
-import {
-  setCssSource,
-  setHtmlSource,
-  setCssPreprocessor
-} from "../../store/creation/actions";
 
 const tabStyled = {
   borderTopWidth: "3px",
@@ -33,7 +28,7 @@ const tabStyled = {
 
 const MobileEditor = () => {
   return (
-    <Grid h="100vh" templateRows="56px 1fr">
+    <Grid h="100vh" templateRows="56px 1fr" data-testid="mobile-editor">
       <Box borderBottomWidth="1px" px="2">
         <Flex height="55px" justifyContent="space-between" alignItems="center">
           <Logo narrow />
