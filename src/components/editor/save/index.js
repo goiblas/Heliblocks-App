@@ -3,7 +3,7 @@ import { ProtectedButton } from "./../../menus";
 import { EditorContext } from "./../editorContext"
 
 const Save = ( props ) => {
-    const { save, hasUnsavedChanges } = useContext(EditorContext);
+    const { save, hasUnsavedChanges, saving } = useContext(EditorContext);
     const disabled = !hasUnsavedChanges;
     
     const buttonProps = {
@@ -11,6 +11,7 @@ const Save = ( props ) => {
         fontWeight: "normal",
         leftIcon: "cloud",
         size: "md",
+        loadingText: "Saving",
         ...props
       };
 
@@ -19,6 +20,8 @@ const Save = ( props ) => {
             {...buttonProps}
             onClick={save}
             disabled={disabled}
+            data-testid="save-button"
+            isLoading={saving}
             >
             {"Save"}
         </ProtectedButton>

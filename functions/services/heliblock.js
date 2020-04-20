@@ -11,8 +11,7 @@ class Heliblock {
     description,
     tags,
     template,
-    theme,
-    publised
+    theme
   }) {
     this.css = css;
     this.html = html;
@@ -26,7 +25,6 @@ class Heliblock {
     this.tags = tags;
     this.template = template;
     this.theme = theme;
-    this.publised = publised;
 
     this.publicAuthor = {
       displayName: "Unknown",

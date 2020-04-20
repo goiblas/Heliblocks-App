@@ -16,6 +16,7 @@ const Title = ( props ) => {
             placeholder="Add title"
             onSubmit={onChange}
             defaultValue={title}
+            data-testid="editor-title"
             {...props}
         >
         <EditablePreview

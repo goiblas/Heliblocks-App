@@ -1,2 +1,4 @@
-export * from "./users"
-export * from "./heliblocks"
+import { database } from "../firebase";
+export const getCollection = name => database.collection(name)
+
+export * from "./utils"

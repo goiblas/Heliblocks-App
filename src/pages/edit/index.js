@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import NotFound from "../notFound";
-import { getHeliblock } from "./../../services/database"
+import { getHeliblock } from "./../../services/heliblocks"
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
 );
@@ -26,7 +26,7 @@ const EditCreation = () => {
   if (heliblock.notFound) {
     return <NotFound />;
   }
-  console.log(heliblock)
+
   return (
     <Suspense fallback={<Loading />}>
       <Editor />

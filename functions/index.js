@@ -57,7 +57,7 @@ exports.addToAlgolia = functions.firestore.document('heliblocks/{id}')
 
   const content = change.after.data();
   
-  if(!content.screenshot || !content.publised) {
+  if(!content.screenshot) {
     return null
   }
 

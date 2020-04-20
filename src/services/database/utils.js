@@ -1,3 +1,6 @@
+import firebase from "./../firebase"
+
+export const addToArray = value => firebase.firestore.FieldValue.arrayUnion(value)
 
 export const handleResponse = doc => {
     if(doc.exists) {
@@ -12,3 +15,7 @@ export const handleResponse = doc => {
     }
 }
 
+export const handleError = error => {
+    // @TODO send to sentry.io
+    throw new Error("Something went wrong")
+}

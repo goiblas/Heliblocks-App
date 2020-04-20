@@ -10,13 +10,14 @@ import { AuthContext } from "./../../services/auth";
 
 const Profile = () => {
   
-  const { isLoaded, user } = useContext(AuthContext)
+  return <h1 data-testid="hello">hello world</h1>
+  // const { isLoaded, user } = useContext(AuthContext)
 
-  if(!isLoaded) {
-    return <Loading />
-  }
+  // if(!isLoaded) {
+  //   return <Loading />
+  // }
   
-  return <h1>profile </h1>
+  // return <h1>profile </h1>
 
   // if (profile === null) {
   //   return <NotFound />;

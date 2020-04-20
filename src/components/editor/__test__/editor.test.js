@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, waitForElement } from '@testing-library/react'
+import { render, act, fireEvent } from '@testing-library/react'
 import Editor from '../index'
 import { AuthContext } from "./../../../services/auth"
 import { BrowserRouter as Router } from "react-router-dom"
@@ -9,6 +9,7 @@ import theme from "./../../../theme"
 // mock media query hook
 import useMediaQuery from "react-use-media-query-hook"
 jest.mock("react-use-media-query-hook")
+
 useMediaQuery.mockImplementation(() => true) // default desktop version
 
 // render component inside mock providers
@@ -32,30 +33,59 @@ const renderWithProviders = component => {
 
 // test
 describe('Editor', () => {
-    beforeEach(() => {
-        // not necessary ???
-        // useMediaQuery.mockClear()
-    })
+    describe('Layout', () => {
+        
+        test("Should render mobile version in small screen", () => {
+             act( () => {
+                useMediaQuery.mockImplementationOnce(() => false)
+                const { getByTestId, queryByTestId } = renderWithProviders(<Editor />)
+        
+                const mobile = getByTestId("mobile-editor")
+                const desktop = queryByTestId("desktop-editor")
+        
+                expect(useMediaQuery).toHaveBeenCalledWith("(min-width: 880px)")
+                expect(mobile).toBeInTheDocument()
+                expect(desktop).toBeNull()
+            })
+        })
+    
+        test("Should render desktop version in large screen", () => {
+            const { getByTestId, queryByTestId } = renderWithProviders(<Editor />)
+    
+            const desktop = getByTestId("desktop-editor")
+            const mobile = queryByTestId("mobile-editor")
+    
+            expect(desktop).toBeInTheDocument()
+            expect(mobile).toBeNull()
+        })
+    });
 
-    test("Should render mobile version in small screen", () => {
-        useMediaQuery.mockImplementationOnce(() => false)
-        const { getByTestId, queryByTestId } = renderWithProviders(<Editor />)
+    describe('OnSave', () => {
+        test("should call with parametres", () => {
+            const onSave = jest.fn()
+            const { getByTestId } = renderWithProviders(<Editor onSave={onSave} hasUnsavedChanges={true} />)
+            
+            const button = getByTestId("save-button")
+            fireEvent.click(button)
 
-        const mobile = getByTestId("mobile-editor")
-        const desktop = queryByTestId("desktop-editor")
-
-        expect(useMediaQuery).toHaveBeenCalledWith("(min-width: 880px)")
-        expect(mobile).toBeInTheDocument()
-        expect(desktop).toBeNull()
-    })
-
-    test("Should render desktop version in large screen", () => {
-        const { getByTestId, queryByTestId } = renderWithProviders(<Editor />)
-
-        const desktop = getByTestId("desktop-editor")
-        const mobile = queryByTestId("mobile-editor")
-
-        expect(desktop).toBeInTheDocument()
-        expect(mobile).toBeNull()
-    })
+            const expected = {
+                title: "Untitled",
+                description: "",
+                tags: [],
+                theme: "twentynineteen",
+                alignment: "normal",
+                html: {
+                  processed: "",
+                  preprocessor: "html",
+                  source: ""
+                },
+                css: {
+                  processed: "",
+                  preprocessor: "css",
+                  source: ""
+                }
+            }
+            expect(onSave).toHaveBeenCalledWith(expected)
+        })
+    });
 });
