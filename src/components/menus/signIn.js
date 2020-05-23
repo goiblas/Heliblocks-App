@@ -1,15 +1,25 @@
 import React from "react";
-import { connect } from "react-redux";
-import { signIn } from "./../../store/auth/actions";
 import { Button } from "@chakra-ui/core";
+import { signInWithGithub } from "./../../services/auth"
+import { setUser } from "./../../services/users"
 
-const SignIn = ({ signIn, ...props }) => {
+const SignIn = ( ...props) => {
+  const signIn = async() => {
+    try {
+      const { uid, displayName, photoURL, profile } = await signInWithGithub()
+      await setUser( uid, {
+        displayName,
+        photoURL,
+        githubURL: profile.html_url
+      })
+    } catch (error) {}
+  }
   return (
     <Button
       variant="outline"
       variantColor="dark"
       leftIcon="github"
-      onClick={signIn}
+      onClick={ signIn }
       {...props}
     >
       Sign in
@@ -17,4 +27,4 @@ const SignIn = ({ signIn, ...props }) => {
   );
 };
 
-export default connect(null, { signIn })(SignIn);
+export default SignIn;

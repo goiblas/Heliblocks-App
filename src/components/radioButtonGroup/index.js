@@ -31,7 +31,6 @@ CustomRadioButtonGroup.defaultProps = {
 
 CustomRadioButtonGroup.radio.propTypes = Button.propTypes;
 
-// Step 1: Create a component that accepts `isChecked` and `isDisabled` prop
 const CustomRadio = React.forwardRef((props, ref) => {
   const { isChecked, isDisabled, size, mb, ...rest } = props;
   return (

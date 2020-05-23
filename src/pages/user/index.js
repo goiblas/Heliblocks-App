@@ -1,68 +1,82 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CreationList from "./creationList";
 import Header from "../../components/header";
-import styled from "@emotion/styled";
+import Footer from "../../components/footer";
 import Loading from "../../components/loading";
 import NotFound from "../notFound";
-import { firestoreConnect, populate } from "react-redux-firebase";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { Image, Heading, Flex, Grid, Text, Icon, Link } from "@chakra-ui/core";
+import Container from "./../../components/container";
+import { AuthContext } from "./../../services/auth";
+import { useParams } from "react-router-dom";
+import { getUser } from "./../../services/users";
 
-const Profile = ({ profile, auth }) => {
-  if (profile === null) {
-    return <NotFound />;
+
+const Profile = () => {
+  const { id } = useParams();
+  const [profile, setProfile] = useState(null)
+  const [owner, setOwner] = useState(false)
+  const { isLoaded, user } = useContext(AuthContext)
+
+  useEffect(() => {
+    getUser(id)
+        .then(setProfile)
+        .catch(() => setProfile({notFound: true}))
+  }, [id])
+
+  useEffect(() => {
+    if(user && user.uid === id ) {
+      setOwner(true)
+    }
+  }, [user])
+
+  if(!profile || !isLoaded) {
+    return <Loading />
   }
-  const Result = () => {
-    if (profile === undefined) {
-      return <Loading />;
-    }
 
-    if ("heliblocks" in profile) {
-      return <CreationList creations={Object.values(profile.heliblocks)} />;
-    }
+  if(profile.notFound) {
+    return <NotFound />
+  }
 
-    return null;
-  };
-
+  
   return (
     <>
       <Header />
-      <Content>
-        <h1>Wellcome User</h1>
-        <Result />
-      </Content>
+      <Container py="68px">
+        <Grid
+          templateColumns={{ md: "220px 1fr" }}
+          columnGap={[10, null, null, "120px"]}
+        >
+          <Flex flexDirection="column" alignItems={["center", "start"]}>
+            <Image
+              size={["68px", "166px"]}
+              objectFit="cover"
+              rounded="1px"
+              src={profile.photoURL}
+              alt={profile.displayName}
+              mb="4"
+            />
+            <Heading as="h1" mb="2" fontSize="lg">
+              {profile.displayName}
+            </Heading>
+              <Text fontSize="md" color="gray.500">
+                <Link
+                  href={profile.githubURL}
+                  isExternal
+                  fontWeight="semibold"
+                  display="flex"
+                  alignItems="center"
+                >
+                  <Icon name="github" size="16px" mr="2" verticalAlign="middle" />
+                  Github
+                </Link>
+              </Text>
+          </Flex>
+          <CreationList owner={owner} creations={profile.heliblocks} />
+        </Grid>
+      </Container>
+      <Footer />
     </>
   );
 };
 
-const populates = [{ child: "heliblocks", root: "heliblocks" }];
-const collection = "users";
-export default compose(
-  withRouter,
-  firestoreConnect(props => {
-    const doc = props.match.params.userId;
-    return [
-      {
-        collection,
-        doc,
-        populates
-      }
-    ];
-  }),
-  connect((state, props) => {
-    const result = populate(state.firestore, collection, populates);
-    const { userId } = props.match.params;
-    return {
-      auth: state.firebase.auth,
-      profile: result && result[userId]
-    };
-  })
-)(Profile);
-
-const Content = styled.div`
-  max-width: 1340px;
-  margin: auto;
-  width: 92%;
-  padding-top: 64px;
-`;
+export default Profile;

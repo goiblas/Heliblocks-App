@@ -1,19 +1,28 @@
-import React from "react";
-import { setHtmlSource } from "./../../../store/creation/actions";
+import React, { useContext, useEffect } from "react";
 import CodeEditor from "./panel";
-import { connect } from "react-redux";
+import { EditorContext } from "./../editorContext"
+import { usePreprocess } from "../../../services/preprocess";
 
-const HtmlEditorComponent = ({ html, setHtml }) => (
-    <CodeEditor
-        language={html.preprocessor}
-        value={html.source}
-        onChange={setHtml}
-      />
-) 
-const mapStateToProps = state => ({
-    html: state.creation.html
-});
-const mapDispatchToProps = {
-    setHtml: setHtmlSource,
-};
-export const HtmlEditor = connect(mapStateToProps, mapDispatchToProps)(HtmlEditorComponent);
+export const HtmlEditor = () => {
+    const { html, setHtml } = useContext(EditorContext)
+    const { processed, preprocess } = usePreprocess(html.preprocessor)
+
+    const onChange = (source) => {
+        setHtml({ source })
+        preprocess(source)
+    }
+    
+    useEffect( () => {
+        if( processed !== null) {
+            setHtml({ processed })
+        }
+    }, [ processed ])
+
+    return (
+        <CodeEditor
+            language={html.preprocessor}
+            value={html.source}
+            onChange={onChange}
+            />
+    )
+}

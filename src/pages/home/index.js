@@ -1,21 +1,30 @@
 import React from "react";
 import Header from "../../components/header";
-import styled from "@emotion/styled";
+import Footer from "../../components/footer";
+import Hero from "./hero";
+import Feature from "./features";
+import PickedList from "./pickedList";
+import { Box, Button } from "@chakra-ui/core";
+import { Link } from "react-router-dom";
 
 const Home = () => (
   <>
     <Header />
-    <Content>
-      <h1>Wellcome to Heliblocks</h1>
-      <h2>Landing de Presentación del proyecto</h2>
-    </Content>
+    <Box maxW="1340px" mx="auto" w="92%">
+      <Hero />
+      <Feature />
+      <PickedList />
+      <Box textAlign="center" py="10" mb="16">
+        <Button as={Link} size="lg">
+          Explore
+        </Button>
+      </Box>
+    </Box>
+    <Box borderTop="1px" borderColor="gray.200">
+      <Box maxW="1340px" mx="auto" w="92%">
+        <Footer />
+      </Box>
+    </Box>
   </>
 );
 export default Home;
-
-const Content = styled.div`
-  max-width: 1340px;
-  margin: auto;
-  width: 92%;
-  padding-top: 64px;
-`;

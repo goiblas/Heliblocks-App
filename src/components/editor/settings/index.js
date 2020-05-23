@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Modal,
@@ -15,22 +15,20 @@ import {
   Textarea
 } from "@chakra-ui/core";
 import SelectTags from "./selectTags";
-import { updateCreation } from "./../../../store/creation/actions";
-import { connect } from "react-redux";
+import { EditorContext } from "./../editorContext"
 
-const Settings = ({ description, tags, setProp, ...props }) => {
+const Settings = ( props ) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
+  const { description, tags, setState } = useContext( EditorContext )
 
-  const reducer = (preState, updateProperty) => ({
-    ...preState,
-    ...updateProperty
-  });
-  const [state, setState] = useReducer(reducer, { description, tags });
+  const [innerState, setInnerState] = useReducer(
+    (innerState, newInnerState) => ({ ...innerState, ...newInnerState }),
+    { description, tags });
 
   const saveHandle = () => {
     onClose();
-    setProp(state);
+    setState(innerState);
   };
   return (
     <>
@@ -48,8 +46,8 @@ const Settings = ({ description, tags, setProp, ...props }) => {
               <FormLabel>Description</FormLabel>
               <Textarea
                 ref={initialRef}
-                value={state.description}
-                onChange={e => setState({ description: e.target.value })}
+                value={innerState.description}
+                onChange={e => setInnerState({ description: e.target.value })}
                 placeholder="Add Description"
               />
             </FormControl>
@@ -57,8 +55,8 @@ const Settings = ({ description, tags, setProp, ...props }) => {
             <FormControl mt={4}>
               <FormLabel>Tags</FormLabel>
               <SelectTags
-                onChange={tags => setState({ tags })}
-                value={state.tags}
+                onChange={tags => setInnerState({ tags })}
+                value={innerState.tags}
               />
             </FormControl>
 
@@ -74,14 +72,8 @@ const Settings = ({ description, tags, setProp, ...props }) => {
     </>
   );
 };
-const mapStateToProps = state => ({
-  tags: state.creation.tags,
-  description: state.creation.description
-})
-const mapDispatchToProps = {
-  setProp: updateCreation
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+
+export default Settings;
 
 Settings.propTypes = {
   ...Button.propTypes,
