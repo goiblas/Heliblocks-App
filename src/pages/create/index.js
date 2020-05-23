@@ -1,9 +1,9 @@
 import React, { useState, Suspense, lazy, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import Loading from "./../../components/loading";
-import { addNewHeliblock } from "./../../services/heliblocks";
-import { addHeliblockToUser } from "./../../services/users";
-import { AuthContext } from "./../../services/auth";
+import Loading from "components/loading";
+import { addHeliblock } from "services/heliblocks";
+import { addHeliblockToUser } from "services/users";
+import { AuthContext } from "services/auth";
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
@@ -19,7 +19,7 @@ const Create = () => {
 
     let heliblockId;
     try {
-      heliblockId = await addNewHeliblock({
+      heliblockId = await addHeliblock({
         ...heliblock,
         author: user.uid,
         lastUpdate: new Date(),

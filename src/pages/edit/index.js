@@ -1,8 +1,8 @@
-import React, { Suspense, lazy, useEffect, useState, useContext } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import Loading from "../../components/loading";
 import NotFound from "../notFound";
-import { getHeliblock } from "./../../services/heliblocks"
+import { getHeliblock } from "./../../services/heliblocks";
 import useIsOwner from "./useIsOwner";
 
 const Editor = lazy(() =>
@@ -18,23 +18,23 @@ const heliblockToEditorProps = response => ({
   html: response.html,
   css: response.css,
   author: response.author
-}) 
+});
 
 const EditCreation = () => {
   const { heliblockId } = useParams();
-  const { isLoaded, isOwner } = useIsOwner(heliblockId)
-  const [ heliblock, setHeliblock ] = useState(null);
-  const [ saving, setSaving ] =  useState(false);
+  const { isLoaded, isOwner } = useIsOwner(heliblockId);
+  const [heliblock, setHeliblock] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getHeliblock(heliblockId)
-            .then( setHeliblock)
-            .catch( error => {
-              // TODO
-            });
+      .then(setHeliblock)
+      .catch(error => {
+        // TODO
+      });
   }, [heliblockId]);
 
-  if (!heliblock || !isLoaded)  {
+  if (!heliblock || !isLoaded) {
     return <Loading />;
   }
 
@@ -42,25 +42,30 @@ const EditCreation = () => {
     return <NotFound />;
   }
 
-  if(!isOwner) {
-    return <Redirect to="/" />
+  if (!isOwner) {
+    return <Redirect to="/" />;
   }
 
-  const onSave = async( heliblock ) => {
-    setSaving(true)
+  const onSave = async heliblock => {
+    setSaving(true);
     try {
-      await setHeliblock( heliblockId, { ...heliblock, lastUpdate: new Date() });
+      await setHeliblock(heliblockId, { ...heliblock, lastUpdate: new Date() });
     } catch (error) {
       // @TODO
     }
-    setSaving(false)
-  }
-
-  const editorProps = heliblockToEditorProps(heliblock)
+    setSaving(false);
+  };
+  console.log(heliblock);
+  const editorProps = heliblockToEditorProps(heliblock);
 
   return (
     <Suspense fallback={<Loading />}>
-      <Editor {...editorProps} id={heliblockId} saving={saving} onSave={onSave} />
+      <Editor
+        {...editorProps}
+        id={heliblockId}
+        saving={saving}
+        onSave={onSave}
+      />
     </Suspense>
   );
 };

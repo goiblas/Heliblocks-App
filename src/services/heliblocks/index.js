@@ -8,7 +8,7 @@ export const getHeliblock = async id => {
   return handleResponse(response);
 };
 
-export const addNewHeliblock = async heliblock => {
+export const addHeliblock = async heliblock => {
   try {
     const { id } = await heliblockCollection.add(heliblock);
     return id;

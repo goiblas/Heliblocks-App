@@ -2,10 +2,10 @@ import React, { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import useMockup from "./useMockup";
 
-const Screen = ({ html, css, alignment, theme }) => {
+const Preview = ({ html, css, alignment }) => {
   const iframeRef = useRef(null);
-  const content = `<style>${css.processed}</style>${html.processed}`;
-  const [mockup] = useMockup({ content, alignment, theme });
+  const content = `<style>${css}</style>${html}`;
+  const [mockup] = useMockup({ content, alignment });
 
   useEffect(() => {
     const iframe = iframeRef.current.contentWindow.document;
@@ -17,7 +17,7 @@ const Screen = ({ html, css, alignment, theme }) => {
   return <IframeStyled title="Preview" ref={iframeRef} />;
 };
 
-export default Screen;
+export default Preview;
 
 const IframeStyled = styled.iframe`
   border: 0;

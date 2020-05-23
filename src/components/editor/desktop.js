@@ -4,7 +4,7 @@ import Title from "./title";
 import Save from "./save";
 import Copycode from "./copycode";
 import { CssEditor, HtmlEditor } from "./codeEditors";
-import Preview from "./preview";
+import ScreenPreview from "./screenPreview";
 import { UserMenu } from "./../menus";
 import Logo from "./../logo";
 import { Box, Flex, useTheme } from "@chakra-ui/core";
@@ -62,7 +62,7 @@ const DesktopEditor = () => {
           }}
           minSize={220}
         >
-          <Preview />
+          <ScreenPreview />
         </Section>
       </Box>
     </>

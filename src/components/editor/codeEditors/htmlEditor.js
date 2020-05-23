@@ -1,28 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import CodeEditor from "./panel";
-import { EditorContext } from "./../editorContext"
-import { usePreprocess } from "../../../services/preprocess";
+import { EditorContext } from "./../editorContext";
 
 export const HtmlEditor = () => {
-    const { html, setHtml } = useContext(EditorContext)
-    const { processed, preprocess } = usePreprocess(html.preprocessor)
+  const { html, setState } = useContext(EditorContext);
 
-    const onChange = (source) => {
-        setHtml({ source })
-        preprocess(source)
-    }
-    
-    useEffect( () => {
-        if( processed !== null) {
-            setHtml({ processed })
-        }
-    }, [ processed ])
+  const onChange = html => setState({ html });
 
-    return (
-        <CodeEditor
-            language={html.preprocessor}
-            value={html.source}
-            onChange={onChange}
-            />
-    )
-}
+  return <CodeEditor language="html" value={html} onChange={onChange} />;
+};

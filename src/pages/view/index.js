@@ -14,7 +14,7 @@ import {
   TabPanel,
   Heading
 } from "@chakra-ui/core";
-import Preview from "./preview";
+import Preview from "components/preview";
 import RelatedList from "./relatedList";
 import Details from "./details";
 import { useInView } from "react-intersection-observer";
@@ -66,7 +66,6 @@ const View = () => {
                     html={heliblock.html}
                     css={heliblock.css}
                     alignment={heliblock.alignment}
-                    theme={heliblock.theme}
                   />
                 </Box>
               </TabPanel>
