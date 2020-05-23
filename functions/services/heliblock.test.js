@@ -1,4 +1,5 @@
 const Heliblock = require("./heliblock");
+const basePreviewStyles = require("./basePreviewStyles");
 
 describe("Heliblock initial value", () => {
   const initialValue = {
@@ -13,16 +14,15 @@ describe("Heliblock initial value", () => {
     template: null,
     theme: "twentynineteen",
     title: "title",
-    html: {
-      error: null,
-      preprocessor: "html",
-      processing: false,
-      processed: "<h1>Hola mundo</h1>",
-      source: "<h1>Hola mundo</h1>"
-    },
-    css: {
-      processed: "body {}"
-    }
+    html: `
+      <h1>Hello</h1>
+      <p>World!</p>
+      <script>alert("hello!")</script>
+    `,
+    css: `
+    body {
+      background: red;
+    }</style><script></script>`
   };
   let heliblock;
 
@@ -30,7 +30,7 @@ describe("Heliblock initial value", () => {
     heliblock = new Heliblock(initialValue);
   });
   test("should get preview", () => {
-    const expected = `<style>${initialValue.css.processed}</style>${initialValue.html.processed}`;
+    const expected = `<style>${basePreviewStyles}${initialValue.css}</style>${initialValue.html}`;
     expect(heliblock.getPreview()).toBe(expected);
   });
   test("should set author in public heliblock", () => {
@@ -68,5 +68,12 @@ describe("Heliblock initial value", () => {
       })
     });
     expect(heliblock.getPublic()).toEqual(withAuthorExpected);
+  });
+
+  test("should minify & sanitize the source", () => {
+    const { source } = heliblock.getPublic();
+
+    expect(source.html).toBe("<h1>Hello</h1><p>World!</p>");
+    expect(source.css).toBe("body { background: red; }");
   });
 });

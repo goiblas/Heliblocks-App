@@ -4,7 +4,7 @@ import Title from "./title";
 import Save from "./save";
 import Copycode from "./copycode";
 import { CssEditor, HtmlEditor } from "./codeEditors";
-import Preview from "./preview";
+import ScreenPreview from "./screenPreview";
 import Logo from "./../logo";
 import { UserMenu } from "./../menus";
 import {
@@ -47,7 +47,7 @@ const MobileEditor = () => {
             <CssEditor />
           </TabPanel>
           <TabPanel h="100%">
-            <Preview />
+            <ScreenPreview />
           </TabPanel>
         </TabPanels>
         <Flex justifyContent="space-between" borderTopWidth="1px">

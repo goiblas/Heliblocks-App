@@ -1,4 +1,5 @@
 import { database } from "../firebase";
-export const getCollection = name => database.collection(name)
 
-export * from "./utils"
+export const usersCollection = database.collection("users");
+export const heliblocksCollection = database.collection("heliblocks");
+export * from "./utils";

@@ -14,15 +14,13 @@ import {
   TabPanel,
   Heading
 } from "@chakra-ui/core";
-import Preview from "./preview";
+import Preview from "components/preview";
 import RelatedList from "./relatedList";
 import Details from "./details";
-import { useInView } from "react-intersection-observer";
 
 const View = () => {
   const { heliblockId } = useParams();
   const [heliblock, setHeliblock] = useState(null);
-  const [ref, inView, entry] = useInView();
 
   useEffect(() => {
     getHeliblock(heliblockId)
@@ -37,7 +35,7 @@ const View = () => {
   if (heliblock.notFound) {
     return <NotFound />;
   }
-  console.log(heliblock);
+
   return (
     <>
       <Header />
@@ -66,7 +64,6 @@ const View = () => {
                     html={heliblock.html}
                     css={heliblock.css}
                     alignment={heliblock.alignment}
-                    theme={heliblock.theme}
                   />
                 </Box>
               </TabPanel>
@@ -77,10 +74,7 @@ const View = () => {
                   bg="white"
                   boxShadow="sm"
                 >
-                  <CodeViewer
-                    language={heliblock.css.preprocessor}
-                    code={heliblock.css.source}
-                  />
+                  <CodeViewer language="css" code={heliblock.css} />
                 </Box>
               </TabPanel>
               <TabPanel>
@@ -90,10 +84,7 @@ const View = () => {
                   bg="white"
                   boxShadow="sm"
                 >
-                  <CodeViewer
-                    language={heliblock.html.preprocessor}
-                    code={heliblock.html.source}
-                  />
+                  <CodeViewer language="html" code={heliblock.html} />
                 </Box>
               </TabPanel>
             </TabPanels>
@@ -106,10 +97,8 @@ const View = () => {
         </Box>
       </Box>
       <Box maxW="1340px" py="40px" mx="auto" w="92%">
-        <Heading as="h2" ref={ref}>
-          Related
-        </Heading>
-        {inView && <RelatedList heliblock={heliblock} id={heliblockId} />}
+        <Heading as="h2">Related</Heading>
+        <RelatedList heliblock={heliblock} id={heliblockId} />
       </Box>
     </>
   );
