@@ -13,7 +13,6 @@ const heliblockToEditorProps = response => ({
   title: response.title,
   description: response.description,
   tags: response.tags,
-  theme: response.theme,
   alignment: response.alignment,
   html: response.html,
   css: response.css,

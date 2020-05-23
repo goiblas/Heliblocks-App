@@ -8,7 +8,6 @@ const createExportableHeliblock = heliblock => ({
   title: heliblock.title,
   description: heliblock.description,
   tags: heliblock.tags,
-  theme: heliblock.theme,
   alignment: heliblock.alignment,
   html: heliblock.html,
   css: heliblock.css

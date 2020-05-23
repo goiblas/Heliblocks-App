@@ -7,7 +7,6 @@ export const defaultState = {
   title: "Untitled",
   description: "",
   tags: [],
-  theme: "twentynineteen",
   alignment: "normal",
   author: null,
   html: "",
