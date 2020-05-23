@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { Global, css } from "@emotion/core";
-import { UserMenu, SignIn } from "./../menus";
+import { UserMenu } from "components/menus";
 import useMediaQuery from "react-use-media-query-hook";
 import { Box, Button, useTheme } from "@chakra-ui/core";
-import { Logo } from "./../../theme/logo";
+import { Logo } from "theme/logo";
 
 export const Header = () => {
   const theme = useTheme();

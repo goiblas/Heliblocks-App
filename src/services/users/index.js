@@ -11,11 +11,10 @@ export const getUser = async(uid) => {
     }
 }
 
-export const setUser = async({ uid, ...userDetails }) => {
+export const setUser = async( uid, userDetails ) => {
     try {
         const options = {merge: true}
-        const response = await userCollection.doc(uid).set(userDetails, options);
-        return handleResponse(response);
+        await userCollection.doc(uid).set(userDetails, options);
     } catch (error) {
         handleError(error)
     }

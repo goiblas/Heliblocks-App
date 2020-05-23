@@ -17,5 +17,6 @@ export const handleResponse = doc => {
 
 export const handleError = error => {
     // @TODO send to sentry.io
+    console.log(error)
     throw new Error("Something went wrong")
 }

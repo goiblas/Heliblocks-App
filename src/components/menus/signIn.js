@@ -7,8 +7,7 @@ const SignIn = ( ...props) => {
   const signIn = async() => {
     try {
       const { uid, displayName, photoURL, profile } = await signInWithGithub()
-      await setUser({
-       uid,
+      await setUser( uid, {
         displayName,
         photoURL,
         githubURL: profile.html_url

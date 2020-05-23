@@ -15,6 +15,7 @@ const createExportableHeliblock = (heliblock) => ({
   })
 
 const Editor = ({ onSave, saving, ...props }) => {
+
   const initialState = Object.assign({}, defaultState, props)
   const [ state, setState ] = useState(initialState)
   const handleStateChanges = newState => setState({ ...state, ...newState, hasUnsavedChanges: true})
@@ -25,7 +26,9 @@ const Editor = ({ onSave, saving, ...props }) => {
   const isDesktop = useMediaQuery("(min-width: 880px)");
 
   useEffect(() =>{
-    setState({ ...state, saving})
+    if(state.saving !== saving) {
+      setState({ ...state, saving})
+    }
   }, [saving])
 
   const save = () => onSave(createExportableHeliblock(state))

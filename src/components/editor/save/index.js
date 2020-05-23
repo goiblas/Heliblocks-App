@@ -5,7 +5,7 @@ import { EditorContext } from "./../editorContext"
 const Save = ( props ) => {
     const { save, hasUnsavedChanges, saving } = useContext(EditorContext);
     const disabled = !hasUnsavedChanges;
-    
+
     const buttonProps = {
         variantColor: "blue",
         fontWeight: "normal",
@@ -14,7 +14,6 @@ const Save = ( props ) => {
         loadingText: "Saving",
         ...props
       };
-
     return (
         <ProtectedButton
             {...buttonProps}

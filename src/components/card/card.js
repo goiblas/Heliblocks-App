@@ -11,10 +11,12 @@ import HeaderCard from "./headerCard";
 export const Card = ({ id, screenshot, title, author }) => {
   return (
     <Box>
-      <HeaderCard id={id} image={screenshot} />
+      <Link to={"/view/" + id}>
+        <HeaderCard image={screenshot} />
+      </Link>
       <Box pb="3">
         <Box flexGrow="1">
-          <Link to={"/heliblock/" + id}>
+          <Link to={"/view/" + id}>
             <Text mt={3} lineHeight="short" data-testid="card-title">
               {title}
             </Text>

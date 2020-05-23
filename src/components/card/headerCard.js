@@ -1,16 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Image, AspectRatioBox } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from "./index"
 
-const IMAGE_WIDTH = 840;
-const IMAGE_HEIGHT = 640;
-
-const HeaderCard = ({ id, image }) => (
+const HeaderCard = ({ image }) => (
   <Box
-    as={Link}
-    to={"/heliblock/" + id}
     display="block"
     backgroundColor="gray.50"
   >
@@ -21,7 +16,6 @@ const HeaderCard = ({ id, image }) => (
 );
 
 HeaderCard.propTypes = {
-  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired
 };
 
@@ -36,6 +30,8 @@ const AspectRatioBoxWithShadow = styled(AspectRatioBox)`
       right: 0;
       bottom: 0;
       filter: blur(1px);
+      border: 0;
+      border: 0;
       background-image: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0) calc(100% - 40px),

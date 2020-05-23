@@ -9,6 +9,7 @@ export const defaultState = {
     tags: [],
     theme: "twentynineteen",
     alignment: "normal",
+    author: null,
     html: {
       processed: "",
       preprocessor: "html",

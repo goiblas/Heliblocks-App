@@ -1,10 +1,9 @@
 import React, { useState, Suspense, lazy, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Loading from "./../../components/loading";
-import { setHeliblock } from "./../../services/heliblocks"
-import { addHeliblockToUser } from "./../../services/users"
-import { AuthContext } from "./../../services/auth"
-
+import { addNewHeliblock } from "./../../services/heliblocks";
+import { addHeliblockToUser } from "./../../services/users";
+import { AuthContext } from "./../../services/auth";
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
@@ -12,35 +11,36 @@ const Editor = lazy(() =>
 
 const Create = () => {
   const history = useHistory();
-  const [ saving, setSaving ] = useState(false)
-  const { user } = useContext(AuthContext)
+  const [saving, setSaving] = useState(false);
+  const { user } = useContext(AuthContext);
 
-  const onSave = async( heliblock ) => {
-    setSaving(true)
+  const onSave = async heliblock => {
+    setSaving(true);
 
     let heliblockId;
     try {
-      heliblockId = await setHeliblock({
+      heliblockId = await addNewHeliblock({
         ...heliblock,
         author: user.uid,
         lastUpdate: new Date(),
         createdAt: new Date()
       });
-      await addHeliblockToUser(user.uid, heliblockId)
+      await addHeliblockToUser(user.uid, heliblockId);
     } catch (error) {
-      console.log(error)
+      // @TODO
     }
 
-    setSaving(false)
-    if(heliblockId){
-      history.push(`/heliblock/${heliblockId}`);
+    setSaving(false);
+
+    if (heliblockId) {
+      history.push(`/edit/${heliblockId}`);
     }
-  }
-  
+  };
+
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <Editor onSave={ onSave } saving={saving} />
+        <Editor onSave={onSave} saving={saving} />
       </Suspense>
     </>
   );
