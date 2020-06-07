@@ -1,12 +1,14 @@
 import React from "react";
-import { SimpleGrid, Heading, Box } from "@chakra-ui/core";
-import { Card } from "./../../components/card";
+import { Heading, Box, Button } from "@chakra-ui/core";
+import { Card } from "components/card";
+import { CardsGrid } from "components/containers";
+import { Link } from "react-router-dom";
 
 const demo = {
   screenshot:
-    "https://storage.googleapis.com/heliblocks.appspot.com/screenshots%2FwhZsGVEulz4hBipWqlSH.png?GoogleAccessId=firebase-adminsdk-t1kz0%40heliblocks.iam.gserviceaccount.com&Expires=16447017600&Signature=UEi%2FLS4O3qjApJVb8fCqinqAActKh34wDUALgLmhJwnxU%2F4Tg%2F9yz3YGYjCP4wN8qpM%2BmFF5jxBss1zRisZz77Yay75qhdI0cSQ%2FvRK55gK5sVTyQo4BbhsI2OE%2FclHb5tif4dnFG5KbuKPa1kNzumqxjKXcs2ykyKCrUNxb3ePBe5B%2FLa%2B71LGucpD0YHjRp4du8cEBgXCNyRl9SOg22eR6ALmtuT2CksG%2BbG5rRyUwk%2BZ6zlXOB02JSczIhx9OmTCfGls9T%2FXlx4nTGvdLcsZPN719PCkHYZU2xsDq7LSvvtKUjM7Q2vObRbdXDzMqX7RMfFCy%2F6CD1NY1h3GekQ%3D%3D",
+    "https://storage.googleapis.com/heliblocks.appspot.com/screenshots%2FC6UxXBJyAP8mLiJ1jG4n.png?GoogleAccessId=firebase-adminsdk-t1kz0%40heliblocks.iam.gserviceaccount.com&Expires=16447017600&Signature=Ct6v5H1ZTaJakC4mN0BmpG5ltfznN2QLOI%2FPwECzlSBiIL%2FD9YodyukhP0oQ3OOyA8DpbcRNt0BoJHj6xUlIjbc%2BoH2rgH1yhS5bNLMPWxtUbY6CnOT0JBO4UKiO6UzO9IKzaneXEfnfASLaEJCelpMvzOkhbSY%2Ban5ghJHOKddWQWdWLiY5BLZQBAahRPv51tg4%2B%2BIyi%2FwQYem6LpBp%2BiCsZiAxaGylbcKnlyR05BwFjvjLQevUsW4JhwAU6pI7K%2FirtKP2TwN2kHZ9uajpuHF9ELMEfGJTbLFXFHVKONH0JQJ8pV3ouB0xFq1rOLVOJ5w9jcr6Uz53Q83grJE31g%3D%3D",
   title: "Service with image",
-  id: "rC1V1EdFfoq5hs91YEST",
+  id: "C6UxXBJyAP8mLiJ1jG4n",
   author: {
     displayName: "Jesus Olazagoitia",
     id: "u2lSmXX6qzVRJMwTFhT4UEX2oUu2",
@@ -15,22 +17,23 @@ const demo = {
 };
 
 const Hero = () => (
-  <Box py="4">
-    <Heading as="h2" fontSize={["xl", null, null, "2xl"]} mb="10">
-      Heliblocks picked
-    </Heading>
-    <SimpleGrid
-      columns={[1, 2, 3, 4]}
-      spacing={[8, null, null, "40px"]}
-      mb="4"
-      maxW="1400px"
-      mx="auto"
-    >
-      {[...Array(8)].map((empty, index) => (
-        <Card key={index} {...demo} />
-      ))}
-    </SimpleGrid>
-  </Box>
+  <>
+    <Box py="4">
+      <Heading as="h2" fontSize={["xl", null, "2xl", "3xl"]} mb="8">
+        Heliblocks picked
+      </Heading>
+      <CardsGrid mb="4">
+        {[...Array(8)].map((empty, index) => (
+          <Card key={index} {...demo} />
+        ))}
+      </CardsGrid>
+    </Box>
+    <Box textAlign="center" py="8" mb="20">
+      <Button as={Link} to="/explore" size="lg">
+        Explore more heliblocks
+      </Button>
+    </Box>
+  </>
 );
 
 export default Hero;

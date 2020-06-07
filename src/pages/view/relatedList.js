@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getRelatedTo } from "./../../services/heliblocks";
-import { Heading, Box, SimpleGrid } from "@chakra-ui/core";
-import { Card } from "./../../components/card";
+import { getRelatedTo } from "services/heliblocks";
+import { SimpleGrid } from "@chakra-ui/core";
+import { Card } from "components/card";
 
 const RelatedList = ({ heliblock, id }) => {
   const [heliblocks, setHeliblocks] = useState(null);

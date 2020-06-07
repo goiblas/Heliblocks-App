@@ -1,82 +1,56 @@
-import React, { useContext, useState, useEffect } from "react";
-import CreationList from "./creationList";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import Loading from "../../components/loading";
-import NotFound from "../notFound";
-import { Image, Heading, Flex, Grid, Text, Icon, Link } from "@chakra-ui/core";
-import Container from "./../../components/container";
-import { AuthContext } from "./../../services/auth";
+import React, { useState, useEffect, useContext } from "react";
+import Header from "components/header";
+import Footer from "components/footer";
+import Loading from "components/loading";
+import NotFound from "pages/notFound";
+import { Container, CardsGrid, Main } from "components/containers";
 import { useParams } from "react-router-dom";
-import { getUser } from "./../../services/users";
-
-
-const Profile = () => {
+import { getUser } from "services/users";
+import Profile from "./profile";
+import CardProfile from "./cardProfile";
+import { AuthContext } from "services/auth";
+const UserPage = () => {
   const { id } = useParams();
-  const [profile, setProfile] = useState(null)
-  const [owner, setOwner] = useState(false)
-  const { isLoaded, user } = useContext(AuthContext)
+  const [profile, setProfile] = useState(null);
+  const { isLoaded, user } = useContext(AuthContext);
 
   useEffect(() => {
     getUser(id)
-        .then(setProfile)
-        .catch(() => setProfile({notFound: true}))
-  }, [id])
+      .then(setProfile)
+      .catch(() => setProfile({ notFound: true }));
+  }, [id]);
 
-  useEffect(() => {
-    if(user && user.uid === id ) {
-      setOwner(true)
-    }
-  }, [user])
-
-  if(!profile || !isLoaded) {
-    return <Loading />
+  if (!profile || !isLoaded) {
+    return <Loading />;
   }
 
-  if(profile.notFound) {
-    return <NotFound />
+  if (profile.notFound) {
+    return <NotFound />;
   }
-
-  
   return (
     <>
       <Header />
-      <Container py="68px">
-        <Grid
-          templateColumns={{ md: "220px 1fr" }}
-          columnGap={[10, null, null, "120px"]}
-        >
-          <Flex flexDirection="column" alignItems={["center", "start"]}>
-            <Image
-              size={["68px", "166px"]}
-              objectFit="cover"
-              rounded="1px"
-              src={profile.photoURL}
-              alt={profile.displayName}
-              mb="4"
-            />
-            <Heading as="h1" mb="2" fontSize="lg">
-              {profile.displayName}
-            </Heading>
-              <Text fontSize="md" color="gray.500">
-                <Link
-                  href={profile.githubURL}
-                  isExternal
-                  fontWeight="semibold"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <Icon name="github" size="16px" mr="2" verticalAlign="middle" />
-                  Github
-                </Link>
-              </Text>
-          </Flex>
-          <CreationList owner={owner} creations={profile.heliblocks} />
-        </Grid>
+      <Container as={Main}>
+        <Profile
+          photoURL={profile.photoURL}
+          displayName={profile.displayName}
+          githubURL={profile.githubURL}
+        />
+        <CardsGrid mb="4">
+          {profile.heliblocks &&
+            profile.heliblocks.map(heliblockID => (
+              <CardProfile
+                id={heliblockID}
+                key={heliblockID}
+                author={profile}
+                isOwner={user && user.uid === id}
+              />
+            ))}
+        </CardsGrid>
       </Container>
       <Footer />
     </>
   );
 };
 
-export default Profile;
+export default UserPage;

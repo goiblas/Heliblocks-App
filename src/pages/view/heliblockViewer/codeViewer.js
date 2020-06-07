@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import styled from "@emotion/styled";
@@ -16,6 +16,7 @@ export default CodeViewer;
 
 const Pre = styled(SyntaxHighlighter)`
   height: 100%;
+  font-size: 13px;
   font-family: "SF Mono", "Monaco", "Andale Mono", "Lucida Console",
     "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 

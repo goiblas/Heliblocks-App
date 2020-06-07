@@ -7,40 +7,32 @@ import {
   MenuList,
   Avatar,
   MenuItem,
-  Text
+  Box
 } from "@chakra-ui/core";
-import useMediaQuery from "react-use-media-query-hook";
+import { AuthContext, signOut } from "services/auth";
 import SignIn from "./signIn";
-import { AuthContext, signOut } from "./../../services/auth";
 
 export const UserMenu = () => {
-  const isTablet = useMediaQuery("(min-width: 600px)");
   const { isLoaded, user } = useContext(AuthContext);
 
   if (!isLoaded) {
-    return null;
+    return <Box w="53px" />;
   }
 
   if (!user) {
-    return <SignIn ml="4" />;
+    return <SignIn />;
   }
-
   return (
     <Menu>
       <MenuButton
         data-testid="dropdown"
         size="sm"
-        ml="2"
+        ml="1"
         as={Button}
         variant="link"
-        rightIcon="chevron-down"
+        rightIcon="dropdown"
       >
-        <Avatar name="Kent Dodds" size="sm" src={user.photoURL} />
-        {isTablet && (
-          <Text as="span" ml="2">
-            {user.displayName}
-          </Text>
-        )}
+        <Avatar name={user.displayName} size="sm" src={user.photoURL} />
       </MenuButton>
       <MenuList placement="bottom-end" zIndex="tooltip">
         <MenuItem as={Link} to={`/user/${user.uid}`}>

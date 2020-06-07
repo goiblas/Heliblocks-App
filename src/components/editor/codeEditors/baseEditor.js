@@ -1,10 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ControlledEditor } from "@monaco-editor/react";
-import { options, theme } from "./config";
 
 // https://monaco-react.surenatoyan.com/
 // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html
+const options = {
+  contextmenu: false,
+  minimap: {
+    enabled: false
+  },
+  scrollbar: {
+    verticalScrollbarSize: 0
+  },
+  suggestOnTriggerCharacters: false
+};
+const theme = "light";
 
 const BaseEditor = ({ language, value, onChange, ...rest }) => {
   const handleEditorChange = (ev, newValue) => {

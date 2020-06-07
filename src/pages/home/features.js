@@ -7,7 +7,7 @@ const Feature = ({ title, description, icon }) => (
       <Icon
         name={icon}
         size={["48px", "56px", null, "78px"]}
-        color="teal.500"
+        color="gray.300"
       />
       <Box ml={["6", null, null, "8"]}>
         <Heading as="h2" fontSize={["xl", null, "2xl", "3xl"]} mb={["2", "4"]}>

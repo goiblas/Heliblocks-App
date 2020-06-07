@@ -13,8 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.ais-Hits-list {
+/* .ais-Hits-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-row-gap: 4rem;
@@ -48,4 +47,10 @@ code {
 .ais-SearchBox-submit svg {
   width: 20px;
   height: 20px;
+} */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

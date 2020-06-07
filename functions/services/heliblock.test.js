@@ -1,5 +1,4 @@
 const Heliblock = require("./heliblock");
-const basePreviewStyles = require("./basePreviewStyles");
 
 describe("Heliblock initial value", () => {
   const initialValue = {
@@ -24,14 +23,18 @@ describe("Heliblock initial value", () => {
       background: red;
     }</style><script></script>`
   };
+  const htmlSanited = "<h1>Hello</h1><p>World!</p>";
+  const cssSanited = "body { background: red; }";
+
   let heliblock;
 
   beforeEach(() => {
     heliblock = new Heliblock(initialValue);
   });
   test("should get preview", () => {
-    const expected = `<style>${basePreviewStyles}${initialValue.css}</style>${initialValue.html}`;
-    expect(heliblock.getPreview()).toBe(expected);
+    const preview = heliblock.getPreview();
+    expect(preview).toContain(htmlSanited);
+    expect(preview).toContain(cssSanited);
   });
   test("should set author in public heliblock", () => {
     const sharedProps = {
@@ -73,7 +76,7 @@ describe("Heliblock initial value", () => {
   test("should minify & sanitize the source", () => {
     const { source } = heliblock.getPublic();
 
-    expect(source.html).toBe("<h1>Hello</h1><p>World!</p>");
-    expect(source.css).toBe("body { background: red; }");
+    expect(source.html).toBe(htmlSanited);
+    expect(source.css).toBe(cssSanited);
   });
 });

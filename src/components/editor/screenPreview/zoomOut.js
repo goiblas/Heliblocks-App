@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import RadioButtonGroup from "../../radioButtonGroup";
+import RadioButtonGroup from "components/radioButtonGroup";
 import PropTypes from "prop-types";
 
 const ZoomOut = ({ children }) => {

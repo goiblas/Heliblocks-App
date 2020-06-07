@@ -1,0 +1,42 @@
+import React from "react";
+import { render, act, fireEvent } from "@testing-library/react";
+import Header from "../index";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "@chakra-ui/core";
+import theme from "theme";
+
+// mock media query hook
+import useMediaQuery from "react-use-media-query-hook";
+jest.mock("react-use-media-query-hook");
+
+const renderWithProviders = component =>
+  render(
+    <Router>
+      <ThemeProvider theme={theme}>{component}</ThemeProvider>
+    </Router>
+  );
+
+describe("Header", () => {
+  test("Should render mobile version in small screen", () => {
+    useMediaQuery.mockImplementationOnce(() => false);
+    const { getByTestId, queryByTestId } = renderWithProviders(<Header />);
+
+    const mobile = getByTestId("mobile-header");
+    const desktop = queryByTestId("desktop-header");
+
+    expect(useMediaQuery).toHaveBeenCalledWith("(min-width: 700px)");
+    expect(mobile).toBeInTheDocument();
+    expect(desktop).toBeNull();
+  });
+
+  test("Should render desktop version in large screen", () => {
+    useMediaQuery.mockImplementation(() => true);
+    const { getByTestId, queryByTestId } = renderWithProviders(<Header />);
+
+    const desktop = getByTestId("desktop-header");
+    const mobile = queryByTestId("mobile-header");
+
+    expect(desktop).toBeInTheDocument();
+    expect(mobile).toBeNull();
+  });
+});

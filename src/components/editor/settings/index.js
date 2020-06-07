@@ -15,16 +15,17 @@ import {
   Textarea
 } from "@chakra-ui/core";
 import SelectTags from "./selectTags";
-import { EditorContext } from "./../editorContext"
+import { EditorContext } from "./../editorContext";
 
-const Settings = ( props ) => {
+const Settings = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
-  const { description, tags, setState } = useContext( EditorContext )
+  const { description, tags, setState } = useContext(EditorContext);
 
   const [innerState, setInnerState] = useReducer(
     (innerState, newInnerState) => ({ ...innerState, ...newInnerState }),
-    { description, tags });
+    { description, tags }
+  );
 
   const saveHandle = () => {
     onClose();
@@ -32,7 +33,7 @@ const Settings = ( props ) => {
   };
   return (
     <>
-      <Button fontWeight="medium" onClick={onOpen} {...props}>
+      <Button fontWeight="normal" color="gray.800" onClick={onOpen} {...props}>
         Settings
       </Button>
 
@@ -59,7 +60,6 @@ const Settings = ( props ) => {
                 value={innerState.tags}
               />
             </FormControl>
-
           </ModalBody>
 
           <ModalFooter>
@@ -79,5 +79,5 @@ Settings.propTypes = {
   ...Button.propTypes,
   tags: PropTypes.arrayOf(PropTypes.string),
   description: PropTypes.string,
-  setProp: PropTypes.func,
+  setProp: PropTypes.func
 };

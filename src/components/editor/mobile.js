@@ -2,11 +2,11 @@ import React from "react";
 import Settings from "./settings";
 import Title from "./title";
 import Save from "./save";
-import Copycode from "./copycode";
 import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
-import Logo from "./../logo";
-import { UserMenu } from "./../menus";
+import Logo from "components/logo";
+import { UserMenu } from "components/menus";
+
 import {
   Box,
   Flex,
@@ -23,7 +23,7 @@ const tabStyled = {
   borderColor: "white",
   fontSize: "sm",
   paddingX: [2, 6],
-  _selected: { color: "blue.500", borderColor: "blue.500" }
+  _selected: { color: "primary.500", borderColor: "primary.500" }
 };
 
 const MobileEditor = () => {
@@ -33,7 +33,6 @@ const MobileEditor = () => {
         <Flex height="55px" justifyContent="space-between" alignItems="center">
           <Logo narrow />
           <Title />
-          <Copycode mr="1" narrow />
           <UserMenu />
         </Flex>
       </Box>

@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import Settings from "./settings";
 import Title from "./title";
 import Save from "./save";
-import Copycode from "./copycode";
 import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
-import { UserMenu } from "./../menus";
-import Logo from "./../logo";
-import { Box, Flex, useTheme } from "@chakra-ui/core";
+import { UserMenu } from "components/menus";
+import Logo from "components/logo";
+import { Box, Flex, useTheme, Stack } from "@chakra-ui/core";
 import { Container, Section, Bar } from "react-simple-resizer";
 
 const Divider = ({ style, ...rest }) => {
   const theme = useTheme();
   return (
     <Bar
-      size={7}
+      size={4}
       style={{ background: theme.colors.gray[100], ...style }}
       {...rest}
     />
@@ -28,17 +27,16 @@ const DesktopEditor = () => {
   return (
     <>
       <Box borderBottomWidth="1px" px="4" data-testid="desktop-editor">
-        <Flex height="55px" justifyContent="space-between" alignItems="center">
-          <Logo narrow />
+        <Flex height="56px" justifyContent="space-between" alignItems="center">
+          <Logo />
           <Title />
-          <Copycode />
-          <Flex justifyContent="space-between" flexGrow="1">
-            <Box ml="auto">
-              <Settings mr="2" />
-              <Save />
+          <Stack isInline spacing={2}>
+            <Settings />
+            <Save />
+            <Flex>
               <UserMenu />
-            </Box>
-          </Flex>
+            </Flex>
+          </Stack>
         </Flex>
       </Box>
       <Box as={Container} h="calc(100vh - 56px)">

@@ -1,4 +1,4 @@
-const basePreviewStyles = require("./basePreviewStyles");
+const previewGenerator = require("./previewGenerator/index");
 
 class Heliblock {
   constructor({
@@ -11,9 +11,7 @@ class Heliblock {
     screenshot,
     author,
     description,
-    tags,
-    template,
-    theme
+    tags
   }) {
     this.css = css;
     this.html = html;
@@ -25,8 +23,6 @@ class Heliblock {
     this.author = author;
     this.description = description;
     this.tags = tags;
-    this.template = template;
-    this.theme = theme;
 
     this.publicAuthor = {
       displayName: "Unknown",
@@ -60,11 +56,20 @@ class Heliblock {
     };
     return minify(sanitized, minifyOptions);
   }
+  _getAlignmentClass() {
+    return;
+  }
   setAuthor(author) {
     this.publicAuthor = author;
   }
   getPreview() {
-    return `<style>${basePreviewStyles}${this.css}</style>${this.html}`;
+    const { source, alignment } = this.getPublic();
+    const previewConfig = {
+      html: source.html,
+      css: source.css,
+      alignment
+    };
+    return previewGenerator(previewConfig);
   }
   getPublic() {
     return {

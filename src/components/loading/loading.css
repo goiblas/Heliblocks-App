@@ -1,10 +1,16 @@
 :root {
   --spinner-animation-duration: 1.8s;
-  --spinner-color: #65b448;
+  --spinner-color: #dd0333;
   --spinner-size: 38px;
   --spinner-border-width: 5px;
 }
+.spinner-wrapper {
+  padding: 32px;
+  width: 100%;
+}
 .spinner-loading {
+  margin-left: auto;
+  margin-right: auto;
   vertical-align: middle;
   animation: rotate var(--spinner-animation-duration) infinite linear;
   align-self: center;

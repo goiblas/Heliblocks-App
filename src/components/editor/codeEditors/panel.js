@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Grid, Box, Text } from "@chakra-ui/core";
 import BaseEditor from "./baseEditor";
 import { useDebouncedCallback } from "use-debounce";
-import { debounceTime } from "./config";
 
+const debounceTime = "400";
 const Panel = ({ language, value, onChange }) => {
   const [debouncedCallback] = useDebouncedCallback(onChange, debounceTime);
   return (

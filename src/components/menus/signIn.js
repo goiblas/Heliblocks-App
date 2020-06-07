@@ -1,27 +1,31 @@
 import React from "react";
 import { Button } from "@chakra-ui/core";
-import { signInWithGithub } from "./../../services/auth"
-import { setUser } from "./../../services/users"
+import { signInWithGithub } from "services/auth";
+import { setUser } from "services/users";
+import useMediaQuery from "react-use-media-query-hook";
 
-const SignIn = ( ...props) => {
-  const signIn = async() => {
+const SignIn = () => {
+  const isLarge = useMediaQuery("(min-width: 700px)");
+
+  const signIn = async () => {
     try {
-      const { uid, displayName, photoURL, profile } = await signInWithGithub()
-      await setUser( uid, {
+      const { uid, displayName, photoURL, profile } = await signInWithGithub();
+      await setUser(uid, {
         displayName,
         photoURL,
         githubURL: profile.html_url
-      })
+      });
     } catch (error) {}
+  };
+  if (isLarge) {
+    return (
+      <Button variant="outline" leftIcon="github" onClick={signIn}>
+        Sign in
+      </Button>
+    );
   }
   return (
-    <Button
-      variant="outline"
-      variantColor="dark"
-      leftIcon="github"
-      onClick={ signIn }
-      {...props}
-    >
+    <Button size="sm" variantColor="primary" leftIcon="github" onClick={signIn}>
       Sign in
     </Button>
   );

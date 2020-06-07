@@ -7,11 +7,9 @@ const sizes = {
   normal: "1340px",
   large: "1640px"
 };
-const Container = ({ size, ...props }) => (
+export const Container = ({ size, ...props }) => (
   <Box maxW={sizes[size]} mx="auto" w="92%" {...props} />
 );
-
-export default Container;
 
 Container.propTypes = {
   size: PropTypes.oneOf(Object.keys(sizes))
