@@ -39,13 +39,14 @@ const CustomRadio = React.forwardRef((props, ref) => {
       rounded="0"
       marginRight="0"
       ref={ref}
-      fontWeight="medium"
+      fontWeight="normal"
       variantColor={isChecked ? "dark" : "gray"}
       backgroundColor={isChecked ? null : "white"}
       aria-checked={isChecked}
       role="radio"
       isDisabled={isDisabled}
-      borderWidth={isChecked ? "0" : "1px"}
+      borderWidth="1px"
+      borderColor={isChecked ? "dark.500" : null}
       marginLeft="-1px"
       mb="0"
       {...rest}

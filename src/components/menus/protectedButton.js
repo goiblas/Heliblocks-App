@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { signInWithGithub, AuthContext } from "./../../services/auth" 
+import { signInWithGithub, AuthContext } from "services/auth";
 import {
   Modal,
   ModalOverlay,
@@ -13,7 +13,7 @@ import {
   Heading
 } from "@chakra-ui/core";
 
-const ProtectedButton = (props) => {
+const ProtectedButton = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const { isLoaded, user } = useContext(AuthContext);
@@ -38,16 +38,20 @@ const ProtectedButton = (props) => {
             <ModalBody textAlign="center" pb={6}>
               <Heading size="lg">Ups!</Heading>
               <Text mb="4">Need to be register</Text>
-              <Button variantColor="blue" leftIcon="github" onClick={signInWithGithub}>
+              <Button
+                variantColor="blue"
+                leftIcon="github"
+                onClick={signInWithGithub}
+              >
                 Login with Github
               </Button>
             </ModalBody>
           </ModalContent>
         </Modal>
       </>
-     );
+    );
   }
-  
+
   return <Button {...buttonProps} />;
 };
 

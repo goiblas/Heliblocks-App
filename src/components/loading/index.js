@@ -1,9 +1,14 @@
 import React from "react";
 import "./loading.css";
 
-const Loading = () => {
-  return (
-    <svg viewBox="0 0 50 50" className="spinner-loading" shapeRendering="auto" data-testid="loading">
+const Loading = () => (
+  <div className="spinner-wrapper">
+    <svg
+      viewBox="0 0 50 50"
+      className="spinner-loading"
+      shapeRendering="auto"
+      data-testid="loading"
+    >
       <circle
         className="spinner-loading__path"
         cx="25"
@@ -13,7 +18,7 @@ const Loading = () => {
         strokeMiterlimit="10"
       />
     </svg>
-  );
-};
+  </div>
+);
 
 export default Loading;

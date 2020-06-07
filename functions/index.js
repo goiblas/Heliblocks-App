@@ -10,7 +10,6 @@ const {
 
 const algoliaClient = algoliasearch(algolia_app_id, algolia_api_key);
 const algoliaIndex = algoliaClient.initIndex(algolia_index_name);
-const preprocessor = require("./services/preprocessor");
 const Heliblock = require("./services/heliblock");
 const screenshot = require("./services/screenshot");
 
@@ -104,21 +103,3 @@ exports.removeCreation = functions.firestore
 
     return algoliaIndex.deleteObject(id);
   });
-
-const { minify } = require("html-minifier");
-
-exports.preprocessor = functions.https.onRequest(preprocessor);
-exports.getcode = functions.https.onCall((data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError(
-      "unauthenticated",
-      "Need to be authenticated"
-    );
-  }
-
-  const minifyOptions = {
-    collapseWhitespace: true,
-    removeComments: true
-  };
-  return minify(data.code, minifyOptions);
-});

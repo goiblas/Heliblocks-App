@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Switch, Route, useLocation, ScrollRestoration } from "react-router-dom";
-import Home from "./pages/home";
-import Explore from "./pages/explore";
-import Documentation from "./pages/documentation";
-import NotFound from "./pages/notFound";
-import User from "./pages/user";
-import Edit from "./pages/edit";
-import View from "./pages/view";
-import Create from "./pages/create";
-
+import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
+import Home from "pages/home";
+import Explore from "pages/explore";
+import Documentation from "pages/documentation";
+import NotFound from "pages/notFound";
+import User from "pages/user";
+import Edit from "pages/edit";
+import View from "pages/view";
+import Create from "pages/create";
 
 const ScrollTo = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname])
+  }, [pathname]);
 
-  return null
-}
+  return null;
+};
 
 function App() {
   return (

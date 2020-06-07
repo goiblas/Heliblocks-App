@@ -71,7 +71,6 @@ describe("Editor", () => {
         title: "Untitled",
         description: "",
         tags: [],
-        theme: "twentynineteen",
         alignment: "normal",
         html: "",
         css: ""

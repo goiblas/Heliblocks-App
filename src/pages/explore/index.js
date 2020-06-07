@@ -1,66 +1,40 @@
 import React from "react";
 import algoliasearch from "algoliasearch/lite";
-import Header from "./../../components/header";
-import {
-  InstantSearch,
-  SearchBox,
-  Pagination,
-  connectStateResults,
-} from "react-instantsearch-dom";
-import "./explore.css";
-import { Box } from "@chakra-ui/core";
-import Results from "./results";
+import Header from "components/header";
+import { InstantSearch, Configure } from "react-instantsearch-dom";
+import InfinityResults from "./infinityResults";
+import { Box, Heading } from "@chakra-ui/core";
+import AmountResults from "./amountResults";
+import { Main, Container } from "components/containers";
+import Footer from "components/footer";
+import SearchBox from "./searchBox";
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
   process.env.REACT_APP_ALGOLIA_SEARCH_API_KEY
 );
+
 // https://www.algolia.com/press/?section=brand-guidelines
 const Explore = porps => (
   <>
     <Header />
-    <div className="container">
+    <Container as={Main}>
       <InstantSearch
         searchClient={searchClient}
         indexName={process.env.REACT_APP_ALGOLIA_INDEX_NAME}
       >
-        <div className="search-panel">
-          <div className="search-panel__results">
-            <Box mb="4" py="40px" maxW="1400px" mx="auto">
-
-                <SearchBox
-                  className="searchbox"
-                  translations={{
-                    placeholder: ""
-                  }}
-                  submit={null}
-                />
-              <Results />
- 
-              <ResultNotFound />
-              <div className="pagination">
-                <Pagination />
-              </div>
-            </Box>
-          </div>
-        </div>
+        <Configure hitsPerPage={16} />
+        <Box py="16">
+          <Heading as="h1" mb="3" fontSize={["xl", null, "2xl", "3xl"]}>
+            Explore
+          </Heading>
+          <SearchBox />
+        </Box>
+        <AmountResults />
+        <InfinityResults minHitsPerPage={16} />
       </InstantSearch>
-    </div>
+    </Container>
+    <Footer />
   </>
 );
-
-const ResultNotFound = connectStateResults(props => {
-  const { searchResults, searchState } = props;
-
-  if (
-    searchResults &&
-    searchResults.hits.length === 0 &&
-    searchState.query !== undefined
-  ) {
-    return <p>No se han encontrado resutados para {searchState.query}</p>;
-  }
-
-  return null;
-});
-
 export default Explore;

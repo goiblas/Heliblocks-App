@@ -1,12 +1,12 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
-import Loading from "../../components/loading";
-import NotFound from "../notFound";
-import { getHeliblock } from "./../../services/heliblocks";
-import useIsOwner from "./useIsOwner";
+import Loading from "components/loading";
+import NotFound from "pages/notFound";
+import { getHeliblock, setHeliblock } from "services/heliblocks";
+import { useIsOwner } from "hooks";
 
 const Editor = lazy(() =>
-  import(/* webpackChunkName: "editor" */ "../../components/editor")
+  import(/* webpackChunkName: "editor" */ "components/editor")
 );
 
 const heliblockToEditorProps = response => ({
@@ -15,29 +15,28 @@ const heliblockToEditorProps = response => ({
   tags: response.tags,
   alignment: response.alignment,
   html: response.html,
-  css: response.css,
-  author: response.author
+  css: response.css
 });
 
 const EditCreation = () => {
   const { heliblockId } = useParams();
   const { isLoaded, isOwner } = useIsOwner(heliblockId);
-  const [heliblock, setHeliblock] = useState(null);
+  const [currentHeliblock, setCurrentHeliblock] = useState(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getHeliblock(heliblockId)
-      .then(setHeliblock)
+      .then(setCurrentHeliblock)
       .catch(error => {
         // TODO
       });
   }, [heliblockId]);
 
-  if (!heliblock || !isLoaded) {
+  if (!currentHeliblock || !isLoaded) {
     return <Loading />;
   }
 
-  if (heliblock.notFound) {
+  if (currentHeliblock.notFound) {
     return <NotFound />;
   }
 
@@ -54,8 +53,7 @@ const EditCreation = () => {
     }
     setSaving(false);
   };
-  console.log(heliblock);
-  const editorProps = heliblockToEditorProps(heliblock);
+  const editorProps = heliblockToEditorProps(currentHeliblock);
 
   return (
     <Suspense fallback={<Loading />}>

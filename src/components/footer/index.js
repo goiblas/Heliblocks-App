@@ -1,23 +1,25 @@
 import React from "react";
-import styled from "@emotion/styled";
-import {
-  Box,
-  Avatar,
-  Text,
-  Menu,
-  MenuButton,
-  Flex,
-  Image,
-  Icon
-} from "@chakra-ui/core";
+import { Container } from "components/containers";
+import { Text, Flex, Icon, Link } from "@chakra-ui/core";
 
 const Footer = () => {
   return (
-    <Box py="6">
-      <Text color="gray.600" fontSize="sm">
-        A project by <a href="https://goiblas.com">@goiblas</a>
-      </Text>
-    </Box>
+    <Container as="footer">
+      <Flex py="6" justifyContent="space-between">
+        <Text color="gray.500" fontSize="sm">
+          Made with ❤ by{" "}
+          <Link href="https://goiblas.com" isExternal>
+            @goiblas
+          </Link>
+        </Text>
+        <Text color="gray.500" fontSize="sm">
+          <Link href="https://goiblas.com">
+            <Icon name="github" verticalAlign="middle" mr="2" mb="1" />
+            Github
+          </Link>
+        </Text>
+      </Flex>
+    </Container>
   );
 };
 
