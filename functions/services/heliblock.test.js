@@ -1,4 +1,15 @@
 const Heliblock = require("./heliblock");
+const processSource = require("./process-source");
+jest.mock("./process-source", () => {
+  return jest.fn().mockImplementation(source => {
+    return {
+      html: source.html,
+      css: source.css,
+      variables: [],
+      wrapperClassname: ""
+    };
+  });
+});
 
 describe("Heliblock initial value", () => {
   const initialValue = {
@@ -13,30 +24,16 @@ describe("Heliblock initial value", () => {
     template: null,
     theme: "twentynineteen",
     title: "title",
-    html: `
-      <h1>Hello</h1>
-      <p>World!</p>
-      <script>alert("hello!")</script>
-    `,
-    css: `
-    body {
-      background: red;
-    }</style><script></script>`
+    html: "html",
+    css: "css"
   };
-  const htmlSanited = "<h1>Hello</h1><p>World!</p>";
-  const cssSanited = "body { background: red; }";
 
   let heliblock;
 
   beforeEach(() => {
     heliblock = new Heliblock(initialValue);
   });
-  test("should get preview", () => {
-    const preview = heliblock.getPreview();
-    expect(preview).toContain(htmlSanited);
-    expect(preview).toContain(cssSanited);
-  });
-  test("should set author in public heliblock", () => {
+  test("should get public", () => {
     const sharedProps = {
       title: expect.any(String),
       description: expect.any(String),
@@ -45,14 +42,17 @@ describe("Heliblock initial value", () => {
       createdAt: expect.any(Date),
       screenshot: expect.any(String),
       source: expect.objectContaining({
-        html: expect.any(String),
-        css: expect.any(String)
+        wrapperClassname: expect.any(String),
+        alignment: expect.any(String),
+        variables: expect.any(Array),
+        html: expect.stringMatching("html"),
+        css: expect.stringMatching("css")
       })
     };
     const withoutAuthorExpected = expect.objectContaining({
       ...sharedProps,
       author: expect.objectContaining({
-        displayName: expect.stringContaining("Unknown"),
+        displayName: expect.stringMatching("Unknown"),
         photoURL: expect.any(String)
       })
     });
@@ -66,17 +66,11 @@ describe("Heliblock initial value", () => {
     const withAuthorExpected = expect.objectContaining({
       ...sharedProps,
       author: expect.objectContaining({
-        displayName: expect.stringContaining(author.displayName),
+        displayName: expect.stringMatching(author.displayName),
         photoURL: expect.any(String)
       })
     });
     expect(heliblock.getPublic()).toEqual(withAuthorExpected);
-  });
-
-  test("should minify & sanitize the source", () => {
-    const { source } = heliblock.getPublic();
-
-    expect(source.html).toBe(htmlSanited);
-    expect(source.css).toBe(cssSanited);
+    expect(processSource).toBeCalled();
   });
 });

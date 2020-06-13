@@ -12,6 +12,8 @@ const algoliaClient = algoliasearch(algolia_app_id, algolia_api_key);
 const algoliaIndex = algoliaClient.initIndex(algolia_index_name);
 const Heliblock = require("./services/heliblock");
 const screenshot = require("./services/screenshot");
+const previewGenerator = require("./services/preview-generator");
+const sanitize = require("./services/sanitize");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -33,11 +35,17 @@ exports.generateScreenshot = functions.firestore
       return null;
     }
 
-    const content = change.after.data();
-    const heliblock = new Heliblock(content);
+    const { html, css, alignment } = change.after.data();
+
+    const preview = previewGenerator({
+      html: sanitize(html),
+      css: sanitize(css),
+      alignment
+    });
+
     const { id } = context.params;
 
-    const imageBuffer = await screenshot(heliblock.getPreview());
+    const imageBuffer = await screenshot(preview);
     const file = bucket.file(`/screenshots/${id}.png`);
     await file.save(imageBuffer);
 
@@ -59,11 +67,16 @@ exports.addToAlgolia = functions.firestore
 
     const content = change.after.data();
 
+    // Exit when does not exit screenshot
     if (!content.screenshot) {
       return null;
     }
 
-    const heliblock = new Heliblock(content);
+    const heliblock = new Heliblock({
+      ...content,
+      html: sanitize(content.html),
+      css: sanitize(content.css)
+    });
 
     const snapshotAuthor = await db
       .collection("users")

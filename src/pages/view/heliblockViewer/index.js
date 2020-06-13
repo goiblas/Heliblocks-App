@@ -30,12 +30,12 @@ const HeliblockViewer = ({ html, css, alignment, height }) => (
         </TabPanel>
         <TabPanel>
           <Box h={height}>
-            <CodeViewer language="css" code={css} />
+            <CodeViewer language="html" code={html} />
           </Box>
         </TabPanel>
         <TabPanel>
           <Box h={height}>
-            <CodeViewer language="html" code={html} />
+            <CodeViewer language="css" code={css} />
           </Box>
         </TabPanel>
       </TabPanels>

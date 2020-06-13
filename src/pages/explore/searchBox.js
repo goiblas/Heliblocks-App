@@ -1,6 +1,13 @@
 import React from "react";
 import { connectSearchBox } from "react-instantsearch-dom";
-import { Flex, Box, Input } from "@chakra-ui/core";
+import {
+  Flex,
+  Box,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Icon
+} from "@chakra-ui/core";
 import searchByAlgolia from "./search-by-algolia.svg";
 
 const SearchBox = ({
@@ -11,20 +18,21 @@ const SearchBox = ({
   ...props
 }) => {
   return (
-    <Flex flexDir={["column", "row"]} alignItems="center" maxW="680px">
-      <Input
-        type="search"
-        size="lg"
-        placeholder="Search heliblocks..."
-        value={currentRefinement}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onChange={e => {
-          refine(e.target.value);
-        }}
-        mr={[0, 4]}
-        {...props}
-      />
+    <Flex flexDir={["column", "row"]} alignItems="center" maxW="720px">
+      <InputGroup mr={[0, 4]} flexGrow="1" size="lg">
+        <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+        <Input
+          type="search"
+          placeholder="Search heliblocks..."
+          value={currentRefinement}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={e => {
+            refine(e.target.value);
+          }}
+          {...props}
+        />
+      </InputGroup>
       <Box py="4" maxW="37vw" ml="0" mr="auto">
         <img
           src={searchByAlgolia}

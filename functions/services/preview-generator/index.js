@@ -11,7 +11,7 @@ function getAligmentClass(alignment) {
   }
 }
 
-module.exports = function({ html, css, alignment }) {
+module.exports = function({ html = "", css = "", alignment }) {
   return `
      <style>${baseStyle}${css}</style>
       <div style="display: grid; min-height: 100%; align-items: center;">
