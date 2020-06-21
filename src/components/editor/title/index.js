@@ -9,7 +9,8 @@ const Title = props => {
   };
   return (
     <Editable
-      w="110px"
+      w={110}
+      maxW={520}
       mx={[2, 10]}
       flexGrow="1"
       placeholder="Add title"

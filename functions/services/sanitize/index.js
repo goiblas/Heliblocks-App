@@ -4,7 +4,7 @@ const svgTags = require("./safeSvgTags");
 
 const allowedTags = [
   ...sanitizeHtml.defaults.allowedTags,
-  ...svgTags,
+  ...svgTags.map(tag => tag.toLowerCase()),
   "h1",
   "h2",
   "img",

@@ -19,7 +19,7 @@ const SearchBox = ({
 }) => {
   return (
     <Flex flexDir={["column", "row"]} alignItems="center" maxW="720px">
-      <InputGroup mr={[0, 4]} flexGrow="1" size="lg">
+      <InputGroup mr={[0, 4]} flexGrow="1" w="100%" size="lg">
         <InputLeftElement children={<Icon name="search" color="gray.300" />} />
         <Input
           type="search"
@@ -33,7 +33,7 @@ const SearchBox = ({
           {...props}
         />
       </InputGroup>
-      <Box py="4" maxW="37vw" ml="0" mr="auto">
+      <Box py="4" maxW="37vw" ml={["auto", 0]} mr={[0, "auto"]}>
         <img
           src={searchByAlgolia}
           width="168"

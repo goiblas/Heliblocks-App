@@ -34,4 +34,11 @@ describe("Sanitize", () => {
       '<svg viewbox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50"></circle></svg>';
     expect(sanitize(htmlSvg)).toBe(htmlSvg);
   });
+  test("should allow camel case tag", () => {
+    const htmlSvgCamelCase =
+      '<svg viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><linearGradient gradientTransform="rotate(90)"><stop offset="5%" stop-color="gold"></stop><stop offset="95%" stop-color="red"></stop></linearGradient></svg>';
+    const htmlExpected =
+      '<svg viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><lineargradient gradienttransform="rotate(90)"><stop offset="5%" stop-color="gold"></stop><stop offset="95%" stop-color="red"></stop></lineargradient></svg>';
+    expect(sanitize(htmlSvgCamelCase)).toBe(htmlExpected);
+  });
 });
