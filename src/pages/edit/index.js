@@ -15,7 +15,8 @@ const heliblockToEditorProps = response => ({
   tags: response.tags,
   alignment: response.alignment,
   html: response.html,
-  css: response.css
+  css: response.css,
+  additionalLinks: response.additionalLinks
 });
 
 const EditCreation = () => {
@@ -28,7 +29,7 @@ const EditCreation = () => {
     getHeliblock(heliblockId)
       .then(setCurrentHeliblock)
       .catch(error => {
-        // TODO
+        // @TODO
       });
   }, [heliblockId]);
 

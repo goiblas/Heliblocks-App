@@ -4,17 +4,29 @@ import Header from "../index";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@chakra-ui/core";
 import theme from "theme";
+import { AuthContext } from "services/auth";
 
 // mock media query hook
 import useMediaQuery from "react-use-media-query-hook";
 jest.mock("react-use-media-query-hook");
 
-const renderWithProviders = component =>
-  render(
-    <Router>
-      <ThemeProvider theme={theme}>{component}</ThemeProvider>
-    </Router>
+const renderWithProviders = component => {
+  const value = {
+    isLoaded: true,
+    user: {
+      displayName: "John"
+    }
+  };
+
+  return render(
+    <AuthContext.Provider value={value}>
+      <Router>
+        <ThemeProvider theme={theme}>{component}</ThemeProvider>
+      </Router>
+    </AuthContext.Provider>
   );
+}
+  
 
 describe("Header", () => {
   test("Should render mobile version in small screen", () => {

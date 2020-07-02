@@ -9,7 +9,6 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Text,
   Heading
 } from "@chakra-ui/core";
 
@@ -36,10 +35,9 @@ const ProtectedButton = props => {
             <ModalHeader />
             <ModalCloseButton />
             <ModalBody textAlign="center" pb={6}>
-              <Heading size="lg">Ups!</Heading>
-              <Text mb="4">Need to be register</Text>
+              <Heading size="lg" mb="4">Need to be register</Heading>
               <Button
-                variantColor="blue"
+                variantColor="primary"
                 leftIcon="github"
                 onClick={signInWithGithub}
               >

@@ -35,12 +35,13 @@ exports.generateScreenshot = functions.firestore
       return null;
     }
 
-    const { html, css, alignment } = change.after.data();
+    const { html, css, alignment, additionalLinks} = change.after.data();
 
     const preview = previewGenerator({
       html: sanitize(html),
       css: sanitize(css),
-      alignment
+      alignment,
+      additionalLinks
     });
 
     const { id } = context.params;

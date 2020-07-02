@@ -1,10 +1,10 @@
 import React from "react";
 import { render, act, fireEvent } from "@testing-library/react";
 import Editor from "../index";
-import { AuthContext } from "./../../../services/auth";
+import { AuthContext } from "services/auth";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@chakra-ui/core";
-import theme from "./../../../theme";
+import theme from "theme";
 
 // mock media query hook
 import useMediaQuery from "react-use-media-query-hook";
@@ -73,7 +73,8 @@ describe("Editor", () => {
         tags: [],
         alignment: "normal",
         html: "",
-        css: ""
+        css: "",
+        additionlLinks: ""
       };
       expect(onSave).toHaveBeenCalledWith(expected);
     });

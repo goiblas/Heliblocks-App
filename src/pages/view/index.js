@@ -57,6 +57,7 @@ const View = () => {
           html={heliblock.html}
           css={heliblock.css}
           alignment={heliblock.alignment}
+          additionalLinks={heliblock.additionalLinks}
         />
         <Container py="16">
           <Box mb="10">

@@ -11,9 +11,10 @@ function getAligmentClass(alignment) {
   }
 }
 
-module.exports = function({ html = "", css = "", alignment }) {
+module.exports = function({ html = "", css = "", alignment, additionalLinks = "" }) {
   return `
      <style>${baseStyle}${css}</style>
+     ${additionalLinks}
       <div style="display: grid; min-height: 100%; align-items: center;">
         <div class="hb-block-container ${getAligmentClass(alignment)}">
           ${html}

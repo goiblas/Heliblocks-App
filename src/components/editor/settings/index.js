@@ -20,11 +20,11 @@ import { EditorContext } from "./../editorContext";
 const Settings = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
-  const { description, tags, setState } = useContext(EditorContext);
+  const { description, tags, additionalLinks, setState } = useContext(EditorContext);
 
   const [innerState, setInnerState] = useReducer(
     (innerState, newInnerState) => ({ ...innerState, ...newInnerState }),
-    { description, tags }
+    { description, tags, additionalLinks }
   );
 
   const saveHandle = () => {
@@ -42,7 +42,7 @@ const Settings = props => {
         <ModalContent>
           <ModalHeader>Settings</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody>
             <FormControl>
               <FormLabel>Description</FormLabel>
               <Textarea
@@ -53,11 +53,20 @@ const Settings = props => {
               />
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mt="4">
               <FormLabel>Tags</FormLabel>
               <SelectTags
                 onChange={tags => setInnerState({ tags })}
                 value={innerState.tags}
+              />
+            </FormControl>
+            <FormControl mt="4">
+              <FormLabel>Embed font</FormLabel>
+              <Textarea
+                ref={initialRef}
+                value={innerState.additionalLinks}
+                onChange={e => setInnerState({ additionalLinks: e.target.value })}
+                placeholder="Enter link tag"
               />
             </FormControl>
           </ModalBody>

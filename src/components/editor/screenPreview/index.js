@@ -21,8 +21,7 @@ export const alignments = [
 ];
 
 const ScreenPreview = () => {
-  const { alignment, setState, html, css } = useContext(EditorContext);
-
+  const { alignment, setState, html, css, additionalLinks } = useContext(EditorContext);
   return (
     <Grid templateRows="auto 1fr" h="100%">
       <Box borderBottomWidth="1px" px="4" py="2">
@@ -40,7 +39,7 @@ const ScreenPreview = () => {
         </RadioButtonGroup>
       </Box>
       <ZoomOut>
-        <Preview html={html} css={css} alignment={alignment} />
+        <Preview html={html} css={css} alignment={alignment} additionalLinks={additionalLinks} />
       </ZoomOut>
     </Grid>
   );

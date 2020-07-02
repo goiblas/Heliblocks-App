@@ -10,6 +10,7 @@ export const defaultState = {
   alignment: "normal",
   author: null,
   html: "",
-  css: ""
+  css: "",
+  additionalLinks: ""
 };
 export const EditorContext = createContext(null);

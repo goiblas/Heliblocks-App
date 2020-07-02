@@ -17,14 +17,14 @@ const TabStyled = React.forwardRef((props, ref) => (
     {...props}
   />
 ));
-const HeliblockViewer = ({ html, css, alignment, height }) => (
+const HeliblockViewer = ({ html, css, alignment, height, additionalLinks }) => (
   <Container w="100%">
     <Tabs borderRadius="6px" borderWidth="1px" variant="unstyled">
       <TabPanels>
         <TabPanel>
           <Box h={height}>
             <Resizable>
-              <Preview html={html} css={css} alignment={alignment} />
+              <Preview html={html} css={css} alignment={alignment} additionalLinks={additionalLinks} />
             </Resizable>
           </Box>
         </TabPanel>

@@ -12,13 +12,15 @@ const createExportableHeliblock = heliblock => ({
   tags: heliblock.tags,
   alignment: heliblock.alignment,
   html: heliblock.html,
-  css: heliblock.css
+  css: heliblock.css,
+  additionalLinks: heliblock.additionalLinks
 });
 
 const unloadMessage = "Changes may not be saved";
 
 const Editor = ({ onSave, saving, ...props }) => {
   const [state, setState] = useState(Object.assign(defaultState, props));
+
   useBeforeUnload({
     when: state.hasUnsavedChanges,
     message: { unloadMessage }
