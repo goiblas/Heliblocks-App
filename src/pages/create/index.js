@@ -36,11 +36,20 @@ const Create = () => {
       history.push(`/edit/${heliblockId}`);
     }
   };
-
+  const initialValues = {
+    title: "Untitled",
+    description: "",
+    tags: [],
+    alignment: "normal",
+    author: null,
+    html: "",
+    css: "",
+    additionalLinks: ""
+  }
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <Editor onSave={onSave} saving={saving} />
+        <Editor onSave={onSave} saving={saving} {...initialValues} />
       </Suspense>
     </>
   );
