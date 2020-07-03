@@ -13,7 +13,7 @@ const Feature = ({ title, description, icon }) => (
         <Heading as="h2" fontSize={["xl", null, "2xl", "3xl"]} mb={["2", "4"]}>
           {title}
         </Heading>
-        <Text fontSize={["base", "md", null, "lg"]} color="gray.500">
+        <Text fontSize={["base", "md", "lg", "xl"]} color="gray.500">
           {description}
         </Text>
       </Box>
@@ -32,14 +32,14 @@ const Features = () => {
       mx="auto"
     >
       <Feature
-        title="Use the platform"
-        description="Crea contenido estandar he inserta en tu WordPress retium sit amet urna sit amet scelerisque. Nam eget est viverra, dictum lectus a, accumsan nisl. Aenean  "
+        title="Works in headless"
+        description="Everything WordPress needs to paint the heliblock is contained within the content, so it is a perfect match to use with headless."
         icon="boxes"
       />
 
       <Feature
         title="Save and reuse"
-        description="Fusce pretium sit amet urna sit amet scelerisque. Nam eget est viverra, dictum lectus a, accumsan nisl. Aenean rutrum ex at placerat varius."
+        description="Use the platform, take the power of Block editor and the versatility of CSS variables to customize."
         icon="reuse"
       />
     </Box>

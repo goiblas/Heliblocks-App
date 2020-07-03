@@ -57,7 +57,7 @@ const Markdown = ({content}) => {
       <Box as="code" fontSize="small" backgroundColor="gray.50" p="1">{code.children}</Box>
     )
     const renderCode = (code) => ( 
-      <Box as="pre" fontSize="small" p="6" backgroundColor="gray.50" mb="8">{code.value}</Box>
+      <Box as="pre" w="100%" overflowX="auto" fontSize="small" p="6" backgroundColor="gray.50" mb="8">{code.value}</Box>
     );
     const renderParagraph = (paragraph) => <Box as="p" mb="6">{paragraph.children}</Box>
   

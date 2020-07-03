@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Box, Heading, Text } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
+import AnimationHero from "./animationHero.json";
 
 const Hero = () => {
   const HeroText = ({ title, description, ...rest }) => {
@@ -13,10 +15,10 @@ const Hero = () => {
           {description}
         </Text>
         <Box py="8">
-          <Button size="lg" variantColor="primary" mr="2">
+          <Button as={Link} to="/documentation" size="lg" variantColor="primary" mr="2" mb="2">
             Get Started
           </Button>
-          <Button as={Link} to="/create" size="lg">
+          <Button download as="a" href="https://github.com/goiblas/Heliblocks-Plugin/archive/v0.1.0.zip" size="lg" mb="2">
             Download plugin
           </Button>
         </Box>
@@ -24,22 +26,23 @@ const Hero = () => {
     );
   };
   const HeroImage = props => (
-    <Box p={5} shadow="xl" minH="220px" bg="gray.200" {...props} />
+    <Box {...props}>
+      <Lottie animationData={AnimationHero} />
+    </Box>
   );
   return (
     <Box
       display={{ md: "flex" }}
-      mb="20px"
       flexDirection="row-reverse"
       justifyContent="space-between"
       py={["12px", "20px", "60px"]}
-    >
-      <HeroImage w={{ md: "45%" }} />
+    > 
+      <HeroImage w={{ md: "55%" }} />
 
       <HeroText
         w={{ md: "45%" }}
         title="Build WordPress pages in minutes"
-        description="Create and share your HTML and CSS snippets, I've inserted and customized them for any theme"
+        description="Create and share your HTML and CSS snippets, I've inserted and customized them for any WordPress theme"
       />
     </Box>
   );
