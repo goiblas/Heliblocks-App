@@ -11,19 +11,13 @@ function getAligmentClass(alignment) {
   }
 }
 
-function preventHtmlErrors (data) {
-  const dom = document.createElement("div");
-  dom.innerHTML = data;
-  return dom.innerHTML; 
-}
-
 module.exports = function({ html = "", css = "", alignment, additionalLinks = "" }) {
   return `
      <style>${baseStyle}${css}</style>
      ${additionalLinks}
       <div style="display: grid; min-height: 100%; align-items: center;">
         <div class="hb-block-container ${getAligmentClass(alignment)}">
-          ${preventHtmlErrors(html)}
+          ${html}
         <div>
       <div>
   `;
