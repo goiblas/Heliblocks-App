@@ -6,12 +6,18 @@ import { EditorContext, defaultState } from "./editorContext";
 import { useBeforeUnload } from "hooks";
 import { Prompt } from "react-router-dom";
 
+const preventHtmlErrors = data => {
+  const container = document.createElement("div");
+  container.innerHTML = data;
+  return container.innerHTML;
+}
+
 const createExportableHeliblock = heliblock => ({
   title: heliblock.title,
   description: heliblock.description,
   tags: heliblock.tags,
   alignment: heliblock.alignment,
-  html: heliblock.html,
+  html: preventHtmlErrors(heliblock.html),
   css: heliblock.css,
   additionalLinks: heliblock.additionalLinks
 });
