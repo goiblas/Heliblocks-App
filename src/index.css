@@ -13,42 +13,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-/* .ais-Hits-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  grid-row-gap: 4rem;
-  grid-column-gap: 45;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ais-Hits-list li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-}
-
-.searchbox {
-  text-align: center;
-  padding: 60px 0;
-}
-.searchbox .ais-SearchBox-input {
-  padding: 12px;
-  border: 1px solid #ddd;
-  width: 100%;
-  max-width: 420px;
-}
-
-.ais-SearchBox-submit {
-  padding: 12px;
-}
-
-.ais-SearchBox-submit svg {
-  width: 20px;
-  height: 20px;
-} */
-
 .app {
   min-height: 100vh;
   display: flex;

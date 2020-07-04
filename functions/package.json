@@ -24,7 +24,7 @@
     "scope-css": "^1.2.1"
   },
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "private": true,
   "devDependencies": {
