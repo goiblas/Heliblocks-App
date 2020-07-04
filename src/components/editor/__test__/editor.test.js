@@ -74,9 +74,24 @@ describe("Editor", () => {
         alignment: "normal",
         html: "",
         css: "",
-        additionlLinks: ""
+        additionalLinks: ""
       };
       expect(onSave).toHaveBeenCalledWith(expected);
+    });
+
+    test("should fix html errors", () => {
+      const onSave = jest.fn();
+      const wrongHtml = "<p>heloo<p>world";
+      const { getByTestId } = renderWithProviders(
+        <Editor onSave={onSave} hasUnsavedChanges={true} html={wrongHtml} />
+      );
+
+      const button = getByTestId("save-button");
+      fireEvent.click(button);
+
+      expect(onSave).toHaveBeenCalledWith( expect.objectContaining({
+        html: "<p>heloo</p><p>world</p>"
+      }));
     });
   });
 });
