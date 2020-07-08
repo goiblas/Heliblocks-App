@@ -10,7 +10,21 @@ const allowedTags = [
   "img",
   "picture",
   "video",
-  "iframe"
+  "iframe",
+  "section",
+  "label",
+  "input",
+  "main",
+  "aside",
+  "footer",
+  "button",
+  "article",
+  "details",
+  "summary",
+  "hgroup",
+  "fieldset",
+  "legend",
+  "meter"   
 ];
 // https://www.npmjs.com/package/sanitize-html
 const sanitizeOptions = {

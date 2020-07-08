@@ -18,7 +18,7 @@ const Hero = () => {
           <Button as={Link} to="/documentation" size="lg" variantColor="primary" mr="2" mb="2">
             Get Started
           </Button>
-          <Button download as="a" href="https://github.com/goiblas/Heliblocks-Plugin/archive/v0.1.0.zip" size="lg" mb="2">
+          <Button download as="a" href="https://wordpress.org/plugins/heliblocks/" target="_blank" size="lg" mb="2">
             Download plugin
           </Button>
         </Box>

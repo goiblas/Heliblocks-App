@@ -8,7 +8,7 @@ const {
   algolia_index_name
 } = require("./config/algoliaConfig.json");
 
-const algoliaClient = algoliasearch(algolia_app_id, algolia_api_key);
+const algoliaClient = algoliasearch(  algolia_app_id, algolia_api_key);
 const algoliaIndex = algoliaClient.initIndex(algolia_index_name);
 const Heliblock = require("./services/heliblock");
 const screenshot = require("./services/screenshot");
