@@ -31,14 +31,10 @@ describe("Parse", () => {
   });
 
   test("should fix errors", () => {
-    const { css, variables, html, wrapperClassname } = parse({
-      css: ":root{-- hb-color-text: #222222;}",
+    const { html } = parse({
+      css: "",
       html: "<p>hello<p>world"
     });
-
-    expect(variables).toEqual([]);
     expect(html).toBe("<p>hello</p><p>world</p>");
-    expect(css).toBe(":root{-- hb-color-text: #222222;}");
-    expect(wrapperClassname).toBe(`hb_${HASH}`);
   });
 });

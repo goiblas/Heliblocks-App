@@ -39,7 +39,7 @@ exports.generateScreenshot = functions.firestore
 
     const preview = previewGenerator({
       html: sanitize(html),
-      css: sanitize(css),
+      css,
       alignment,
       additionalLinks
     });
@@ -76,7 +76,7 @@ exports.addToAlgolia = functions.firestore
     const heliblock = new Heliblock({
       ...content,
       html: sanitize(content.html),
-      css: sanitize(content.css)
+      css: content.css
     });
 
     const snapshotAuthor = await db

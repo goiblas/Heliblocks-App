@@ -20,13 +20,15 @@ const InfinityResults = ({ hits, hasMore, refine }) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(onSentinelIntersection);
+    observer.observe(sentinel.current);
+  
     return () => observer.disconnect();
-  }, [onSentinelIntersection]);
+  }, [onSentinelIntersection, sentinel]);
 
   return (
     <>
       <CardsGrid>
-        {hits.map(({ title, description, screenshot, objectID, author }) => (
+        {hits.map(({ title, screenshot, objectID, author }) => (
           <Card
             key={objectID}
             title={title}
