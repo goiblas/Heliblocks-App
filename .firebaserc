@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "heliblocks"
+    "default": "heliblocks",
+    "staging": "heliblocks-stating"
   }
 }
-  
