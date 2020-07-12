@@ -3,6 +3,7 @@ import { connectInfiniteHits } from "react-instantsearch-dom";
 import PropTypes from "prop-types";
 import { Card } from "components/card";
 import { CardsGrid } from "components/containers";
+import { Box } from "@chakra-ui/core"
 
 const InfinityResults = ({ hits, hasMore, refine }) => {
   const sentinel = useRef();
@@ -26,7 +27,7 @@ const InfinityResults = ({ hits, hasMore, refine }) => {
   }, [onSentinelIntersection, sentinel]);
 
   return (
-    <>
+    <Box mb="8%">
       <CardsGrid>
         {hits.map(({ title, screenshot, objectID, author }) => (
           <Card
@@ -39,7 +40,7 @@ const InfinityResults = ({ hits, hasMore, refine }) => {
         ))}
       </CardsGrid>
       <div ref={sentinel} />
-    </>
+    </Box>
   );
 };
 
