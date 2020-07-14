@@ -7,7 +7,8 @@ import { getUser } from "services/users";
 import { Card, SkeletonCard } from "components/card";
 
 const pickedIds = [
-  "PYjNsJQ5DVSjcZSiA9Ng", "nGS0teMpWFE1owOMq7NE", "CKsZyUKnBoaol8BLritf", "0DReVqb9VpixfWP8vpIe"
+  "PYjNsJQ5DVSjcZSiA9Ng", "nGS0teMpWFE1owOMq7NE", "CKsZyUKnBoaol8BLritf", "0DReVqb9VpixfWP8vpIe",
+  "0DReVqb9VpixfWP8vpIe", "oXDDDm9oEZg2vH0t4nGI", "YaLbM45swYLbUlX5dalH", "j2HUDVyshZZa7WOUcrC9"
  ];
 
 const withHeliblock = Component => ({ id, fallback }) => {
