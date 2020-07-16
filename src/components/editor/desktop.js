@@ -49,7 +49,7 @@ const DesktopEditor = () => {
           </Stack>
         </Flex>
       </Box>
-      <Box as={Container} h="calc(100vh - 56px)">
+      <Box as={Container} h="calc(100vh - 57px)">
         <Section defaultSize={620} minSize={100}>
           <Container vertical={true} style={{ height: "100%" }}>
             <Section minSize={48}>
