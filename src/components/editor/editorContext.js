@@ -2,8 +2,9 @@ import { createContext } from "react";
 
 export const defaultState = {
   id: null,
-  hasUnsavedChanges: false,
   saving: false,
+  publishing: false,
+  hasUnsavedChanges: false,
   title: "Untitled",
   description: "",
   tags: [],
@@ -11,6 +12,8 @@ export const defaultState = {
   author: null,
   html: "",
   css: "",
-  additionalLinks: ""
+  additionalLinks: "",
+  published: false,
+  draft: true
 };
 export const EditorContext = createContext(null);

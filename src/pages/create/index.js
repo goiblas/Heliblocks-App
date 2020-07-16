@@ -12,11 +12,10 @@ const Editor = lazy(() =>
 const Create = () => {
   const history = useHistory();
   const [saving, setSaving] = useState(false);
+  const [publishing, setPublishing] = useState(false);
   const { user } = useContext(AuthContext);
 
-  const onSave = async heliblock => {
-    setSaving(true);
-
+  const setNewHeliblock = async heliblock => {
     let heliblockId;
     try {
       heliblockId = await addHeliblock({
@@ -30,12 +29,23 @@ const Create = () => {
       // @TODO
     }
 
-    setSaving(false);
-
     if (heliblockId) {
       history.push(`/edit/${heliblockId}`);
     }
   };
+
+  const onSave = async heliblock => {
+    setSaving(true);
+    await setNewHeliblock(heliblock);
+    setSaving(false);
+  };
+
+  const onPublish = async heliblock => {
+    setPublishing(true);
+    await setNewHeliblock(heliblock);
+    setPublishing(false);
+  }
+
   const initialValues = {
     title: "Untitled",
     description: "",
@@ -49,7 +59,13 @@ const Create = () => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <Editor onSave={onSave} saving={saving} {...initialValues} />
+        <Editor 
+          onSave={onSave}
+          saving={saving}
+          onPublish={onPublish}
+          publishing={publishing}
+          {...initialValues}
+        />
       </Suspense>
     </>
   );

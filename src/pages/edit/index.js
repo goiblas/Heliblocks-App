@@ -16,7 +16,8 @@ const heliblockToEditorProps = response => ({
   alignment: response.alignment,
   html: response.html,
   css: response.css,
-  additionalLinks: response.additionalLinks
+  additionalLinks: response.additionalLinks,
+  draft: response.draft
 });
 
 const EditCreation = () => {
@@ -24,6 +25,7 @@ const EditCreation = () => {
   const { isLoaded, isOwner } = useIsOwner(heliblockId);
   const [currentHeliblock, setCurrentHeliblock] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [publishing, setPublishing] = useState(false);
 
   useEffect(() => {
     getHeliblock(heliblockId)
@@ -45,15 +47,25 @@ const EditCreation = () => {
     return <Redirect to="/" />;
   }
 
-  const onSave = async heliblock => {
-    setSaving(true);
+  const setNewHeliblock = async heliblock => {
     try {
       await setHeliblock(heliblockId, { ...heliblock, lastUpdate: new Date() });
     } catch (error) {
       // @TODO
     }
+  }
+
+  const onSave = async heliblock => {
+    setSaving(true);
+    await setNewHeliblock(heliblock);
     setSaving(false);
   };
+
+  const onPublish = async heliblock => {
+    setPublishing(true);
+    await setNewHeliblock(heliblock);
+    setPublishing(false);
+  }
   const editorProps = heliblockToEditorProps(currentHeliblock);
 
   return (
@@ -63,6 +75,8 @@ const EditCreation = () => {
         id={heliblockId}
         saving={saving}
         onSave={onSave}
+        onPublish={onPublish}
+        publishing={publishing}
       />
     </Suspense>
   );

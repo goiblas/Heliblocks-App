@@ -17,18 +17,10 @@ const ProtectedButton = props => {
   const initialRef = React.useRef();
   const { isLoaded, user } = useContext(AuthContext);
 
-  const buttonProps = {
-    variantColor: "blue",
-    fontWeight: "normal",
-    leftIcon: "cloud",
-    size: "md",
-    ...props
-  };
-
   if (!user) {
     return (
       <>
-        <Button {...buttonProps} isDisabled={!isLoaded} onClick={onOpen} />
+        <Button {...props} isDisabled={!isLoaded} onClick={onOpen} />
         <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -50,7 +42,7 @@ const ProtectedButton = props => {
     );
   }
 
-  return <Button {...buttonProps} />;
+  return <Button {...props} />;
 };
 
 export default ProtectedButton;

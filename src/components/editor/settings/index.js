@@ -17,7 +17,7 @@ import {
 import SelectTags from "./selectTags";
 import { EditorContext } from "./../editorContext";
 
-const Settings = props => {
+const Settings = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const { description, tags, additionalLinks, setState } = useContext(EditorContext);
@@ -31,6 +31,7 @@ const Settings = props => {
     onClose();
     setState(innerState);
   };
+
   return (
     <>
       <Button fontWeight="normal" color="gray.800" onClick={onOpen} {...props}>
@@ -63,7 +64,6 @@ const Settings = props => {
             <FormControl mt="4">
               <FormLabel>Embed font</FormLabel>
               <Textarea
-                ref={initialRef}
                 value={innerState.additionalLinks}
                 onChange={e => setInnerState({ additionalLinks: e.target.value })}
                 placeholder="Enter link tag"

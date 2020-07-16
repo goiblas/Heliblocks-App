@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { EditorContext } from "./editorContext";
 import Settings from "./settings";
 import Title from "./title";
 import Save from "./save";
@@ -6,7 +7,7 @@ import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
 import { UserMenu } from "components/menus";
 import Logo from "components/logo";
-import { Box, Flex, useTheme, Stack } from "@chakra-ui/core";
+import { Box, Flex, useTheme, Stack, Button } from "@chakra-ui/core";
 import { Container, Section, Bar } from "react-simple-resizer";
 
 const Divider = ({ style, ...rest }) => {
@@ -21,6 +22,7 @@ const Divider = ({ style, ...rest }) => {
 };
 
 const DesktopEditor = () => {
+  const { save, draft, saving } = useContext(EditorContext);
   const [dragging, setDragging] = useState(false);
   const { colors } = useTheme();
 
@@ -31,7 +33,15 @@ const DesktopEditor = () => {
           <Logo />
           <Title />
           <Stack isInline spacing={2}>
-            <Settings />
+            {draft && (<>
+              <Button variant="link"
+                  fontWeight="normal"
+                  isLoading={saving}
+                  loadingText="Saving" 
+                  onClick={() => save()}> Save draft</Button>
+              <Box w="4" />
+              </>)}
+            <Settings mr="2" />
             <Save />
             <Flex>
               <UserMenu />

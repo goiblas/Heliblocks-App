@@ -24,7 +24,7 @@ const createExportableHeliblock = heliblock => ({
 
 const unloadMessage = "Changes may not be saved";
 
-const Editor = ({ onSave, saving, ...props }) => {
+const Editor = ({ onSave, onPublish, saving, publishing, ...props }) => {
   const [state, setState] = useState(Object.assign(defaultState, props));
 
   useBeforeUnload({
@@ -45,14 +45,23 @@ const Editor = ({ onSave, saving, ...props }) => {
     setState(prevState => ({ ...prevState, saving }));
   }, [saving]);
 
+  useEffect(() => {
+    setState(prevState => ({ ...prevState, publishing }));
+  }, [publishing]);
+
   const save = () => {
     setState(prevState => ({ ...prevState, hasUnsavedChanges: false }));
-    onSave(createExportableHeliblock(state));
+    onSave({...createExportableHeliblock(state), draft: true });
   };
+  
+  const publish = () => {
+    setState(prevState => ({ ...prevState, hasUnsavedChanges: false, draft: false }));
+    onPublish({...createExportableHeliblock(state), draft: false });  
+  } 
 
   return (
     <EditorContext.Provider
-      value={{ ...state, setState: handleStateChanges, save }}
+      value={{ ...state, setState: handleStateChanges, save, publish }}
     >
       <Prompt when={state.hasUnsavedChanges} message={unloadMessage} />
       {isDesktop ? <DesktopEditor /> : <MobileEditor />}

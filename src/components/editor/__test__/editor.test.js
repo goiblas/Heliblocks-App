@@ -56,42 +56,4 @@ describe("Editor", () => {
       expect(mobile).toBeNull();
     });
   });
-
-  describe("OnSave", () => {
-    test("should call with parametres", () => {
-      const onSave = jest.fn();
-      const { getByTestId } = renderWithProviders(
-        <Editor onSave={onSave} hasUnsavedChanges={true} />
-      );
-
-      const button = getByTestId("save-button");
-      fireEvent.click(button);
-
-      const expected = {
-        title: "Untitled",
-        description: "",
-        tags: [],
-        alignment: "normal",
-        html: "",
-        css: "",
-        additionalLinks: ""
-      };
-      expect(onSave).toHaveBeenCalledWith(expected);
-    });
-
-    test("should fix html errors", () => {
-      const onSave = jest.fn();
-      const wrongHtml = "<p>heloo<p>world";
-      const { getByTestId } = renderWithProviders(
-        <Editor onSave={onSave} hasUnsavedChanges={true} html={wrongHtml} />
-      );
-
-      const button = getByTestId("save-button");
-      fireEvent.click(button);
-
-      expect(onSave).toHaveBeenCalledWith( expect.objectContaining({
-        html: "<p>heloo</p><p>world</p>"
-      }));
-    });
-  });
 });

@@ -37,9 +37,7 @@
     "test:deploy": "react-scripts test --watchAll=false",
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
-    "pretty": "pretty-quick",
-    "deploy:staging": "firebase deploy -P staging --only hosting",
-    "deploy:staging-functions": "firebase deploy -P staging --only functions"
+    "pretty": "pretty-quick"
   },
   "eslintConfig": {
     "extends": "react-app"

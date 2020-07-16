@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Box, Text, Flex, IconButton } from "@chakra-ui/core";
+import { Box, Text, Flex, IconButton, Tag } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import HeaderCard from "./headerCard";
@@ -34,13 +34,14 @@ export const CardOwner = props => {
       opacity={deleting ? 0 : 1}
       pointerEvents={deleting ? "none" : "auto"}
     >
-      <Link to={"/edit/" + props.id}>
+      <Box as={Link} to={"/edit/" + props.id} pos="relative" display="block">
         <HeaderCard image={props.screenshot} />
-      </Link>
+        {props.draft && <Tag size="sm" variantColor="purple" pos="absolute" top="4px" left="4px">Draft</Tag>}
+      </Box>
       <Flex alignItems="flex-start" pb="3">
         <Box flexGrow="1">
           <Link to={"/edit/" + props.id}>
-            <Text mt={3} lineHeight="short">
+            <Text mt={3} lineHeight="short" color={props.draft ? "purple.500" : null}>
               {props.title}
             </Text>
           </Link>

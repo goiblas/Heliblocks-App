@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Settings from "./settings";
 import Title from "./title";
-import Save from "./save";
 import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
 import Logo from "components/logo";
 import { UserMenu } from "components/menus";
-
+import { EditorContext } from "./editorContext";
 import {
   Box,
   Flex,
@@ -15,18 +14,24 @@ import {
   TabPanel,
   TabPanels,
   TabList,
-  Tab
+  Tab,
+  MenuItem,
+  MenuList,
+  MenuButton, 
+  Menu,
+  IconButton
 } from "@chakra-ui/core";
 
 const tabStyled = {
   borderTopWidth: "3px",
   borderColor: "white",
   fontSize: "sm",
-  paddingX: [2, 6],
+  paddingX: [3, 6],
   _selected: { color: "primary.500", borderColor: "primary.500" }
 };
 
 const MobileEditor = () => {
+  const { save, publish } = useContext(EditorContext);
   return (
     <Grid h="100vh" templateRows="56px 1fr" data-testid="mobile-editor">
       <Box borderBottomWidth="1px" px="2">
@@ -57,8 +62,14 @@ const MobileEditor = () => {
           </TabList>
           <Flex p="2" justifyContent="space-between" flexGrow="1">
             <Box ml="auto">
-              <Settings size="sm" mr="3" variant="link" />
-              <Save />
+              <Settings />
+              <Menu>
+                <MenuButton as={IconButton} aria-label="Settings" icon="settings" ml="2" />  
+                <MenuList placement="top-end">
+                  <MenuItem onClick={publish}>Publish</MenuItem>
+                  <MenuItem onClick={save}>Save draft</MenuItem>
+                </MenuList>
+                </Menu>
             </Box>
           </Flex>
         </Flex>

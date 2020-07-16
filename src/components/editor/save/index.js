@@ -5,36 +5,35 @@ import { AuthContext } from "services/auth";
 
 const Save = props => {
   const { user } = useContext(AuthContext)
-  const { save, hasUnsavedChanges, saving } = useContext(EditorContext);
-  const disabled = !hasUnsavedChanges;
+  const { publish, publishing, draft } = useContext(EditorContext);
 
   useEffect(() => {
     const downHandler = (e) => {
       if (user && (e.metaKey || e.ctrlKey) && e.keyCode === 83){
         e.preventDefault();
-        save()
+        publish()
       }
     }
     window.addEventListener('keydown', downHandler);
     return () => window.removeEventListener('keydown', downHandler);
-  },[ user, save ])
+  },[ user, publish ])
+
   const buttonProps = {
     variantColor: "primary",
     fontWeight: "normal",
-    leftIcon: "cloud",
     size: "md",
     loadingText: "Saving",
     ...props
   };
+
   return (
     <ProtectedButton
       {...buttonProps}
-      onClick={save}
-      disabled={disabled}
+      onClick={publish}
       data-testid="save-button"
-      isLoading={saving}
+      isLoading={publishing}
     >
-      Save
+      {draft ? "Publish" : "Save"}
     </ProtectedButton>
   );
 };

@@ -69,7 +69,7 @@ exports.addToAlgolia = functions.firestore
     const content = change.after.data();
 
     // Exit when does not exit screenshot
-    if (!content.screenshot) {
+    if (!content.screenshot || content.draft) {
       return null;
     }
 

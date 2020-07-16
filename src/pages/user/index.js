@@ -7,9 +7,10 @@ import { Container, CardsGrid, Main } from "components/containers";
 import { useParams } from "react-router-dom";
 import { getUser } from "services/users";
 import Profile from "./profile";
-import CardProfile from "./cardProfile";
 import { AuthContext } from "services/auth";
 import { Box } from "@chakra-ui/core";
+import HeliblocksProfile from "./heliblocksProfile";
+
 
 const UserPage = () => {
   const { id } = useParams();
@@ -29,6 +30,9 @@ const UserPage = () => {
   if (profile.notFound) {
     return <NotFound />;
   }
+
+  const isOwner = user && user.uid === id;
+
   return (
     <>
       <Header />
@@ -40,15 +44,7 @@ const UserPage = () => {
         />
         <Box mb="8%">
           <CardsGrid>
-            {profile.heliblocks &&
-              profile.heliblocks.map(heliblockID => (
-                <CardProfile
-                  id={heliblockID}
-                  key={heliblockID}
-                  author={profile}
-                  isOwner={user && user.uid === id}
-                />
-              ))}
+            <HeliblocksProfile ids={profile.heliblocks} isOwner={isOwner} />
           </CardsGrid>
         </Box>
       </Container>

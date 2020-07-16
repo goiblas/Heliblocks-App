@@ -11,9 +11,7 @@ const Hero = () => {
         <Heading pt="6" as="h1" fontSize={["3xl", null, "4xl", null, "5xl"]}>
           {title}
         </Heading>
-        <Text color="gray.600" fontSize={["md", null, "lg", "xl"]} mt="4" mb="2">
-          {description}
-        </Text>
+        {description}
         <Box py="8">
           <Button as={Link} to="/documentation" size="lg" variantColor="primary" mr="2" mb="2">
             Get Started
@@ -44,8 +42,12 @@ const Hero = () => {
         title="Build WordPress pages in minutes"
         description={ 
         <>
-          <p style={{ marginBottom: ".5rem"}}>Create and share your HTML and CSS snippets, I've inserted and customized them for any WordPress theme.</p>
-          <p>Get started now, Heliblocks is free!</p>
+          <Text color="gray.600" fontSize={["md", null, "lg", "xl"]} my="4">
+            Create and share your HTML and CSS snippets, I've inserted and customized them for any WordPress theme.
+          </Text>
+          <Text color="gray.600" fontSize={["md", null, "lg", "xl"]} mb="2">
+            Get started now, Heliblocks is free!
+          </Text>
         </>
         }
       />
