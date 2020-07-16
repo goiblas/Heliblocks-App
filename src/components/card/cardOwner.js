@@ -23,8 +23,11 @@ export const CardOwner = props => {
     window.addEventListener("transitionend", remove);
     return () => window.removeEventListener("transitionend", remove);
   }, [remove]);
+
   const deleteHandle = () => {
-    setDeleting(true);
+    if(window.confirm("You are going to remove this heliblock, are you sure?")) {
+      setDeleting(true);
+    }
   };
 
   return (

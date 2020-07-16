@@ -7,7 +7,7 @@ import bg from "./bg-transparent.svg";
 
 const HeaderCard = ({ image }) => (
   <WrapperImage ratio={IMAGE_HEIGHT / IMAGE_WIDTH}>
-    <Image src={image} alt="" objectFit="cover" rounded="sm" />
+    {image && <Image src={image} alt="" objectFit="cover" rounded="sm" />}
   </WrapperImage>
 );
 

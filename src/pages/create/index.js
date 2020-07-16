@@ -54,7 +54,8 @@ const Create = () => {
     author: null,
     html: "",
     css: "",
-    additionalLinks: ""
+    additionalLinks: "",
+    draft: true
   }
   return (
     <>

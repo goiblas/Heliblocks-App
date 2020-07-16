@@ -31,7 +31,7 @@ const tabStyled = {
 };
 
 const MobileEditor = () => {
-  const { save, publish } = useContext(EditorContext);
+  const { save, publish, draft } = useContext(EditorContext);
   return (
     <Grid h="100vh" templateRows="56px 1fr" data-testid="mobile-editor">
       <Box borderBottomWidth="1px" px="2">
@@ -66,8 +66,8 @@ const MobileEditor = () => {
               <Menu>
                 <MenuButton as={IconButton} aria-label="Settings" icon="settings" ml="2" />  
                 <MenuList placement="top-end">
-                  <MenuItem onClick={publish}>Publish</MenuItem>
-                  <MenuItem onClick={save}>Save draft</MenuItem>
+                  <MenuItem onClick={publish}>{ draft ? "Publish" : "Save" }</MenuItem>
+                  {draft && (<MenuItem onClick={save}>Save draft</MenuItem>)}
                 </MenuList>
                 </Menu>
             </Box>
