@@ -30,12 +30,12 @@ Esto mostrará en el inspector del editor de WordPress un selector de color con 
 
 ** --hb-color-***
 
-Se utiliza para definir colores, ejemplo: \`-—hb-color-box-background: #ffffff;\`
+Define colors, example: \`-—hb-color-box-background: #ffffff;\`
 
 ** --hb-text-***
 
-Se utiliza para definir cadena de texto
-ejemplo: \`-—hb-text-body-family: -apple-system, system-ui, sans-serif;\`
+Define string text,
+example: \`-—hb-text-body-family: -apple-system, system-ui, sans-serif;\`
 
 ** --hb-size-***
 
