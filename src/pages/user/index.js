@@ -9,8 +9,8 @@ import { getUser } from "services/users";
 import Profile from "./profile";
 import { AuthContext } from "services/auth";
 import { Box } from "@chakra-ui/core";
-import HeliblocksProfile from "./heliblocksProfile";
-
+import PublicHeliblocks from "./publicHeliblocks";
+import OwnHeliblocks from "./ownHeliblocks";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -44,7 +44,11 @@ const UserPage = () => {
         />
         <Box mb="8%">
           <CardsGrid>
-            <HeliblocksProfile ids={profile.heliblocks} isOwner={isOwner} />
+            {isOwner ? (
+              <OwnHeliblocks ids={profile.heliblocks} />
+            ) : (
+              <PublicHeliblocks ids={profile.heliblocks} />
+            )}
           </CardsGrid>
         </Box>
       </Container>
