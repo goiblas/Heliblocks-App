@@ -14,12 +14,14 @@ const languages = {
   en: {
     label: "English",
     content: DocsEN,
-    filename: "docs-en.js"
+    filename: "docs-en.js",
+    lang: "en-US"
   },
   es: {
     label: "Español",
     content: DocsES,
-    filename: "docs-es.js"
+    filename: "docs-es.js",
+    lang: "es-ES"
   }
 }
 const Documentation = () => {
@@ -35,12 +37,12 @@ const Documentation = () => {
     }
   `} />
     <Header />
-    <Container size="small" as={Main}>
+    <Container size="small" as={Main} lang={languages[language].lang}>
       <Provider>
         <Grid py="4" templateColumns="repeat(12, 1fr)" gap="32px">
-          <Box display={[ "none", null, "block"]} gridColumn="span 3" >
-            <Box pos="sticky" top="16px">
-                <List fontSize="small" py="16">
+          <Box gridColumn={["span 12", "span 8", "span 3"]} >
+            <Box pos="sticky" top="16px" pt="8">
+                <List fontSize="small" pb="16" pt="8" display={["none", null, "block"]}>
                   <Slot name="Docs.menu" />
                 </List>
               <Select size="sm" value={language} onChange={handleLanguage}>
@@ -52,7 +54,7 @@ const Documentation = () => {
           <Box gridColumn={["span 12", null, "5/ span 8"]} pb="12%" >
             <Markdown content={languages[language].content} />
             <Box textAlign="center" py="8">
-              <Button as="a" target="_blank" href={ "https://github.com/goiblas/Heliblocks-App/blob/master/src/pages/documentation/" + languages[language].filename }>Edit this page</Button>
+              <Button as="a" target="_blank" href={ "https://github.com/goiblas/Heliblocks-App/edit/master/src/pages/documentation/" + languages[language].filename }>Edit this page</Button>
             </Box>
           </Box>
         </Grid>
