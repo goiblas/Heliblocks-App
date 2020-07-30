@@ -39,7 +39,7 @@ const Documentation = () => {
     <Header />
     <Container size="small" as={Main} lang={languages[language].lang}>
       <Provider>
-        <Grid py="4" templateColumns="repeat(12, 1fr)" gap="32px">
+        <Grid py="4" templateColumns="repeat(12, 1fr)" gap={[null, null, "32px"]}>
           <Box gridColumn={["span 12", "span 8", "span 3"]} >
             <Box pos="sticky" top="16px" pt="8">
                 <List fontSize="small" pb="16" pt="8" display={["none", null, "block"]}>
@@ -51,7 +51,7 @@ const Documentation = () => {
               </Select>
             </Box>
           </Box>
-          <Box gridColumn={["span 12", null, "5/ span 8"]} pb="12%" >
+          <Box gridColumn={["span 12", null, "5/ span 8"]} pb="12%">
             <Markdown content={languages[language].content} />
             <Box textAlign="center" py="8">
               <Button as="a" target="_blank" href={ "https://github.com/goiblas/Heliblocks-App/edit/master/src/pages/documentation/" + languages[language].filename }>Edit this page</Button>
