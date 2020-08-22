@@ -4,6 +4,7 @@ import Loading from "components/loading";
 import NotFound from "pages/notFound";
 import { getHeliblock, setHeliblock } from "services/heliblocks";
 import { useIsOwner } from "hooks";
+import { Title } from 'react-head';
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "components/editor")
@@ -69,6 +70,8 @@ const EditCreation = () => {
   const editorProps = heliblockToEditorProps(currentHeliblock);
 
   return (
+    <>
+    <Title>Editor - Heliblocks</Title>
     <Suspense fallback={<Loading />}>
       <Editor
         {...editorProps}
@@ -79,6 +82,7 @@ const EditCreation = () => {
         publishing={publishing}
       />
     </Suspense>
+    </>
   );
 };
 

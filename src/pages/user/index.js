@@ -11,6 +11,7 @@ import { AuthContext } from "services/auth";
 import { Box } from "@chakra-ui/core";
 import PublicHeliblocks from "./publicHeliblocks";
 import OwnHeliblocks from "./ownHeliblocks";
+import { Title } from "react-head";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -35,6 +36,7 @@ const UserPage = () => {
 
   return (
     <>
+      <Title>{profile.displayName} - Heliblocks</Title>
       <Header />
       <Container as={Main}>
         <Profile

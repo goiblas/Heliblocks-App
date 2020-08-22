@@ -9,6 +9,7 @@ import DocsEN from "./docs-en";
 import { Provider } from 'react-slot-fill';
 import { Slot } from 'react-slot-fill';
 import { Global, css } from '@emotion/core'
+import { Title } from 'react-head';
 
 const languages = {
   en: {
@@ -36,6 +37,7 @@ const Documentation = () => {
       scroll-behavior: smooth;
     }
   `} />
+    <Title>Documentation - Heliblocks</Title>
     <Header />
     <Container size="small" as={Main} lang={languages[language].lang}>
       <Provider>
@@ -46,7 +48,7 @@ const Documentation = () => {
                   <Slot name="Docs.menu" />
                 </List>
               <Select size="sm" value={language} onChange={handleLanguage}>
-                  {Object.keys(languages).map(lang => (<option value={lang}>{languages[lang].label}</option>)
+                  {Object.keys(languages).map(lang => (<option value={lang} key={lang}>{languages[lang].label}</option>)
                 )}
               </Select>
             </Box>

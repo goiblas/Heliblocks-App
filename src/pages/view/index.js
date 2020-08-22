@@ -10,6 +10,7 @@ import Footer from "components/footer";
 import RelatedList from "./relatedList";
 import Details from "./details";
 import HeliblocksViewer from "./heliblockViewer";
+import { Title } from "react-head";
 
 const View = () => {
   const { heliblockId } = useParams();
@@ -20,7 +21,7 @@ const View = () => {
 
     getHeliblock(heliblockId)
       .then(setHeliblock)
-      .catch(error => {});
+      .catch((error) => {});
   }, [heliblockId]);
 
   if (!heliblock) {
@@ -41,6 +42,7 @@ const View = () => {
 
   return (
     <>
+      <Title>{heliblock.title} - Heliblocks</Title>
       <Header />
       <Main>
         <Container pt="12" pb="2">

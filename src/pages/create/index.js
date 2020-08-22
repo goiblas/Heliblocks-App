@@ -4,6 +4,7 @@ import Loading from "components/loading";
 import { addHeliblock } from "services/heliblocks";
 import { addHeliblockToUser } from "services/users";
 import { AuthContext } from "services/auth";
+import { Title } from 'react-head';
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "../../components/editor")
@@ -59,6 +60,7 @@ const Create = () => {
   }
   return (
     <>
+      <Title>Editor - Heliblocks</Title>
       <Suspense fallback={<Loading />}>
         <Editor 
           onSave={onSave}

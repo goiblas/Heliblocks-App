@@ -8,6 +8,7 @@ import AmountResults from "./amountResults";
 import { Main, Container } from "components/containers";
 import Footer from "components/footer";
 import SearchBox from "./searchBox";
+import { Title } from 'react-head';
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -17,6 +18,7 @@ const searchClient = algoliasearch(
 // https://www.algolia.com/press/?section=brand-guidelines
 const Explore = porps => (
   <>
+    <Title>Explore - Heliblocks</Title>
     <Header />
     <Container as={Main}>
       <InstantSearch
