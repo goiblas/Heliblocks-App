@@ -1,17 +1,16 @@
 import {
   handleResponse,
   handleError,
-  heliblocksCollection
+  heliblocksCollection,
 } from "./../database";
 export * from "./relatedTo";
 
-export const getHeliblock = async id => {
-  console.log();
+export const getHeliblock = async (id) => {
   const response = await heliblocksCollection.doc(id).get();
   return handleResponse(response);
 };
 
-export const addHeliblock = async heliblock => {
+export const addHeliblock = async (heliblock) => {
   try {
     const { id } = await heliblocksCollection.add(heliblock);
     return id;
@@ -27,7 +26,7 @@ export const setHeliblock = async (id, heliblock) => {
   }
 };
 
-export const removeHeliblock = async id => {
+export const removeHeliblock = async (id) => {
   try {
     await heliblocksCollection.doc(id).delete();
   } catch (error) {
