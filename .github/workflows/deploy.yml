@@ -28,7 +28,7 @@ jobs:
           REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
         run: npm run test:deploy
       - name: Build
-        env: 
+        env:
           REACT_APP_ALGOLIA_INDEX_NAME: ${{ secrets.REACT_APP_ALGOLIA_INDEX_NAME }}
           REACT_APP_ALGOLIA_SEARCH_API_KEY: ${{ secrets.REACT_APP_ALGOLIA_SEARCH_API_KEY }}
           REACT_APP_ALGOLIA_APP_ID: ${{ secrets.REACT_APP_ALGOLIA_APP_ID }}
@@ -40,6 +40,7 @@ jobs:
           REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
           REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
           REACT_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}
+          REACT_APP_FATHOM_SITE_ID: ${{ secrets.REACT_APP_FATHOM_SITE_ID }}
         run: npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
