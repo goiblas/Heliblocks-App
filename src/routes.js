@@ -9,8 +9,7 @@ import Edit from "pages/edit";
 import View from "pages/view";
 import Create from "pages/create";
 import Cookies from "pages/legal/cookies";
-import { withAnalytics } from "services/analytics";
-import { CookiesNotices, Tracker } from "components/analytics";
+import { Fathom } from "components/analytics";
 
 const ScrollTo = () => {
   const { pathname } = useLocation();
@@ -26,8 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollTo />
-      <Tracker />
-      <CookiesNotices />
+      <Fathom />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/create" component={Create} />
@@ -43,4 +41,4 @@ function App() {
   );
 }
 
-export default withAnalytics(App);
+export default App;
