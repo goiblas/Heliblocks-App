@@ -7,7 +7,7 @@ import {
   MenuList,
   Avatar,
   MenuItem,
-  Box
+  Box,
 } from "@chakra-ui/core";
 import { AuthContext, signOut } from "services/auth";
 import SignIn from "./signIn";
@@ -37,6 +37,9 @@ export const UserMenu = () => {
       <MenuList placement="bottom-end" zIndex="tooltip">
         <MenuItem as={Link} to={`/user/${user.uid}`}>
           Profile
+        </MenuItem>
+        <MenuItem as={Link} to={`/account-settings`}>
+          Account settings
         </MenuItem>
         <MenuItem data-testid="logout-button" onClick={signOut}>
           Log Out
