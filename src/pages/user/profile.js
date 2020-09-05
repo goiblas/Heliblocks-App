@@ -1,17 +1,18 @@
 import React from "react";
-import { Image, Heading, Flex, Stack, Text, Icon, Link } from "@chakra-ui/core";
+import {
+  Heading,
+  Flex,
+  Stack,
+  Text,
+  Icon,
+  Link,
+  Avatar,
+} from "@chakra-ui/core";
 
 const Profile = ({ photoURL, displayName, githubURL }) => {
   return (
     <Flex alignItems="center" py="16">
-      <Image
-        size={["68px", "90px"]}
-        objectFit="cover"
-        rounded="full"
-        src={photoURL}
-        alt={displayName}
-        mr="6"
-      />
+      <Avatar name={displayName} src={photoURL} size="xl" mr="6" />
       <Stack spacing="1">
         <Heading as="h1" fontSize={["xl", "2xl", "3xl"]}>
           {displayName}

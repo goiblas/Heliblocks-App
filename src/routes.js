@@ -5,6 +5,7 @@ import Explore from "pages/explore";
 import Documentation from "pages/documentation";
 import NotFound from "pages/notFound";
 import User from "pages/user";
+import AccountSettings from "pages/accountSettings";
 import Edit from "pages/edit";
 import View from "pages/view";
 import Create from "pages/create";
@@ -32,6 +33,11 @@ function App() {
         <Route exact path="/explore" component={Explore} />
         <Route exact path="/documentation" component={Documentation} />
         <Route exact path="/user/:id" component={User}></Route>
+        <Route
+          exact
+          path="/account-settings"
+          component={AccountSettings}
+        ></Route>
         <Route exact path="/edit/:heliblockId" component={Edit}></Route>
         <Route exact path="/view/:heliblockId" component={View}></Route>
         <Route exact path="/cookies" component={Cookies}></Route>

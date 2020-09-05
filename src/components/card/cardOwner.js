@@ -5,12 +5,12 @@ import TimeAgo from "react-timeago";
 import HeaderCard from "./headerCard";
 import { removeHeliblock } from "services/heliblocks";
 
-export const CardOwner = props => {
+export const CardOwner = (props) => {
   const [deleting, setDeleting] = useState(false);
   const wrapper = useRef(null);
 
   const remove = useCallback(
-    event => {
+    (event) => {
       if (event.target === wrapper.current) {
         wrapper.current.style.display = "none";
         removeHeliblock(props.id);
@@ -25,10 +25,16 @@ export const CardOwner = props => {
   }, [remove]);
 
   const deleteHandle = () => {
-    if(window.confirm("You are going to remove this heliblock, are you sure?")) {
+    if (
+      window.confirm("You are going to remove this heliblock, are you sure?")
+    ) {
       setDeleting(true);
     }
   };
+
+  if (!props.lastUpdate) {
+    return null;
+  }
 
   return (
     <Box
@@ -39,12 +45,26 @@ export const CardOwner = props => {
     >
       <Box as={Link} to={"/edit/" + props.id} pos="relative" display="block">
         <HeaderCard image={props.screenshot} />
-        {props.draft && <Tag size="sm" variantColor="purple" pos="absolute" top="4px" left="4px">Draft</Tag>}
+        {props.draft && (
+          <Tag
+            size="sm"
+            variantColor="purple"
+            pos="absolute"
+            top="4px"
+            left="4px"
+          >
+            Draft
+          </Tag>
+        )}
       </Box>
       <Flex alignItems="flex-start" pb="3">
         <Box flexGrow="1">
           <Link to={"/edit/" + props.id}>
-            <Text mt={3} lineHeight="short" color={props.draft ? "purple.500" : null}>
+            <Text
+              mt={3}
+              lineHeight="short"
+              color={props.draft ? "purple.500" : null}
+            >
               {props.title}
             </Text>
           </Link>
