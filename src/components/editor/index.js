@@ -6,20 +6,21 @@ import { EditorContext, defaultState } from "./editorContext";
 import { useBeforeUnload } from "hooks";
 import { Prompt } from "react-router-dom";
 
-const preventHtmlErrors = data => {
+const preventHtmlErrors = (data) => {
   const container = document.createElement("div");
   container.innerHTML = data;
   return container.innerHTML;
-}
+};
 
-const createExportableHeliblock = heliblock => ({
+const createExportableHeliblock = (heliblock) => ({
   title: heliblock.title,
   description: heliblock.description,
   tags: heliblock.tags,
   alignment: heliblock.alignment,
   html: preventHtmlErrors(heliblock.html),
   css: heliblock.css,
-  additionalLinks: heliblock.additionalLinks
+  restricted: heliblock.restricted,
+  additionalLinks: heliblock.additionalLinks,
 });
 
 const unloadMessage = "Changes may not be saved";
@@ -29,35 +30,39 @@ const Editor = ({ onSave, onPublish, saving, publishing, ...props }) => {
 
   useBeforeUnload({
     when: state.hasUnsavedChanges,
-    message: { unloadMessage }
+    message: { unloadMessage },
   });
 
-  const handleStateChanges = newState =>
-    setState(prevState => ({
+  const handleStateChanges = (newState) =>
+    setState((prevState) => ({
       ...prevState,
       ...newState,
-      hasUnsavedChanges: true
+      hasUnsavedChanges: true,
     }));
 
   const isDesktop = useMediaQuery("(min-width: 880px)");
 
   useEffect(() => {
-    setState(prevState => ({ ...prevState, saving }));
+    setState((prevState) => ({ ...prevState, saving }));
   }, [saving]);
 
   useEffect(() => {
-    setState(prevState => ({ ...prevState, publishing }));
+    setState((prevState) => ({ ...prevState, publishing }));
   }, [publishing]);
 
   const save = () => {
-    setState(prevState => ({ ...prevState, hasUnsavedChanges: false }));
-    onSave({...createExportableHeliblock(state), draft: true });
+    setState((prevState) => ({ ...prevState, hasUnsavedChanges: false }));
+    onSave({ ...createExportableHeliblock(state), draft: true });
   };
-  
+
   const publish = () => {
-    setState(prevState => ({ ...prevState, hasUnsavedChanges: false, draft: false }));
-    onPublish({...createExportableHeliblock(state), draft: false });  
-  } 
+    setState((prevState) => ({
+      ...prevState,
+      hasUnsavedChanges: false,
+      draft: false,
+    }));
+    onPublish({ ...createExportableHeliblock(state), draft: false });
+  };
 
   return (
     <EditorContext.Provider

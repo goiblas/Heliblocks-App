@@ -14,9 +14,13 @@ import {
   Box,
   Button,
   useToast,
+  FormControl,
+  FormLabel,
+  Text,
 } from "@chakra-ui/core";
 import { Title } from "react-head";
 import { uploadUserAvatar } from "services/storage";
+import ManageSubscription from "./manageSubscription";
 import * as services from "services/users";
 
 const AccountSettings = () => {
@@ -112,48 +116,53 @@ const AccountSettings = () => {
         <Heading as="h1" mb="2" pt="16">
           Account settings
         </Heading>
-        <Flex alignItems="center" py="8">
-          <Avatar size="2xl" name={name} src={avatar} mr="8" />
-          <Input
-            d="none"
-            type="file"
-            accept=".jpg"
-            onChange={handleChangeImage}
-            ref={inputFile}
-          />
-          <Button onClick={handleChangeAvatar}>Change photo</Button>
-        </Flex>
-
-        <Grid autoFlow={["row", "column"]} columnGap="8">
-          <Box mb="4">
-            <label htmlFor="name"> Name </label>
-            <Input
-              id="name"
-              type="text"
-              value={name}
-              name="name"
-              onChange={handleName}
-            />
-          </Box>
-          <Box mb="4">
-            <label htmlFor="email"> Email</label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              name="email"
-              onChange={handleEmail}
-            />
-          </Box>
-        </Grid>
         <Box mb="8%">
-          <Button
-            isLoading={loading}
-            variantColor="primary"
-            onClick={handleSubmit}
-          >
-            Save profile
-          </Button>
+          <Flex alignItems="center" py="8">
+            <Avatar size="2xl" name={name} src={avatar} mr="8" />
+            <Input
+              d="none"
+              type="file"
+              accept=".jpg"
+              onChange={handleChangeImage}
+              ref={inputFile}
+            />
+            <Button onClick={handleChangeAvatar}>Change photo</Button>
+          </Flex>
+
+          <Grid autoFlow={["row", "column"]} columnGap="8">
+            <FormControl mb="4">
+              <FormLabel htmlFor="name"> Name </FormLabel>
+              <Input
+                id="name"
+                type="text"
+                value={name}
+                name="name"
+                onChange={handleName}
+              />
+            </FormControl>
+            <FormControl mb="4">
+              <FormLabel htmlFor="email"> Email</FormLabel>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                name="email"
+                onChange={handleEmail}
+              />
+            </FormControl>
+          </Grid>
+          <Box mb="16">
+            <Button
+              isLoading={loading}
+              variantColor="primary"
+              onClick={handleSubmit}
+            >
+              Save profile
+            </Button>
+          </Box>
+          <Box borderTopWidth="1px" pt="12">
+            <ManageSubscription />
+          </Box>
         </Box>
       </Container>
       <Footer />

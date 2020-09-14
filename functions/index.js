@@ -82,6 +82,62 @@ exports.generateScreenshot = functions.firestore
     return refHeliblocks.doc(id).update({ screenshot: url[0] });
   });
 
+exports.addToPrivates = functions.firestore
+  .document("heliblocks/{id}")
+  .onWrite(async (change, context) => {
+    // Exit when the data is deleted.
+    if (!change.after.exists) {
+      return null;
+    }
+
+    const content = change.after.data();
+
+    if (!content.screenshot || content.draft || !content.restricted) {
+      return null;
+    }
+
+    const heliblock = new Heliblock({
+      ...content,
+      html: sanitize(content.html),
+      css: content.css,
+    });
+
+    return admin
+      .firestore()
+      .collection("heliblocks_private")
+      .doc(context.params.id)
+      .set({
+        ...heliblock,
+        author: content.author,
+      });
+  });
+
+exports.changePrivacity = functions.firestore
+  .document("heliblocks/{id}")
+  .onWrite(async (change, context) => {
+    if (!change.after.exists || !change.before.exists) {
+      return null;
+    }
+
+    const content = change.after.data();
+    const before = change.before.data();
+    const { id } = context.params;
+
+    if (!before.restricted && content.restricted) {
+      return algoliaIndex.deleteObject(id);
+    }
+
+    if (before.restricted && !content.restricted) {
+      return admin
+        .firestore()
+        .collection("heliblocks_private")
+        .doc(id)
+        .delete();
+    }
+
+    return null;
+  });
+
 exports.addToAlgolia = functions.firestore
   .document("heliblocks/{id}")
   .onWrite(async (change, context) => {
@@ -93,7 +149,7 @@ exports.addToAlgolia = functions.firestore
     const content = change.after.data();
 
     // Exit when does not exit screenshot
-    if (!content.screenshot || content.draft) {
+    if (!content.screenshot || content.draft || content.restricted) {
       return null;
     }
 
@@ -116,7 +172,6 @@ exports.addToAlgolia = functions.firestore
     }
 
     const publicHeliblock = heliblock.getPublic();
-
     return algoliaIndex.saveObject({
       objectID: context.params.id,
       ...publicHeliblock,
@@ -139,7 +194,15 @@ exports.removeCreation = functions.firestore
       });
     }
 
-    return algoliaIndex.deleteObject(id);
+    if (snapshot.data().restricted) {
+      return admin
+        .firestore()
+        .collection("heliblocks_private")
+        .doc(id)
+        .delete();
+    } else {
+      return algoliaIndex.deleteObject(id);
+    }
   });
 
 exports.updateAuthorToAlgolia = functions.firestore

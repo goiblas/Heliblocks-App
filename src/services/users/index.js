@@ -2,10 +2,10 @@ import {
   usersCollection,
   handleError,
   handleResponse,
-  addToArray
+  addToArray,
 } from "./../database";
 
-export const getUser = async uid => {
+export const getUser = async (uid) => {
   try {
     const response = await usersCollection.doc(uid).get();
     return handleResponse(response);
@@ -24,6 +24,6 @@ export const setUser = async (uid, userDetails) => {
 };
 export const addHeliblockToUser = (uid, heliblockId) => {
   return usersCollection.doc(uid).update({
-    heliblocks: addToArray(heliblockId)
+    heliblocks: addToArray(heliblockId),
   });
 };

@@ -45,17 +45,18 @@ export const CardOwner = (props) => {
     >
       <Box as={Link} to={"/edit/" + props.id} pos="relative" display="block">
         <HeaderCard image={props.screenshot} />
-        {props.draft && (
-          <Tag
-            size="sm"
-            variantColor="purple"
-            pos="absolute"
-            top="4px"
-            left="4px"
-          >
-            Draft
-          </Tag>
-        )}
+        <ContainerTags>
+          {props.draft && (
+            <Tag size="sm" mr="1" variantColor="purple">
+              Draft
+            </Tag>
+          )}
+          {props.restricted && (
+            <Tag Tag size="sm" variantColor="blue">
+              Private
+            </Tag>
+          )}
+        </ContainerTags>
       </Box>
       <Flex alignItems="flex-start" pb="3">
         <Box flexGrow="1">
@@ -85,3 +86,14 @@ export const CardOwner = (props) => {
     </Box>
   );
 };
+
+const ContainerTags = (props) => (
+  <Box
+    pos="absolute"
+    top="4px"
+    left="4px"
+    right="0"
+    pointerEvents="none"
+    {...props}
+  />
+);
