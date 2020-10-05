@@ -1,21 +1,21 @@
 export default `
 # Welcome to Heliblocks
-Heliblocks nace con la necesidad de reutilizar y compartir fragmentos de HTML y CSS. Para ello hace uso de las capacidades de edición, del editor de bloques de WordPress y las posibilidades de personalización, de las variables nativas de CSS.
+Heliblocks was born with the need to reuse and share HTML and CSS fragments. For this, it makes use of the editing capabilities; the WordPress block editor and the customization possibilities of the native CSS variables.
 
-Para poder empezar a utilizar tus heliblocks o los ya creados por la comunidad, deberas tener instalado el bloque oficial, desde el cual podrás buscar, insertar y personalizar directamente en tu editor de WordPress.
+In order to start using your heliblocks or those that are already created by the community, you must have the official block installed, from which you can search, insert and customize directly in your WordPress editor.
 
-Heliblocks te permitirá insertar código HTML personalizado en tus páginas en WordPress, sin la complejidad de crear un bloque propio pero disfrutando de todas las ventajas de edición del editor de bloques de WordPress.
+Heliblocks will allow you to insert custom HTML code into your WordPress pages, without the complexity of creating your own block but enjoying all the editing advantages of the WordPress block editor.
 
 ## Getting Started
-Heliblocks intenta mantenerse lo más cerca de los estándares, con lo que no es necesario que aprendas ningún lenguaje especifico, es simplemente, HTML y CSS. 
+Heliblocks tries to stay as close to the standards as possible, so you don't need to learn any specific language, it's just HTML and CSS.
 
-Puedes utilizar todas las etiquetas que quieras para construir el HTML de tu Heliblock, aunque por  seguridad, por ahora no está permitido utilizar ningún tipo de script. 
+You can use all the tags you want to build the HTML of your Heliblock, although for security reasons, for now the use of any type of script is not allowed.
 
-Todo el CSS es encapsulado, así que no te preocupes demasiado por los nombre que utilizas, todas las clases serán transformadas para evitar colisiones con el resto de elementos de la página donde se inserte.
+All the CSS is encapsulated, so don't worry too much about the names you use, all the classes will be transformed to avoid collisions or clashes with the rest of the elements of the page where it is inserted.
 
 ## Customization
-Heliblocks no solo permite editar el contenido y las imágenes desde el editor de WordPress, también puedes permitir que se personalizen otros detalles como colores, fuentes, tamaños, etc.
-Para ello tienes que utilizar variables de CSS que comiencen por unos nombre predeterminados y que estén definidas dentro de \`:root\`, por ejemplo: 
+Heliblocks not only allows you to edit the content and images from the WordPress editor,but you can also allow other details such as colors, fonts, sizes, etc. to be customized.
+For this you have to use CSS variables that starts with a default name and are defined within \`:root\`, for example: 
 
 ~~~ css
 :root {
@@ -23,31 +23,29 @@ Para ello tienes que utilizar variables de CSS que comiencen por unos nombre pre
 }
 ~~~
 
-Esto mostrará en el inspector del editor de WordPress un selector de color con la etiqueta "Button background" que permitirá al usuario editar ese color.
-
+This will display a color picker labeled "Button background" in the WordPress editor inspector, that will allow the user to edit that color.
 
 ### Available formats
 
 ** --hb-color-***
 
-Define colors, example: \`-—hb-color-box-background: #ffffff;\`
+Define colors, for example: \`-—hb-color-box-background: #ffffff;\`
 
 ** --hb-text-***
 
-Define string text,
-example: \`-—hb-text-body-family: -apple-system, system-ui, sans-serif;\`
+Define string text, for example: \`-—hb-text-body-family: -apple-system, system-ui, sans-serif;\`
 
 ** --hb-size-***
 
-Se utiliza para definir tamaños en píxeles, ejemplo: \` -—hb-size-title-size: 45px; \`
+Define sizes in pixels, for example: \` -—hb-size-title-size: 45px; \`
 
 ** --hb-value-***
 
-Se utiliza para definir valores sin unidad, ejemplo: \`-—hb-value-title-line-height: 1.2;\`
+Define unitless values, for example:: \`-—hb-value-title-line-height: 1.2;\`
 
 ### Define min max values
 
-Por defecto las variables con el formato \`-—hb-size\` y \`—-hb-value\` tienen un valor mínimo de 0 y un máximo de 100, si quieres personalizar esos valores tienes que añadir los valores después del formato separados por guiones, ejemplo: 
+By default the variables with the format  \`-—hb-size\` and \`—-hb-value\` have a minimum value of 0 and a maximum of 100, if you want to customize those values, you have to add the values after the format separated by hyphens, for example:
 
 ~~~ css
 -—hb-size-16-60-title-size: 45px;
