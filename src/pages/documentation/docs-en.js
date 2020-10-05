@@ -1,21 +1,21 @@
 export default `
 # Welcome to Heliblocks
-Heliblocks was born with the need to reuse and share HTML and CSS fragments. For this, it makes use of the editing capabilities; the WordPress block editor and the customization possibilities of the native CSS variables.
+Heliblocks was born from a need to reuse and share HTML and CSS fragments. To achieve this, it makes use of the editing capabilities of the WordPress block editor and the customization possibilities of native CSS variables.
 
-In order to start using your heliblocks or those that are already created by the community, you must have the official block installed, from which you can search, insert and customize directly in your WordPress editor.
+In order to start using your Heliblocks, or those already created by the community, you must have the official block installed, from which you can search, insert and customize directly in your WordPress editor.
 
-Heliblocks will allow you to insert custom HTML code into your WordPress pages, without the complexity of creating your own block but enjoying all the editing advantages of the WordPress block editor.
+Heliblocks will allow you to insert custom HTML code into your WordPress pages without the complexity of creating your own block, while enjoying all the editing advantages of the WordPress block editor.
 
 ## Getting Started
-Heliblocks tries to stay as close to the standards as possible, so you don't need to learn any specific language, it's just HTML and CSS.
+Heliblocks tries to stay as close to standards as possible, so you don't need to learn any specific language. It's just HTML and CSS.
 
 You can use all the tags you want to build the HTML of your Heliblock, although for security reasons, for now the use of any type of script is not allowed.
 
-All the CSS is encapsulated, so don't worry too much about the names you use, all the classes will be transformed to avoid collisions or clashes with the rest of the elements of the page where it is inserted.
+All the CSS is encapsulated, so don't worry too much about the names you use. All the classes will be transformed to avoid collisions or clashes with the rest of the elements of the page it's inserted into.
 
 ## Customization
-Heliblocks not only allows you to edit the content and images from the WordPress editor,but you can also allow other details such as colors, fonts, sizes, etc. to be customized.
-For this you have to use CSS variables that starts with a default name and are defined within \`:root\`, for example: 
+Heliblocks not only allows you to edit the content and images from the WordPress editor, but you can also allow other details such as colors, fonts, sizes, etc. to be customized.
+For this you have to use CSS variables that start with a default name and are defined within \`:root\`, for example:
 
 ~~~ css
 :root {
