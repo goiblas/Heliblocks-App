@@ -1,25 +1,6 @@
 import firebase, { database } from "../firebase";
 import getStripe from "./stripe";
 
-export async function goToBillingPortal(uid) {
-  await database
-    .collection("customers")
-    .doc(uid)
-    .collection("checkout_sessions")
-    .add({
-      price: "price_1HOPcsB0UO1rlgTelWYoyIO1",
-      allow_promotion_codes: true,
-      success_url: window.location.origin,
-      cancel_url: window.location.origin,
-    });
-  const functionRef = firebase
-    .app()
-    .functions("europe-west2")
-    .httpsCallable("ext-firestore-stripe-subscriptions-createPortalLink");
-  const { data } = await functionRef({ returnUrl: window.location.origin });
-  window.location.assign(data.url);
-}
-
 export async function createCheckoutSession(uid) {
   const docRef = await database
     .collection("customers")
@@ -58,6 +39,7 @@ export async function createSubscription(uid, { type }) {
     .collection("checkout_sessions")
     .add({
       price: SUBSCRIPTIONS_TYPES[type],
+      allow_promotion_codes: true,
       success_url: window.location.origin + "/account-settings",
       cancel_url: window.location.origin + "/account-settings",
     });
@@ -74,4 +56,17 @@ export async function createSubscription(uid, { type }) {
       stripe.redirectToCheckout({ sessionId });
     }
   });
+}
+
+export async function goToBillingPortal() {
+  const functionRef = firebase
+    .app()
+    .functions("europe-west2")
+    .httpsCallable("ext-firestore-stripe-subscriptions-createPortalLink");
+
+  const { data } = await functionRef({
+    returnUrl: `${window.location.origin}/account-settings`,
+  });
+
+  window.location.assign(data.url);
 }

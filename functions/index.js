@@ -14,6 +14,8 @@ const Heliblock = require("./services/heliblock");
 const screenshot = require("./services/screenshot");
 const previewGenerator = require("./services/preview-generator");
 const sanitize = require("./services/sanitize");
+const tokenService = require("./services/token");
+const { firestore } = require("firebase-admin");
 const axios = require("axios").default;
 
 admin.initializeApp({
@@ -102,14 +104,26 @@ exports.addToPrivates = functions.firestore
       css: content.css,
     });
 
+    const snapshotAuthor = await db
+      .collection("users")
+      .doc(content.author)
+      .get();
+
+    if (snapshotAuthor.exists) {
+      heliblock.setAuthor({
+        id: content.author,
+        displayName: snapshotAuthor.data().displayName,
+        photoURL: snapshotAuthor.data().photoURL,
+      });
+    }
+
+    const publicHeliblock = heliblock.getPublic();
+
     return admin
       .firestore()
       .collection("heliblocks_private")
       .doc(context.params.id)
-      .set({
-        ...heliblock,
-        author: content.author,
-      });
+      .set(publicHeliblock);
   });
 
 exports.changePrivacity = functions.firestore
@@ -244,3 +258,120 @@ exports.updateAuthorToAlgolia = functions.firestore
     }
     return null;
   });
+
+exports.generateToken = functions.https.onCall((data, context) => {
+  const uid = context.auth.uid;
+
+  if (!uid) {
+    return null;
+  }
+
+  const token = tokenService.encode(uid);
+
+  return admin
+    .firestore()
+    .collection("tokens")
+    .doc(uid)
+    .set({
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      value: token,
+    })
+    .then(() => {
+      return { token };
+    });
+});
+
+async function isPro(uid) {
+  try {
+    const snapshot = await db
+      .collection("customers")
+      .doc(uid)
+      .collection("subscriptions")
+      .where("status", "in", ["trialing", "active"])
+      .get();
+
+    const doc = snapshot.docs[0];
+    return doc.data().role === "pro";
+  } catch (err) {
+    return false;
+  }
+}
+
+const cors = require("cors")({ origin: true });
+
+exports.api = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      const uid = await tokenService.decode(token);
+
+      const snapshotToken = await db.collection("tokens").doc(uid).get();
+
+      if (snapshotToken.exists) {
+        const snapshotUser = await db.collection("users").doc(uid).get();
+
+        if (snapshotUser.exists) {
+          const { heliblocks, displayName, photoURL } = snapshotUser.data();
+          const isUserPro = await isPro(uid);
+
+          const rawHeliblocks = await Promise.all(
+            heliblocks.map((id) =>
+              refHeliblocks
+                .doc(id)
+                .get()
+                .then((doc) => (doc.exists ? { id, ...doc.data() } : null))
+            )
+          );
+          const allHeliblocks = rawHeliblocks.filter(
+            (heliblock) => heliblock && heliblock.draft !== true
+          );
+          /*
+          let firstPrivate = false;
+          const rawPublicHeliblocks = await Promise.all(
+            allHeliblocks.map((heliblock) => {
+              if (heliblock.private) {
+                if (firstPrivate || !isUserPro) {
+                  return null;
+                }
+                firstPrivate = true;
+                return admin
+                  .firestore()
+                  .collection("heliblocks_private")
+                  .doc(heliblock.id)
+                  .get()
+                  .then((privateBlock) => {
+                    if (privateBlock.exists) {
+                      return {
+                        objectID: heliblock.id,
+                        ...privateBlock.data(),
+                      };
+                    } else {
+                      return null;
+                    }
+                  });
+              }
+
+              return algoliaIndex.getObject(heliblock.id);
+            })
+          );
+            */
+          // const publicHeliblocks = rawPublicHeliblocks.filter(Boolean);
+
+          res.json({
+            displayName,
+            photoURL,
+            heliblocks: allHeliblocks,
+            pro: isUserPro,
+          });
+        } else {
+          res.status(500).send({ error: "Invalid token" });
+        }
+      } else {
+        res.status(500).send({ error: "Invalid token" });
+      }
+    } catch (error) {
+      res.status(500).send({ error: "Invalid autenticacion" });
+    }
+  });
+});

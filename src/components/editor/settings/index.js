@@ -15,15 +15,24 @@ import {
   Textarea,
   Switch,
   Flex,
-  Tag,
+  Link,
+  useToast,
 } from "@chakra-ui/core";
 import SelectTags from "./selectTags";
 import { EditorContext } from "./../editorContext";
 import { AuthContext } from "services/auth";
+import { Link as RouterLink } from "react-router-dom";
+import { useCanSaveRestrictedHeliblocks } from "hooks";
+
+const isPRO = (user) => user && user.stripeRole === "pro";
 
 const Settings = (props) => {
-  const user = useContext(AuthContext);
-  console.log(user);
+  const { user } = useContext(AuthContext);
+  const [
+    isloadedCanSaveRestrit,
+    canSaveRestrit,
+  ] = useCanSaveRestrictedHeliblocks();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const {
@@ -40,10 +49,17 @@ const Settings = (props) => {
   );
 
   const requestRestrict = (e) => {
-    if (true) {
+    if (canSaveRestrit) {
       setInnerState({ restricted: !innerState.restricted });
     } else {
-      // mostrar toast
+      toast({
+        position: "bottom-left",
+        description:
+          "You have reached the limit of private blocks, Upgrade to PRO to get unlimited private blocks",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   const saveHandle = () => {
@@ -97,12 +113,27 @@ const Settings = (props) => {
                   mr="4"
                   onChange={requestRestrict}
                   isChecked={innerState.restricted}
+                  isDisabled={!isloadedCanSaveRestrit}
                 />
                 <FormLabel htmlFor="private">
                   <strong> Make this block private </strong>
                   <br />
-                  Puedes tener solo un bloque privado, para tener bloque
-                  privados ilimitados necesitas <Tag>PRO</Tag>
+                  {isPRO(user) ? (
+                    <>You can have unlimited private blocks</>
+                  ) : (
+                    <>
+                      You can only have one private block, to have unlimited
+                      private blocks{" "}
+                      <Link
+                        color="primary.500"
+                        fontWeight="600"
+                        as={RouterLink}
+                        to="/account-settings"
+                      >
+                        upgrade to PRO Acount
+                      </Link>
+                    </>
+                  )}
                 </FormLabel>
               </Flex>
             </FormControl>

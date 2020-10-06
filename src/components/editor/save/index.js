@@ -3,27 +3,27 @@ import { ProtectedButton } from "components/menus";
 import { EditorContext } from "./../editorContext";
 import { AuthContext } from "services/auth";
 
-const Save = props => {
-  const { user } = useContext(AuthContext)
-  const { publish, publishing, draft } = useContext(EditorContext);
+const Save = (props) => {
+  const { user } = useContext(AuthContext);
+  const { publish, publishing } = useContext(EditorContext);
 
   useEffect(() => {
     const downHandler = (e) => {
-      if (user && (e.metaKey || e.ctrlKey) && e.keyCode === 83){
+      if (user && (e.metaKey || e.ctrlKey) && e.keyCode === 83) {
         e.preventDefault();
-        publish()
+        publish();
       }
-    }
-    window.addEventListener('keydown', downHandler);
-    return () => window.removeEventListener('keydown', downHandler);
-  },[ user, publish ])
+    };
+    window.addEventListener("keydown", downHandler);
+    return () => window.removeEventListener("keydown", downHandler);
+  }, [user, publish]);
 
   const buttonProps = {
     variantColor: "primary",
     fontWeight: "normal",
     size: "md",
     loadingText: "Saving",
-    ...props
+    ...props,
   };
 
   return (
@@ -33,7 +33,7 @@ const Save = props => {
       data-testid="save-button"
       isLoading={publishing}
     >
-      {draft ? "Publish" : "Save"}
+      Save
     </ProtectedButton>
   );
 };

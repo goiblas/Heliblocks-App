@@ -2,7 +2,6 @@ import React, { useEffect, useReducer } from "react";
 import Auth from "./auth";
 import { AuthContext } from "./authContext";
 import { getUser } from "services/users";
-import { listenSubcription } from "./subscription";
 import firebase from "services/firebase";
 
 const getStripeRole = async () => {

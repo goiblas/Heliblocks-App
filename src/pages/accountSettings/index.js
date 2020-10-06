@@ -16,12 +16,12 @@ import {
   useToast,
   FormControl,
   FormLabel,
-  Text,
 } from "@chakra-ui/core";
 import { Title } from "react-head";
 import { uploadUserAvatar } from "services/storage";
 import ManageSubscription from "./manageSubscription";
 import * as services from "services/users";
+import UserToken from "./userToken";
 
 const AccountSettings = () => {
   const { isLoaded, user, setUser } = useContext(AuthContext);
@@ -151,6 +151,9 @@ const AccountSettings = () => {
               />
             </FormControl>
           </Grid>
+          <Box mb="6" maxW="820px">
+            <UserToken uid={user.uid} />
+          </Box>
           <Box mb="16">
             <Button
               isLoading={loading}
@@ -160,7 +163,7 @@ const AccountSettings = () => {
               Save profile
             </Button>
           </Box>
-          <Box borderTopWidth="1px" pt="12">
+          <Box borderTopWidth="1px" pt="10">
             <ManageSubscription />
           </Box>
         </Box>
