@@ -2,11 +2,20 @@ import React, { useEffect, useReducer } from "react";
 import Auth from "./auth";
 import { AuthContext } from "./authContext";
 import { getUser } from "services/users";
+import firebase from "services/firebase";
+
+const getStripeRole = async () => {
+  await firebase.auth().currentUser.getIdToken(true);
+  const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
+
+  return decodedToken.claims.stripeRole || "free";
+};
 
 export const withAuth = (Component) => (props) => {
   const initialState = {
     isLoaded: false,
     user: null,
+    subcription: false,
   };
 
   const [auth, setAuth] = useReducer(
@@ -24,6 +33,7 @@ export const withAuth = (Component) => (props) => {
             currentUser = {
               uid: currentUser.uid,
               ...userDetails,
+              stripeRole: await getStripeRole(),
             };
           }
         } catch (error) {}

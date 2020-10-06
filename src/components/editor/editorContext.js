@@ -14,6 +14,7 @@ export const defaultState = {
   css: "",
   additionalLinks: "",
   published: false,
-  draft: true
+  restricted: false,
+  draft: true,
 };
 export const EditorContext = createContext(null);

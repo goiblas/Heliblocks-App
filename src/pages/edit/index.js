@@ -4,13 +4,13 @@ import Loading from "components/loading";
 import NotFound from "pages/notFound";
 import { getHeliblock, setHeliblock } from "services/heliblocks";
 import { useIsOwner } from "hooks";
-import { Title } from 'react-head';
+import { Title } from "react-head";
 
 const Editor = lazy(() =>
   import(/* webpackChunkName: "editor" */ "components/editor")
 );
 
-const heliblockToEditorProps = response => ({
+const heliblockToEditorProps = (response) => ({
   title: response.title,
   description: response.description,
   tags: response.tags,
@@ -18,7 +18,8 @@ const heliblockToEditorProps = response => ({
   html: response.html,
   css: response.css,
   additionalLinks: response.additionalLinks,
-  draft: response.draft
+  restricted: response.restricted,
+  draft: response.draft,
 });
 
 const EditCreation = () => {
@@ -31,7 +32,7 @@ const EditCreation = () => {
   useEffect(() => {
     getHeliblock(heliblockId)
       .then(setCurrentHeliblock)
-      .catch(error => {
+      .catch((error) => {
         // @TODO
       });
   }, [heliblockId]);
@@ -48,40 +49,40 @@ const EditCreation = () => {
     return <Redirect to="/" />;
   }
 
-  const setNewHeliblock = async heliblock => {
+  const setNewHeliblock = async (heliblock) => {
     try {
       await setHeliblock(heliblockId, { ...heliblock, lastUpdate: new Date() });
     } catch (error) {
       // @TODO
     }
-  }
+  };
 
-  const onSave = async heliblock => {
+  const onSave = async (heliblock) => {
     setSaving(true);
     await setNewHeliblock(heliblock);
     setSaving(false);
   };
 
-  const onPublish = async heliblock => {
+  const onPublish = async (heliblock) => {
     setPublishing(true);
     await setNewHeliblock(heliblock);
     setPublishing(false);
-  }
+  };
   const editorProps = heliblockToEditorProps(currentHeliblock);
 
   return (
     <>
-    <Title>Editor - Heliblocks</Title>
-    <Suspense fallback={<Loading />}>
-      <Editor
-        {...editorProps}
-        id={heliblockId}
-        saving={saving}
-        onSave={onSave}
-        onPublish={onPublish}
-        publishing={publishing}
-      />
-    </Suspense>
+      <Title>Editor - Heliblocks</Title>
+      <Suspense fallback={<Loading />}>
+        <Editor
+          {...editorProps}
+          id={heliblockId}
+          saving={saving}
+          onSave={onSave}
+          onPublish={onPublish}
+          publishing={publishing}
+        />
+      </Suspense>
     </>
   );
 };

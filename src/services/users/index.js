@@ -2,10 +2,33 @@ import {
   usersCollection,
   handleError,
   handleResponse,
-  addToArray
+  addToArray,
+  tokensCollection,
 } from "./../database";
 
-export const getUser = async uid => {
+import firebase from "./../firebase";
+export const generateToken = async () => {
+  try {
+    const generateTokenService = firebase
+      .functions()
+      .httpsCallable("generateToken");
+    const { data } = await generateTokenService();
+    return data;
+  } catch (error) {}
+
+  return { token: "" };
+};
+
+export const getToken = async (id) => {
+  try {
+    const response = await tokensCollection.doc(id).get();
+    return handleResponse(response);
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const getUser = async (uid) => {
   try {
     const response = await usersCollection.doc(uid).get();
     return handleResponse(response);
@@ -24,6 +47,6 @@ export const setUser = async (uid, userDetails) => {
 };
 export const addHeliblockToUser = (uid, heliblockId) => {
   return usersCollection.doc(uid).update({
-    heliblocks: addToArray(heliblockId)
+    heliblocks: addToArray(heliblockId),
   });
 };

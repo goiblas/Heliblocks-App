@@ -8,6 +8,7 @@
     "@emotion/styled": "^10.0.27",
     "@firebase/analytics": "^0.4.2",
     "@monaco-editor/react": "^3.6.2",
+    "@stripe/stripe-js": "^1.9.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.1.3",
