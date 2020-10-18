@@ -18,7 +18,7 @@ const heliblockToEditorProps = (response) => ({
   html: response.html,
   css: response.css,
   additionalLinks: response.additionalLinks,
-  restricted: response.restricted,
+  restricted: response.restricted || false,
   draft: response.draft,
 });
 
