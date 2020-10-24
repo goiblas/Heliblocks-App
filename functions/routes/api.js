@@ -4,30 +4,6 @@ const express = require("express");
 const { isUserPro } = require("../services/users");
 const router = express.Router();
 
-function getUsersHeliblocksFromSnapshot(snapshotHeliblocks, isPro) {
-  const privateCompiled = 0;
-  const userFreePrivateLimit = 1;
-  return snapshotHeliblocks.docs
-    .map((snapshot) => {
-      const heliblock = snapshot.data();
-      if (heliblock.restricted) {
-        privateCompiled++;
-        if (!isPro && privateCompiled > userFreePrivateLimit) {
-          return null;
-        }
-      }
-      return {
-        objectID: heliblock.id,
-        title: heliblock.title,
-        lastUpdate: heliblock.lastUpdate,
-        screenshot: heliblock.screenshot,
-        source: heliblock.source,
-        tags: heliblock.tags,
-        description: heliblock.description,
-      };
-    })
-    .filter(Boolean);
-}
 router.get("/", async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
@@ -39,6 +15,7 @@ router.get("/", async (req, res) => {
 
       if (snapshotUser.exists) {
         const isPro = await isUserPro(uid);
+        console.log("isPro", isPro);
         const { displayName, photoURL } = snapshotUser.data();
         const snapshotHeliblocks = await firestore()
           .collection("heliblocks_compiled")
@@ -48,7 +25,15 @@ router.get("/", async (req, res) => {
         res.json({
           displayName,
           photoURL,
-          heliblocks: getUsersHeliblocksFromSnapshot(snapshotHeliblocks, isPro),
+          heliblocks: snapshotHeliblocks.docs.map((snapshot) => ({
+            objectID: snapshot.id,
+            title: snapshot.data().title,
+            lastUpdate: snapshot.data().lastUpdate,
+            screenshot: snapshot.data().screenshot,
+            source: snapshot.data().source,
+            tags: snapshot.data().tags,
+            description: snapshot.data().description,
+          })),
           isPro,
         });
       } else {
