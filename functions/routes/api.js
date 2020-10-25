@@ -43,6 +43,7 @@ router.get("/", async (req, res) => {
       res.status(401).send({ error: "Invalid token" });
     }
   } catch (error) {
+    console.log(error);
     res.status(401).send({ error: "Invalid autenticacion" });
   }
 });
