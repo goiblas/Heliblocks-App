@@ -31,6 +31,8 @@
   },
   "private": true,
   "devDependencies": {
+    "firebase-functions-test": "^0.2.2",
+    "firestore-jest-mock": "^0.6.0",
     "jest": "^24.9.0"
   }
 }
