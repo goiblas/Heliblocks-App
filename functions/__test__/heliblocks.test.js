@@ -3,6 +3,13 @@ const admin = require("firebase-admin");
 const functions = require("../index");
 const firestore = admin.firestore();
 const { aHeliblock } = require("./builders/heliblock.builder");
+const { nanoid } = require("nanoid");
+
+jest.mock("nanoid", ()=> {
+  return {
+    nanoid: jest.fn(() => "id_321")
+  }
+})
 
 describe("compileHeliblock", () => {
   beforeEach(() => {
@@ -60,6 +67,7 @@ describe("compileHeliblock", () => {
   });
 
   it("should exit when is draft", async () => {
+
     const heliblock = aHeliblock().isDraft().build();
     const afterSnapshot = test.firestore.makeDocumentSnapshot(heliblock);
     const beforeSnahpshot = test.firestore.makeDocumentSnapshot();
@@ -71,39 +79,17 @@ describe("compileHeliblock", () => {
     expect(firestore.collection).not.toHaveBeenCalled();
   });
 
-  //   const source = processSource({
-  //     html: sanitize(content.html),
-  //     css: content.css,
-  //   });
-
-  //   return firestore()
-  //     .collection("heliblocks_compiled")
-  //     .doc(context.params.id)
-  //     .set({
-  //       source: {
-  //         ...source,
-  //         alignment: content.alignment,
-  //       },
-  //       title: content.title,
-  //       createdAt: content.createdAt,
-  //       lastUpdate: content.lastUpdate,
-  //       author: content.author,
-  //       screenshot: content.screenshot,
-  //       tags: content.tags,
-  //       description: content.description,
-  //       restricted: content.restricted,
-  //     });
-
   it("should compile & save in compiled collection", async () => {
     const htmlUnsafed = `
         <script>
             console.log("hello!")
         </script>
-        <div class="className">Hello</div>
+        <div class="name">Hello</div>
         `;
+      const css = ":root { --hb-color-text: red} .name { color: var(--hb-color-text) }"
     const id = "id_01";
 
-    const heliblock = aHeliblock().withHtml(htmlUnsafed).build();
+    const heliblock = aHeliblock().withHtml(htmlUnsafed).withCss(css).build();
     const afterSnapshot = test.firestore.makeDocumentSnapshot(heliblock);
     const beforeSnahpshot = test.firestore.makeDocumentSnapshot();
 
@@ -112,9 +98,31 @@ describe("compileHeliblock", () => {
       params: { id },
     });
 
-    // expect(sanitize).toHaveBeenCalled();
     expect(firestore.collection).toHaveBeenCalledWith("heliblocks_compiled");
     expect(firestore.collection().doc).toHaveBeenCalledWith(id);
-    // expect(firestore.collection().doc().set).toHaveBeenCalledWith({source:{}});
+    expect(firestore.collection().doc().set).toHaveBeenCalledWith({
+      "author": heliblock.author,
+       "createdAt": heliblock.createdAt,
+       "description": heliblock.description,
+       "lastUpdate": heliblock.lastUpdate,
+       "restricted": heliblock.restricted,
+       "screenshot": heliblock.screenshot,
+       "source":  {
+         "alignment": heliblock.alignment,
+         "css": ".hb_id_321 {}.hb_id_321  ._name_id_321 { color: var(--hb-color-text) }",
+         "html": "<div class=\"_name_id_321\">Hello</div>",
+         "variables":  [
+            {
+             "label": "Text",
+             "type": "color",
+             "value": "red",
+             "variable": "--hb-color-text",
+           },
+         ],
+         "wrapperClassname": "hb_id_321",
+       },
+       "tags": heliblock.tags,
+       "title": heliblock.title,
+    });
   });
 });

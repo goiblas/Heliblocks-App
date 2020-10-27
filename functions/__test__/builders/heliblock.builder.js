@@ -12,6 +12,7 @@ const aHeliblock = (title = "Untitled") => {
     screenshot: "irrelevant.jpg",
     tags: [],
     title,
+    restricted: false
   };
   return {
     isDraft() {
