@@ -2,9 +2,8 @@ const test = require("firebase-functions-test")();
 const admin = require("firebase-admin");
 const functions = require("../index");
 
-const mockSet = jest.fn();
 const mockDoc = jest.fn((path) => ({
-  set: mockSet,
+  set: jest.fn(),
 }));
 
 jest.mock("firebase-admin", () => ({
@@ -12,11 +11,6 @@ jest.mock("firebase-admin", () => ({
   credential: {
     cert: jest.fn(),
   },
-  database: () => ({
-    ref: jest.fn((path) => ({
-      set: mockSet,
-    })),
-  }),
   firestore: () => ({
     collection: () => ({
       doc: mockDoc,

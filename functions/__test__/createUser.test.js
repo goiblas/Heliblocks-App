@@ -6,32 +6,11 @@ const firestore = admin.firestore();
 const { aUser } = require("./builders/user.builder");
 jest.mock("axios");
 
+const { firebaseMock } = require("./__mocks__/firebase");
+
 describe("onUserCreate", () => {
   beforeEach(() => {
-    var docData = undefined;
-    var docExists = true;
-    const docResult = () => {
-      return {
-        data: () => docData,
-        exists: docExists,
-      };
-    };
-    firestore.collection = jest.fn((docname) => ({ doc }));
-
-    const doc = jest.fn((docname) => {
-      return { update, get, set, delete: deleteFn };
-    });
-    const get = jest.fn(() => Promise.resolve(docResult()));
-    const update = jest.fn((updateValue) => Promise.resolve(true));
-    const set = jest.fn((setValue) => Promise.resolve(true));
-    const deleteFn = jest.fn((setValue) => Promise.resolve(true));
-
-    admin.firestore.FieldValue.arrayUnion = jest.fn((val) => {
-      return val;
-    });
-    admin.firestore.FieldValue.arrayRemove = jest.fn((val) => {
-      return val;
-    });
+    firebaseMock();
   });
   afterAll(() => {
     // clean things up
