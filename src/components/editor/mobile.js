@@ -17,9 +17,9 @@ import {
   Tab,
   MenuItem,
   MenuList,
-  MenuButton, 
+  MenuButton,
   Menu,
-  IconButton
+  IconButton,
 } from "@chakra-ui/core";
 
 const tabStyled = {
@@ -27,13 +27,13 @@ const tabStyled = {
   borderColor: "white",
   fontSize: "sm",
   paddingX: [3, 6],
-  _selected: { color: "primary.500", borderColor: "primary.500" }
+  _selected: { color: "primary.500", borderColor: "primary.500" },
 };
 
 const MobileEditor = () => {
   const { save, publish, draft } = useContext(EditorContext);
   return (
-    <Grid h="100vh" templateRows="56px 1fr" data-testid="mobile-editor">
+    <Grid h="100vh" templateRows="56px 1fr">
       <Box borderBottomWidth="1px" px="2">
         <Flex height="55px" justifyContent="space-between" alignItems="center">
           <Logo narrow />
@@ -64,12 +64,19 @@ const MobileEditor = () => {
             <Box ml="auto">
               <Settings />
               <Menu>
-                <MenuButton as={IconButton} aria-label="Settings" icon="settings" ml="2" />  
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Settings"
+                  icon="settings"
+                  ml="2"
+                />
                 <MenuList placement="top-end">
-                  <MenuItem onClick={publish}>{ draft ? "Publish" : "Save" }</MenuItem>
-                  {draft && (<MenuItem onClick={save}>Save draft</MenuItem>)}
+                  <MenuItem onClick={publish}>
+                    {draft ? "Publish" : "Save"}
+                  </MenuItem>
+                  {draft && <MenuItem onClick={save}>Save draft</MenuItem>}
                 </MenuList>
-                </Menu>
+              </Menu>
             </Box>
           </Flex>
         </Flex>

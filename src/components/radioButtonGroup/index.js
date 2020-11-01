@@ -7,14 +7,14 @@ const CustomRadioButtonGroup = React.forwardRef(
   ({ size, children, ...props }, ref) => {
     return (
       <RadioButtonGroupStyled ref={ref} {...props}>
-        {React.Children.map(children, child =>
+        {React.Children.map(children, (child) =>
           React.cloneElement(child, { size })
         )}
       </RadioButtonGroupStyled>
     );
   }
 );
-CustomRadioButtonGroup.radio = React.forwardRef((props, ref) => (
+CustomRadioButtonGroup.Radio = React.forwardRef((props, ref) => (
   <CustomRadio ref={ref} {...props} />
 ));
 
@@ -22,14 +22,14 @@ export default CustomRadioButtonGroup;
 
 CustomRadioButtonGroup.propTypes = {
   ...RadioButtonGroup.propTypes,
-  size: PropTypes.oneOf(["xs", "sm", "md", "lg"])
+  size: PropTypes.oneOf(["xs", "sm", "md", "lg"]),
 };
 CustomRadioButtonGroup.defaultProps = {
   rounded: 4,
-  size: "md"
+  size: "md",
 };
 
-CustomRadioButtonGroup.radio.propTypes = Button.propTypes;
+CustomRadioButtonGroup.Radio.propTypes = Button.propTypes;
 
 const CustomRadio = React.forwardRef((props, ref) => {
   const { isChecked, isDisabled, size, mb, ...rest } = props;

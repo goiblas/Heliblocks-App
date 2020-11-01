@@ -14,22 +14,22 @@ const ZoomOut = ({ children }) => {
           width: `${zoom * 100}%`,
           height: `${zoom * 100}%`,
           transform: `scale(${1 / zoom})`,
-          transformOrigin: "0 0"
+          transformOrigin: "0 0",
         }}
       >
         {children}
       </div>
       <ButtonGroup>
         <RadioButtonGroup defaultValue={zoom} size="xs" onChange={setZoom}>
-          <RadioButtonGroup.radio data-testid="button-zoom-100" value={1}>
+          <RadioButtonGroup.Radio data-testid="button-zoom-100" value={1}>
             100%
-          </RadioButtonGroup.radio>
-          <RadioButtonGroup.radio data-testid="button-zoom-50" value={2}>
+          </RadioButtonGroup.Radio>
+          <RadioButtonGroup.Radio data-testid="button-zoom-50" value={2}>
             50%
-          </RadioButtonGroup.radio>
-          <RadioButtonGroup.radio data-testid="button-zoom-25" value={4}>
+          </RadioButtonGroup.Radio>
+          <RadioButtonGroup.Radio data-testid="button-zoom-25" value={4}>
             25%
-          </RadioButtonGroup.radio>
+          </RadioButtonGroup.Radio>
         </RadioButtonGroup>
       </ButtonGroup>
     </Wrapper>
@@ -37,7 +37,7 @@ const ZoomOut = ({ children }) => {
 };
 
 ZoomOut.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 export default ZoomOut;
 

@@ -3,8 +3,8 @@ import Footer from "components/footer";
 import Header from "components/header";
 import { Container, Main } from "components/containers";
 import Markdown from "components/markdown";
-import content from "./content";
-import { Title, Meta } from 'react-head';
+import { content } from "./content";
+import { Title, Meta } from "react-head";
 import { Box } from "@chakra-ui/core";
 
 const Cookies = () => (
@@ -21,4 +21,4 @@ const Cookies = () => (
   </>
 );
 
-export default Cookies
+export default Cookies;

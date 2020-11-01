@@ -4,8 +4,8 @@ import Markdown from "pages/documentation/markdown";
 import Footer from "components/footer";
 import { Container, Main } from "components/containers";
 import { List, Box, Grid, Button, Select } from "@chakra-ui/core";
-import DocsES from "./docs-es";
-import DocsEN from "./docs-en";
+import { docsEs } from "./docs-es";
+import { docsEn } from "./docs-en";
 import { Provider } from "react-slot-fill";
 import { Slot } from "react-slot-fill";
 import { Global, css } from "@emotion/core";
@@ -14,13 +14,13 @@ import { Title } from "react-head";
 const languages = {
   en: {
     label: "English",
-    content: DocsEN,
+    content: docsEn,
     filename: "docs-en.js",
     lang: "en-US",
   },
   es: {
     label: "Español",
-    content: DocsES,
+    content: docsEs,
     filename: "docs-es.js",
     lang: "es-ES",
   },

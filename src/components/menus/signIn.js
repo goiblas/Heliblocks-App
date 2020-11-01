@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@chakra-ui/core";
 import { signInWithGithub } from "services/auth";
-import useMediaQuery from "react-use-media-query-hook";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const SignIn = () => {
   const isLarge = useMediaQuery("(min-width: 700px)");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useMediaQuery from "react-use-media-query-hook";
+import { useMediaQuery } from "@react-hook/media-query";
 import DesktopEditor from "./desktop";
 import MobileEditor from "./mobile";
 import { EditorContext, defaultState } from "./editorContext";

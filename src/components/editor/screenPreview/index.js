@@ -8,20 +8,22 @@ import ZoomOut from "./zoomOut";
 export const alignments = [
   {
     id: "normal",
-    name: "Normal"
+    name: "Normal",
   },
   {
     id: "wide",
-    name: "Wide"
+    name: "Wide",
   },
   {
     id: "full",
-    name: "Full"
-  }
+    name: "Full",
+  },
 ];
 
 const ScreenPreview = () => {
-  const { alignment, setState, html, css, additionalLinks } = useContext(EditorContext);
+  const { alignment, setState, html, css, additionalLinks } = useContext(
+    EditorContext
+  );
   return (
     <Grid templateRows="auto 1fr" h="100%">
       <Box borderBottomWidth="1px" px="4" py="2">
@@ -29,17 +31,22 @@ const ScreenPreview = () => {
           defaultValue={alignment}
           mr="2"
           size="sm"
-          onChange={newAlignment => setState({ alignment: newAlignment })}
+          onChange={(newAlignment) => setState({ alignment: newAlignment })}
         >
-          {alignments.map(alignment => (
-            <RadioButtonGroup.radio key={alignment.id} value={alignment.id}>
+          {alignments.map((alignment) => (
+            <RadioButtonGroup.Radio key={alignment.id} value={alignment.id}>
               {alignment.name}
-            </RadioButtonGroup.radio>
+            </RadioButtonGroup.Radio>
           ))}
         </RadioButtonGroup>
       </Box>
       <ZoomOut>
-        <Preview html={html} css={css} alignment={alignment} additionalLinks={additionalLinks} />
+        <Preview
+          html={html}
+          css={css}
+          alignment={alignment}
+          additionalLinks={additionalLinks}
+        />
       </ZoomOut>
     </Grid>
   );

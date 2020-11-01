@@ -1,4 +1,4 @@
-export default `
+export const docsEn = `
 # Welcome to Heliblocks
 Heliblocks was born from a need to reuse and share HTML and CSS fragments. To achieve this, it makes use of the editing capabilities of the WordPress block editor and the customization possibilities of native CSS variables.
 
