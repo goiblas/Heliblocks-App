@@ -28,19 +28,26 @@ const DesktopEditor = () => {
 
   return (
     <>
-      <Box borderBottomWidth="1px" px="4" data-testid="desktop-editor">
+      <Box borderBottomWidth="1px" px="4">
         <Flex height="56px" justifyContent="space-between" alignItems="center">
           <Logo />
           <Title />
           <Stack isInline spacing={2}>
-            {draft && (<>
-              <Button variant="link"
+            {draft && (
+              <>
+                <Button
+                  variant="link"
                   fontWeight="normal"
                   isLoading={saving}
-                  loadingText="Saving" 
-                  onClick={() => save()}> Save draft</Button>
-              <Box w="4" />
-              </>)}
+                  loadingText="Saving"
+                  onClick={() => save()}
+                >
+                  {" "}
+                  Save draft
+                </Button>
+                <Box w="4" />
+              </>
+            )}
             <Settings mr="2" />
             <Save />
             <Flex>
@@ -66,7 +73,7 @@ const DesktopEditor = () => {
           style={{
             borderLeft: `1px solid ${colors.gray["200"]}`,
             background: "#fff",
-            pointerEvents: dragging ? "none" : "auto"
+            pointerEvents: dragging ? "none" : "auto",
           }}
           minSize={220}
         >

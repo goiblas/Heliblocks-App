@@ -1,5 +1,5 @@
 import React from "react";
-import { render, act, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Header from "../index";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@chakra-ui/core";
@@ -7,15 +7,15 @@ import theme from "theme";
 import { AuthContext } from "services/auth";
 
 // mock media query hook
-import useMediaQuery from "react-use-media-query-hook";
-jest.mock("react-use-media-query-hook");
+import { useMediaQuery } from "@react-hook/media-query";
+jest.mock("@react-hook/media-query");
 
-const renderWithProviders = component => {
+const renderWithProviders = (component) => {
   const value = {
     isLoaded: true,
     user: {
-      displayName: "John"
-    }
+      displayName: "John",
+    },
   };
 
   return render(
@@ -25,8 +25,7 @@ const renderWithProviders = component => {
       </Router>
     </AuthContext.Provider>
   );
-}
-  
+};
 
 describe("Header", () => {
   test("Should render mobile version in small screen", () => {

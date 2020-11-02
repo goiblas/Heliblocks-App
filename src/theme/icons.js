@@ -1,5 +1,5 @@
 import React from "react";
-export default {
+const icons = {
   resize: {
     path: (
       <path
@@ -7,7 +7,7 @@ export default {
         d="M4.762 3.075h1.5v10h-1.5zM8.762 3.075h1.5v10h-1.5z"
       ></path>
     ),
-    viewBox: "0 0 16 16"
+    viewBox: "0 0 16 16",
   },
   dropdown: {
     path: (
@@ -16,7 +16,7 @@ export default {
         d="M11.707 14.293a1 1 0 01-1.414 0L5.707 9.707A1 1 0 016.414 8h9.172a1 1 0 01.707 1.707z"
       ></path>
     ),
-    viewBox: "0 0 20 20"
+    viewBox: "0 0 20 20",
   },
   boxes: {
     path: (
@@ -26,7 +26,7 @@ export default {
         transform="translate(.578 .602)"
       ></path>
     ),
-    viewBox: "0 0 22 22"
+    viewBox: "0 0 22 22",
   },
   reuse: {
     path: (
@@ -38,7 +38,7 @@ export default {
         />
       </g>
     ),
-    viewBox: "0 0 22 22"
+    viewBox: "0 0 22 22",
   },
   dots: {
     path: (
@@ -48,7 +48,7 @@ export default {
         <circle cx="19.5" cy="10.5" r="2.5" />
       </g>
     ),
-    viewBox: "0 0 22 22"
+    viewBox: "0 0 22 22",
   },
   pencil: {
     path: (
@@ -61,7 +61,7 @@ export default {
         />
       </>
     ),
-    viewBox: "0 0 20 20"
+    viewBox: "0 0 20 20",
   },
   cloud: {
     path: (
@@ -70,7 +70,7 @@ export default {
         d="M22 13.3c0 2.6-2.1 4.7-4.7 4.7H3.6c-2 0-3.6-1.6-3.6-3.6s1.6-3.6 3.6-3.6c0-3.8 3.1-6.9 6.9-6.9 3.1 0 5.7 2 6.5 4.8h.3c2.6 0 4.7 2 4.7 4.6z"
       ></path>
     ),
-    viewBox: "0 0 22 22"
+    viewBox: "0 0 22 22",
   },
   // HEADER ICONS
   github: {
@@ -82,7 +82,7 @@ export default {
         clipRule="evenodd"
       ></path>
     ),
-    viewBox: "0 0 32.6 31.8"
+    viewBox: "0 0 32.6 31.8",
   },
   explore: {
     path: (
@@ -95,7 +95,7 @@ export default {
         d="M23.534 15.267A8.267 8.267 0 1115.267 7a8.267 8.267 0 018.267 8.267zm2.067 10.334l-4.5-4.5"
       ></path>
     ),
-    viewBox: "0 0 32 32"
+    viewBox: "0 0 32 32",
   },
   documentation: {
     path: (
@@ -116,7 +116,7 @@ export default {
         ></path>
       </>
     ),
-    viewBox: "0 0 32 32"
+    viewBox: "0 0 32 32",
   },
   create: {
     path: (
@@ -128,6 +128,8 @@ export default {
         d="M25 16.5H6M15.5 7v19"
       ></path>
     ),
-    viewBox: "0 0 32 32"
-  }
+    viewBox: "0 0 32 32",
+  },
 };
+
+export default icons;

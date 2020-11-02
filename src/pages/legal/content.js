@@ -1,4 +1,4 @@
-export default `
+export const content = `
 # Privacy Policy
 
 It is Heliblocks’s policy to respect your privacy regarding any information we may collect from you across our website, heliblocks.com, and other sites we own and operate.

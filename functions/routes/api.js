@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
 
       if (snapshotUser.exists) {
         const isPro = await isUserPro(uid);
-        console.log("isPro", isPro);
         const { displayName, photoURL } = snapshotUser.data();
         const snapshotHeliblocks = await firestore()
           .collection("heliblocks_compiled")

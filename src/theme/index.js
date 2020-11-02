@@ -1,15 +1,15 @@
 import { theme } from "@chakra-ui/core";
 import customIcons from "./icons";
 
-export default {
+const customTheme = {
   ...theme,
   icons: {
     ...theme.icons,
-    ...customIcons
+    ...customIcons,
   },
   shadows: {
     ...theme.shadows,
-    sm: "0 0 1px #ececed, 0 1px 3px 0 rgba(41, 71, 98, 0.1)"
+    sm: "0 0 1px #ececed, 0 1px 3px 0 rgba(41, 71, 98, 0.1)",
   },
   fontSizes: {
     xs: "0.68rem",
@@ -21,7 +21,7 @@ export default {
     "3xl": "1.875rem",
     "4xl": "2.25rem",
     "5xl": "3rem",
-    "6xl": "4rem"
+    "6xl": "4rem",
   },
   fontWeights: {
     hairline: 300,
@@ -32,13 +32,13 @@ export default {
     semibold: 600,
     bold: 700,
     extrabold: 700,
-    black: 700
+    black: 700,
   },
   colors: {
     ...theme.colors,
     gray: {
       ...theme.colors.gray,
-      500: "#67768e" // contrasct ratio
+      500: "#67768e", // contrasct ratio
     },
     primary: {
       50: "#ffe2ea",
@@ -50,7 +50,7 @@ export default {
       600: "#b10029",
       700: "#7f001c",
       800: "#4e000f",
-      900: "#200005"
+      900: "#200005",
     },
     teal: {
       50: "#dbfdff",
@@ -62,7 +62,7 @@ export default {
       600: "#0e8e9c",
       700: "#006670",
       800: "#003e44",
-      900: "#00161a"
+      900: "#00161a",
     },
     blue: {
       50: "#def6ff",
@@ -74,7 +74,7 @@ export default {
       600: "#0F71C5",
       700: "#0A55A5",
       800: "#063C85",
-      900: "#042A6E"
+      900: "#042A6E",
     },
     dark: {
       50: "#e8f3ff",
@@ -86,12 +86,14 @@ export default {
       600: "#495a69",
       700: "#33404c",
       800: "#1c2631",
-      900: "#010e18"
-    }
+      900: "#010e18",
+    },
   },
   fonts: {
     body: "'Inter', system-ui, sans-serif",
     heading: "'Inter', system-ui, sans-serif",
-    mono: "Menlo, monospace"
-  }
+    mono: "Menlo, monospace",
+  },
 };
+
+export default customTheme;

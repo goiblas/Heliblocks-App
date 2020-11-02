@@ -6,7 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 const debounceTime = "400";
 const Panel = ({ language, value, onChange }) => {
-  const [debouncedCallback] = useDebouncedCallback(onChange, debounceTime);
+  const { callback } = useDebouncedCallback(onChange, debounceTime);
   return (
     <Grid templateRows="56px 1fr" h="100%">
       <Box px="4" py="3">
@@ -14,11 +14,7 @@ const Panel = ({ language, value, onChange }) => {
           {language.toUpperCase()}
         </Text>
       </Box>
-      <BaseEditor
-        language={language}
-        value={value}
-        onChange={debouncedCallback}
-      />
+      <BaseEditor language={language} value={value} onChange={callback} />
     </Grid>
   );
 };
@@ -28,5 +24,5 @@ export default Panel;
 Panel.propTypes = {
   language: PropTypes.string.isRequired,
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
