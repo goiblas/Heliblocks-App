@@ -2,11 +2,12 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import ZoomOut from "./zoomOut";
 import { ThemeProvider } from "@chakra-ui/core";
+import theme from "theme";
 
 describe("ZoomOut", () => {
   test("Should be able zoom", () => {
     render(
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <ZoomOut></ZoomOut>
       </ThemeProvider>
     );
