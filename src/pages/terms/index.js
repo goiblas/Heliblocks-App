@@ -7,12 +7,12 @@ import { content } from "./content";
 import { Title, Meta } from "react-head";
 import { Box } from "@chakra-ui/core";
 
-const Cookies = () => (
+const Terms = () => (
   <>
-    <Title>Cookie Policy - Heliblocks</Title>
+    <Title>Terms and Conditions - Heliblocks</Title>
     <Meta name="robots" content="noindex" />
     <Header />
-    <Container size="extra_small" as={Main} lang="es">
+    <Container size="extra_small" as={Main}>
       <Box mb="10">
         <Markdown content={content} />
       </Box>
@@ -21,4 +21,4 @@ const Cookies = () => (
   </>
 );
 
-export default Cookies;
+export default Terms;

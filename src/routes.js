@@ -9,7 +9,8 @@ import AccountSettings from "pages/accountSettings";
 import Edit from "pages/edit";
 import View from "pages/view";
 import Create from "pages/create";
-import Cookies from "pages/legal/cookies";
+import Privacy from "pages/privacy";
+import Terms from "pages/terms";
 import { Fathom } from "components/analytics";
 
 const ScrollTo = () => {
@@ -40,7 +41,8 @@ function App() {
         ></Route>
         <Route exact path="/edit/:heliblockId" component={Edit}></Route>
         <Route exact path="/view/:heliblockId" component={View}></Route>
-        <Route exact path="/cookies" component={Cookies}></Route>
+        <Route exact path="/privacy" component={Privacy}></Route>
+        <Route exact path="/terms" component={Terms}></Route>
         <Route path="*" component={NotFound}></Route>
       </Switch>
     </BrowserRouter>
