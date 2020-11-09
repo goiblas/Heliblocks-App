@@ -19,7 +19,7 @@ describe("useCanSaveRestrictedHeliblocks", () => {
     jest.resetAllMocks();
   });
 
-  test("Should return false if user is null", async () => {
+  test("Should return false if user is null", () => {
     const { result, rerender } = renderHook(
       () => useCanSaveRestrictedHeliblocks(),
       { wrapper }
@@ -31,7 +31,7 @@ describe("useCanSaveRestrictedHeliblocks", () => {
     rerender();
     expect(result.current).toStrictEqual([true, false]);
   });
-  test("Should return true if user is pro", async () => {
+  test("Should return true if user is pro", () => {
     auth = { isLoaded: true, user: { stripeRole: "pro" } };
     const { result } = renderHook(() => useCanSaveRestrictedHeliblocks(), {
       wrapper,
@@ -40,7 +40,7 @@ describe("useCanSaveRestrictedHeliblocks", () => {
     expect(result.current).toStrictEqual([true, true]);
   });
 
-  test("Should return true if user have´t heliblocks", async () => {
+  test("Should return true if user have´t heliblocks", () => {
     const mockDoc = jest.fn().mockReturnValue({
       onSnapshot: (cb) => {
         cb({
