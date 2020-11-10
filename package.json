@@ -39,7 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:deploy": "react-scripts test --watchAll=false",
+    "test:deploy": "react-scripts test --watchAll=false --detectOpenHandles --forceExit",
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
     "pretty": "pretty-quick"
