@@ -1,6 +1,9 @@
 name: Build and Deploy
 on:
   push:
+    paths-ignore:
+      - "functions/**"
+      - ".github/**"
     branches:
       - master
 
