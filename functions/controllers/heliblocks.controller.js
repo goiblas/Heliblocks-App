@@ -7,7 +7,11 @@ exports.delete = async function (dataSnapshot, context) {
   const { id } = context.params;
 
   if (screenshot) {
-    await storage().bucket().file(`/screenshots/${id}.png`).delete();
+    try {
+      await storage().bucket().file(`/screenshots/${id}.png`).delete();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (author) {
