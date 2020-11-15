@@ -26,6 +26,12 @@ const DesktopEditor = () => {
   const [dragging, setDragging] = useState(false);
   const { colors } = useTheme();
 
+  const handleResize = () => {
+    const event = new CustomEvent("editor-resize", {
+      detail: {},
+    });
+    window.dispatchEvent(event);
+  };
   return (
     <>
       <Box borderBottomWidth="1px" px="4">
@@ -56,9 +62,16 @@ const DesktopEditor = () => {
           </Stack>
         </Flex>
       </Box>
-      <Box as={Container} h="calc(100vh - 57px)">
+      <Container
+        style={{ height: "calc(100vh - 57px)" }}
+        afterResizing={handleResize}
+      >
         <Section defaultSize={620} minSize={100}>
-          <Container vertical={true} style={{ height: "100%" }}>
+          <Container
+            vertical={true}
+            style={{ height: "100%" }}
+            afterResizing={handleResize}
+          >
             <Section minSize={48}>
               <HtmlEditor />
             </Section>
@@ -79,7 +92,7 @@ const DesktopEditor = () => {
         >
           <ScreenPreview />
         </Section>
-      </Box>
+      </Container>
     </>
   );
 };
