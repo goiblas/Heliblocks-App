@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Editor from "@monaco-editor/react";
+import { ControlledEditor } from "@monaco-editor/react";
 
 // https://monaco-react.surenatoyan.com/
 // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html
@@ -33,7 +34,7 @@ const BaseEditor = ({ language, value, onChange, ...rest }) => {
     return () => window.removeEventListener("editor-resize", listener);
   }, [editorRef]);
   return (
-    <Editor
+    <ControlledEditor
       value={value}
       onChange={handleEditorChange}
       theme={theme}
