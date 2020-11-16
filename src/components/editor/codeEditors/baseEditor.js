@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import Editor from "@monaco-editor/react";
 import { ControlledEditor } from "@monaco-editor/react";
 
 // https://monaco-react.surenatoyan.com/
