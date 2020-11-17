@@ -16,12 +16,12 @@ const fileMock = jest.fn(() => ({
   getSignedUrl: getSignedUrlMock,
 }));
 
+jest.spyOn(storage, "bucket").mockImplementation(() => ({
+  file: fileMock,
+}));
+
 describe("Screenshot", () => {
   beforeEach(() => {
-    jest.spyOn(storage, "bucket").mockImplementation(() => ({
-      file: fileMock,
-    }));
-
     firebaseMock();
   });
   afterAll(() => {
