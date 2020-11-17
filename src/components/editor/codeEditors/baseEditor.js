@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import Editor from "@monaco-editor/react";
 
@@ -15,32 +15,57 @@ const options = {
   suggestOnTriggerCharacters: false,
 };
 const theme = "light";
-const BaseEditor = ({ language, value, onChange, ...rest }) => {
-  const editorRef = useRef();
-  const handleEditorChange = (ev, newValue) => {
-    onChange(newValue);
-  };
-  const handleEditorDidMount = (_, editor) => {
-    editorRef.current = editor;
-  };
+const BaseEditor = ({ language, value: providedValue, onChange, ...rest }) => {
+  const editor = useRef(null);
+  const listener = useRef(null);
+  const value = useRef(providedValue);
+
+  value.current = providedValue;
+
+  const handleEditorModelChange = useCallback(
+    (event) => {
+      const editorValue = editor.current.getValue();
+
+      if (value.current !== editorValue) {
+        onChange(editorValue);
+      }
+    },
+    [onChange]
+  );
+
+  const attachChangeEventListener = useCallback(() => {
+    listener.current = editor.current?.onDidChangeModelContent(
+      handleEditorModelChange
+    );
+  }, [handleEditorModelChange]);
 
   useEffect(() => {
-    const listener = () => {
-      if (editorRef) editorRef.current.layout();
-    };
+    attachChangeEventListener();
+    return () => listener.current?.dispose();
+  }, [attachChangeEventListener]);
+
+  const handleEditorDidMount = useCallback(
+    (getValue, _editor) => {
+      editor.current = _editor;
+      attachChangeEventListener();
+    },
+    [attachChangeEventListener]
+  );
+
+  useEffect(() => {
+    const listener = () => editor.current?.layout();
     window.addEventListener("editor-resize", listener);
 
     return () => window.removeEventListener("editor-resize", listener);
-  }, [editorRef]);
+  }, [editor]);
+
   return (
     <Editor
-      value={value}
-      onChange={handleEditorChange}
+      value={providedValue}
       theme={theme}
       language={language}
       options={options}
       editorDidMount={handleEditorDidMount}
-      ref={editorRef}
       {...rest}
     />
   );
