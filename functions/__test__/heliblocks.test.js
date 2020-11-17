@@ -154,7 +154,7 @@ describe("Heliblocks", () => {
       await wrapped(data, { params: { id } });
 
       expect(storage.bucket().file).toHaveBeenCalledWith(
-        `/screenshots/${id}.png`
+        `screenshots/${id}.png`
       );
       expect(storage.bucket().file().delete).toHaveBeenCalled();
 

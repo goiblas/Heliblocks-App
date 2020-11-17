@@ -21,7 +21,7 @@ exports.generate = async function (dataSnapshot, context) {
   const { id } = context.params;
 
   const imageBuffer = await screenshot(preview);
-  const file = storage().bucket().file(`/screenshots/${id}.png`);
+  const file = storage().bucket().file(`screenshots/${id}.png`);
   await file.save(imageBuffer);
 
   const url = await file.getSignedUrl({
