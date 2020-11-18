@@ -26,4 +26,9 @@ exports.firebaseMock = function () {
   admin.firestore.FieldValue.arrayRemove = jest.fn((val) => {
     return val;
   });
+
+  const toDate = jest.fn(() => "timestamp");
+  admin.firestore.Timestamp = jest.fn((seconds, nanoseconds) => {
+    return { toDate };
+  });
 };

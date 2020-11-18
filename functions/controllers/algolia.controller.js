@@ -103,6 +103,14 @@ exports.add = async function (dataSnapshot, context) {
   return algoliaIndex.saveObject({
     ...heliblock,
     objectID: context.params.id,
+    createdAt: new firestore.Timestamp(
+      heliblock.createdAt._seconds,
+      heliblock.createdAt._nanoseconds
+    ).toDate(),
+    lastUpdate: new firestore.Timestamp(
+      heliblock.lastUpdate._seconds,
+      heliblock.lastUpdate._nanoseconds
+    ).toDate(),
     author: {
       id: heliblock.author,
       ...publicAuthor,
