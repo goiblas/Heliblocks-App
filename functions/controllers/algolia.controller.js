@@ -101,8 +101,12 @@ exports.add = async function (dataSnapshot, context) {
   }
 
   return algoliaIndex.saveObject({
-    ...heliblock,
     objectID: context.params.id,
+    description: heliblock.description,
+    screenshot: heliblock.screenshot,
+    source: heliblock.source,
+    tags: heliblock.tags,
+    title: heliblock.title,
     createdAt: new firestore.Timestamp(
       heliblock.createdAt._seconds,
       heliblock.createdAt._nanoseconds
