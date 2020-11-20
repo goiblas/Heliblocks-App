@@ -12,7 +12,7 @@ const aHeliblock = (title = "Untitled") => {
     screenshot: "irrelevant.jpg",
     tags: [],
     title,
-    restricted: false
+    restricted: false,
   };
   return {
     isDraft() {
@@ -38,3 +38,45 @@ const aHeliblock = (title = "Untitled") => {
 };
 
 exports.aHeliblock = aHeliblock;
+
+const aHeliblockCompiled = (title = "Untitled") => {
+  const heliblockCompiledBase = {
+    author: "P8hbu7BWIxfiuUMmXPoPzVVUVd72",
+    createdAt: {
+      _seconds: 10000,
+      _nanoseconds: 100000,
+    },
+    lastUpdate: {
+      _seconds: 10000,
+      _nanoseconds: 100000,
+    },
+    source: {
+      alignment: "",
+      html: "",
+      css: "",
+      wrapperClassname: "",
+      variables: [],
+    },
+    description: "",
+    screenshot: "irrelevant.jpg",
+    tags: [],
+    title,
+
+    restricted: false,
+  };
+  return {
+    isPrivate() {
+      heliblockCompiledBase.restricted = true;
+      return this;
+    },
+    withAuthor(authorId) {
+      heliblockCompiledBase.author = authorId;
+      return this;
+    },
+    build() {
+      return heliblockCompiledBase;
+    },
+  };
+};
+
+exports.aHeliblockCompiled = aHeliblockCompiled;

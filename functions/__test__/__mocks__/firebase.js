@@ -15,6 +15,7 @@ exports.firebaseMock = function () {
   const doc = jest.fn((docname) => {
     return { update, get, set, delete: deleteFn };
   });
+
   const get = jest.fn(() => Promise.resolve(docResult()));
   const update = jest.fn((updateValue) => Promise.resolve(true));
   const set = jest.fn((setValue) => Promise.resolve(true));
