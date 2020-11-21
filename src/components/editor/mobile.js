@@ -32,6 +32,14 @@ const tabStyled = {
 
 const MobileEditor = () => {
   const { save, publish, draft } = useContext(EditorContext);
+  const handleResize = () => {
+    setTimeout(() => {
+      const event = new CustomEvent("editor-resize", {
+        detail: {},
+      });
+      window.dispatchEvent(event);
+    });
+  };
   return (
     <Grid h="100vh" templateRows="56px 1fr">
       <Box borderBottomWidth="1px" px="2">
@@ -42,7 +50,12 @@ const MobileEditor = () => {
         </Flex>
       </Box>
 
-      <Tabs variant="unstyled" d="flex" flexDir="column">
+      <Tabs
+        variant="unstyled"
+        d="flex"
+        flexDir="column"
+        onChange={handleResize}
+      >
         <TabPanels flexGrow="1">
           <TabPanel h="100%">
             <HtmlEditor />
