@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "@react-hook/media-query";
+import { useToast } from "@chakra-ui/core";
 import DesktopEditor from "./desktop";
 import MobileEditor from "./mobile";
 import { EditorContext, defaultState } from "./editorContext";
 import { useBeforeUnload } from "hooks";
 import { Prompt } from "react-router-dom";
+import sizeof from "object-sizeof";
 
 const preventHtmlErrors = (data) => {
   const container = document.createElement("div");
@@ -24,9 +26,20 @@ const createExportableHeliblock = (heliblock) => ({
 });
 
 const unloadMessage = "Changes may not be saved";
+const MAX_SIZE = 92000;
 
 const Editor = ({ onSave, onPublish, saving, publishing, ...props }) => {
   const [state, setState] = useState(Object.assign(defaultState, props));
+  const toast = useToast();
+
+  const showToastLimitSize = () =>
+    toast({
+      title: "Could not be saved",
+      description: "It is longer than 92000 bytes",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
 
   useBeforeUnload({
     when: state.hasUnsavedChanges,
@@ -51,17 +64,25 @@ const Editor = ({ onSave, onPublish, saving, publishing, ...props }) => {
   }, [publishing]);
 
   const save = () => {
-    setState((prevState) => ({ ...prevState, hasUnsavedChanges: false }));
-    onSave({ ...createExportableHeliblock(state), draft: true });
+    if (sizeof(state) > MAX_SIZE) {
+      showToastLimitSize();
+    } else {
+      setState((prevState) => ({ ...prevState, hasUnsavedChanges: false }));
+      onSave({ ...createExportableHeliblock(state), draft: true });
+    }
   };
 
   const publish = () => {
-    setState((prevState) => ({
-      ...prevState,
-      hasUnsavedChanges: false,
-      draft: false,
-    }));
-    onPublish({ ...createExportableHeliblock(state), draft: false });
+    if (sizeof(state) > MAX_SIZE) {
+      showToastLimitSize();
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        hasUnsavedChanges: false,
+        draft: false,
+      }));
+      onPublish({ ...createExportableHeliblock(state), draft: false });
+    }
   };
 
   return (
