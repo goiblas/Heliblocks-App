@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Editor from ".";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -7,7 +7,6 @@ import { ThemeProvider } from "@chakra-ui/core";
 import theme from "theme";
 import { AuthContext } from "services/auth";
 import { useMediaQuery } from "@react-hook/media-query";
-import { within } from "@testing-library/dom";
 
 jest.mock("@react-hook/media-query");
 jest.mock("./codeEditors/baseEditor.js");
@@ -46,9 +45,7 @@ describe("Editor", () => {
     userEvent.type(cssEditor, ".box {backgound: red}");
     userEvent.type(htmlEditor, "<div class='box'>hello world!</div>");
 
-    expect(
-      await within(preview).findByText(/hello world!/i)
-    ).toBeInTheDocument();
+    await waitFor(() => expect(preview).toHaveTextContent(/hello world!/i));
 
     userEvent.click(screen.getByRole("button", { name: "Save" }));
 
@@ -86,21 +83,15 @@ describe("Editor", () => {
     const cssEditor = screen.getByTestId("editor-css");
     const preview = screen.getByTitle("Preview");
 
-    expect(
-      await within(preview).findByText("Hello world!")
-    ).toBeInTheDocument();
-    expect(
-      await within(htmlEditor).findByText("Hello world!")
-    ).toBeInTheDocument();
-    expect(
-      await within(cssEditor).findByText(".box {backgound: red}")
-    ).toBeInTheDocument();
+    expect(htmlEditor).toHaveTextContent(heliblock.html);
+    expect(preview).toHaveTextContent("Hello world!");
+    expect(cssEditor).toHaveTextContent(heliblock.css);
 
     userEvent.type(htmlEditor, " more...");
 
-    expect(
-      await within(preview).findByText("Hello world! more...")
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(preview).toHaveTextContent("Hello world! more...")
+    );
 
     userEvent.click(screen.getByRole("button", { name: "Save" }));
 
