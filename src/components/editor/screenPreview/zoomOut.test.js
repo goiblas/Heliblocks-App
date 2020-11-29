@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import ZoomOut from "./zoomOut";
-import { ThemeProvider } from "@chakra-ui/core";
+import { ThemeProvider } from "@emotion/react";
 import theme from "theme";
 
 describe("ZoomOut", () => {
@@ -13,9 +13,9 @@ describe("ZoomOut", () => {
     );
 
     const container = screen.getByTestId("container-zoom");
-    const button100 = screen.getByTestId("button-zoom-100");
-    const button50 = screen.getByTestId("button-zoom-50");
-    const button25 = screen.getByTestId("button-zoom-25");
+    const button100 = screen.getByText("100%");
+    const button50 = screen.getByText("50%");
+    const button25 = screen.getByText("25%");
 
     expect(container).toHaveStyle("width: 100%");
     expect(container).toHaveStyle("height: 100%");

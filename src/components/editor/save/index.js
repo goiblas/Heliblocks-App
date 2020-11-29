@@ -19,7 +19,7 @@ const Save = (props) => {
   }, [user, publish]);
 
   const buttonProps = {
-    variantColor: "primary",
+    colorScheme: "primary",
     fontWeight: "normal",
     size: "md",
     loadingText: "Saving",

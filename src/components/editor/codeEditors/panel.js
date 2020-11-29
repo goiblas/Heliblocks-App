@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Box, Text } from "@chakra-ui/core";
+import { Grid, Box, Text } from "@chakra-ui/react";
 import BaseEditor from "./baseEditor";
 import { useDebouncedCallback } from "use-debounce";
 

@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Heading,
-  Flex,
-  Stack,
-  Text,
-  Icon,
-  Link,
-  Avatar,
-} from "@chakra-ui/core";
+import { Heading, Flex, Stack, Text, Link, Avatar } from "@chakra-ui/react";
+import { GithubIcon } from "theme/icons";
 
 const Profile = ({ photoURL, displayName, githubURL }) => {
   return (
@@ -25,7 +18,7 @@ const Profile = ({ photoURL, displayName, githubURL }) => {
             display="flex"
             alignItems="center"
           >
-            <Icon name="github" size="16px" mr="2" verticalAlign="middle" />
+            <GithubIcon size="16px" mr="2" verticalAlign="middle" />
             Github
           </Link>
         </Text>

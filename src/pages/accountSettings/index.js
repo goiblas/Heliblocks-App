@@ -16,7 +16,7 @@ import {
   useToast,
   FormControl,
   FormLabel,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { Title } from "react-head";
 import { uploadUserAvatar } from "services/storage";
 import ManageSubscription from "./manageSubscription";
@@ -157,7 +157,7 @@ const AccountSettings = () => {
           <Box mb="16">
             <Button
               isLoading={loading}
-              variantColor="primary"
+              colorScheme="primary"
               onClick={handleSubmit}
             >
               Save profile

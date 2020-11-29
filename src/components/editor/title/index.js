@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { Editable, EditablePreview, EditableInput } from "@chakra-ui/core";
+import { Editable, EditablePreview, EditableInput } from "@chakra-ui/react";
 import { EditorContext } from "../editorContext";
 
-const Title = props => {
+const Title = (props) => {
   const { title, setState } = useContext(EditorContext);
-  const onChange = newTitle => {
+  const onChange = (newTitle) => {
     setState({ title: newTitle });
   };
   return (

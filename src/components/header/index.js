@@ -1,7 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "@react-hook/media-query";
-
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import HeaderMobile from "./headerMobile";
 import HeaderDesktop from "./headerDesktop";
 

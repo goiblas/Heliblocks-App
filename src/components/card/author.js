@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Flex, Avatar } from "@chakra-ui/core";
+import { Text, Flex, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const Author = ({ id, displayName, photoURL, ...props }) => (

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import isotypeImage from "theme/isotipo-heliblocks.svg";
 import logoImage from "theme/logo-heliblocks.svg";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 
 const Logo = ({ narrow }) => (
   <Box as={Link} to="/" mb="3px">

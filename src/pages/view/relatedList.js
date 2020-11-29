@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getRelatedTo } from "services/heliblocks";
-import { SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
 import { Card } from "components/card";
 
 const RelatedList = ({ heliblock, id }) => {
@@ -14,7 +14,7 @@ const RelatedList = ({ heliblock, id }) => {
   return (
     <SimpleGrid columns={[1, 2, 3, 4]} spacing={[8, null, null, "40px"]} mb="4">
       {heliblocks &&
-        heliblocks.map(heliblockRelated => (
+        heliblocks.map((heliblockRelated) => (
           <Card key={heliblockRelated.id} {...heliblockRelated} />
         ))}
     </SimpleGrid>

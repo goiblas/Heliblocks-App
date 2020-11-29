@@ -2,9 +2,9 @@ import React from "react";
 import Header from "components/header";
 import { Main, Container } from "components/containers";
 import Footer from "components/footer";
-import { Box, Heading, Text } from "@chakra-ui/core";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Title } from 'react-head';
+import { Title } from "react-head";
 
 const NotFound = () => (
   <>

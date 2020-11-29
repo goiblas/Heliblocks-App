@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Box, Text, Flex, IconButton, Tag } from "@chakra-ui/core";
+import { Box, Text, Flex, IconButton, Tag } from "@chakra-ui/react";
+import { DeleteIcon } from "theme/icons";
 import { Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import HeaderCard from "./headerCard";
@@ -47,12 +48,12 @@ export const CardOwner = (props) => {
         <HeaderCard image={props.screenshot} />
         <ContainerTags>
           {props.draft && (
-            <Tag size="sm" mr="1" variantColor="purple">
+            <Tag size="sm" mr="1" colorScheme="purple">
               Draft
             </Tag>
           )}
           {props.restricted && (
-            <Tag Tag size="sm" variantColor="blue">
+            <Tag Tag size="sm" colorScheme="blue">
               Private
             </Tag>
           )}
@@ -79,7 +80,7 @@ export const CardOwner = (props) => {
           variant="ghost"
           my="2"
           aria-label="remove"
-          icon="delete"
+          icon={<DeleteIcon />}
           onClick={deleteHandle}
         />
       </Flex>

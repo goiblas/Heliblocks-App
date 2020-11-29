@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { getUser } from "services/users";
 import Profile from "./profile";
 import { AuthContext } from "services/auth";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import PublicHeliblocks from "./publicHeliblocks";
 import OwnHeliblocks from "./ownHeliblocks";
 import { Title } from "react-head";

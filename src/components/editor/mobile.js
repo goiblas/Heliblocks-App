@@ -5,6 +5,7 @@ import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
 import Logo from "components/logo";
 import { UserMenu } from "components/menus";
+import { SettingsIcon } from "theme/icons";
 import { EditorContext } from "./editorContext";
 import {
   Box,
@@ -20,7 +21,7 @@ import {
   MenuButton,
   Menu,
   IconButton,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 const tabStyled = {
   borderTopWidth: "3px",
@@ -80,7 +81,7 @@ const MobileEditor = () => {
                 <MenuButton
                   as={IconButton}
                   aria-label="Settings"
-                  icon="settings"
+                  icon={<SettingsIcon />}
                   ml="2"
                 />
                 <MenuList placement="top-end">

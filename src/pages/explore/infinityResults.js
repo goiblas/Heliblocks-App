@@ -3,14 +3,14 @@ import { connectInfiniteHits } from "react-instantsearch-dom";
 import PropTypes from "prop-types";
 import { Card } from "components/card";
 import { CardsGrid } from "components/containers";
-import { Box } from "@chakra-ui/core"
+import { Box } from "@chakra-ui/react";
 
 const InfinityResults = ({ hits, hasMore, refine }) => {
   const sentinel = useRef();
 
   const onSentinelIntersection = useCallback(
-    entries => {
-      entries.forEach(entry => {
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && hasMore) {
           refine();
         }
@@ -22,7 +22,7 @@ const InfinityResults = ({ hits, hasMore, refine }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(onSentinelIntersection);
     observer.observe(sentinel.current);
-  
+
     return () => observer.disconnect();
   }, [onSentinelIntersection, sentinel]);
 
@@ -47,7 +47,7 @@ const InfinityResults = ({ hits, hasMore, refine }) => {
 InfinityResults.propTypes = {
   hits: PropTypes.arrayOf(PropTypes.object).isRequired,
   hasMore: PropTypes.bool.isRequired,
-  refine: PropTypes.func.isRequired
+  refine: PropTypes.func.isRequired,
 };
 
 export default connectInfiniteHits(InfinityResults);

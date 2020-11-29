@@ -5,7 +5,7 @@ import { Container, Main } from "components/containers";
 import Markdown from "components/markdown";
 import { content } from "./content";
 import { Title, Meta } from "react-head";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 
 const Privacy = () => (
   <>

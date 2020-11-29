@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Section, Bar } from "react-simple-resizer";
-import { useTheme, Box, Icon } from "@chakra-ui/core";
+import { useTheme, Box } from "@chakra-ui/react";
+import { ResizeIcon } from "theme/icons";
 
-const Divider = props => {
+const Divider = (props) => {
   const theme = useTheme();
   return (
     <Bar
@@ -10,16 +11,16 @@ const Divider = props => {
       style={{
         display: "flex",
         background: theme.colors.gray[100],
-        borderLeft: `1px solid ${theme.colors.gray[200]}`
+        borderLeft: `1px solid ${theme.colors.gray[200]}`,
       }}
       {...props}
     >
-      <Icon name="resize" color="gray.500" m="auto" />
+      <ResizeIcon color="gray.500" m="auto" />
     </Bar>
   );
 };
 
-const Resizable = props => {
+const Resizable = (props) => {
   const [dragging, setDragging] = useState(false);
   const containerRef = useRef(null);
 

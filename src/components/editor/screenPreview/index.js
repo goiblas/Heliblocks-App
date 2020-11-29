@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
-import { Box, Grid } from "@chakra-ui/core";
-import RadioButtonGroup from "components/radioButtonGroup";
+import { Box, Grid } from "@chakra-ui/react";
+import ToggleButtons from "components/toggleButtons";
 import { EditorContext } from "./../editorContext";
 import Preview from "components/preview";
 import ZoomOut from "./zoomOut";
 
 export const alignments = [
   {
-    id: "normal",
-    name: "Normal",
+    label: "Normal",
+    value: "normal",
   },
   {
-    id: "wide",
-    name: "Wide",
+    label: "Wide",
+    value: "wide",
   },
   {
-    id: "full",
-    name: "Full",
+    label: "Full",
+    value: "full",
   },
 ];
 
@@ -27,18 +27,14 @@ const ScreenPreview = () => {
   return (
     <Grid templateRows="auto 1fr" h="100%">
       <Box borderBottomWidth="1px" px="4" py="2">
-        <RadioButtonGroup
-          defaultValue={alignment}
-          mr="2"
-          size="sm"
+        <ToggleButtons
+          options={alignments}
+          name="Alignments"
+          value={alignment}
           onChange={(newAlignment) => setState({ alignment: newAlignment })}
-        >
-          {alignments.map((alignment) => (
-            <RadioButtonGroup.Radio key={alignment.id} value={alignment.id}>
-              {alignment.name}
-            </RadioButtonGroup.Radio>
-          ))}
-        </RadioButtonGroup>
+          size="sm"
+          mr="2"
+        />
       </Box>
       <ZoomOut>
         <Preview

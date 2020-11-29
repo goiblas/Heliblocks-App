@@ -1,6 +1,6 @@
 import React from "react";
 import Author from "./author";
-import { Heading, Box, Flex, Tag } from "@chakra-ui/core";
+import { Heading, Box, Flex, Tag } from "@chakra-ui/react";
 import CopyId from "./copyId";
 
 const Details = ({ title, description, tags, author, id }) => {
@@ -25,8 +25,8 @@ const Details = ({ title, description, tags, author, id }) => {
           </Box>
         )}
         <Flex flexWrap="wrap" mb="2">
-          {tags.map(tag => (
-            <Tag mr="2" mb="2" size="sm" key={tag} variantColor="gray">
+          {tags.map((tag) => (
+            <Tag mr="2" mb="2" size="sm" key={tag} colorScheme="gray">
               {tag}
             </Tag>
           ))}

@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Radio,
   Tag,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { AuthContext } from "services/auth";
 import { createSubscription, goToBillingPortal } from "services/subscription";
 
@@ -46,7 +46,7 @@ const ManageSubscription = () => {
           secure portal.
         </Text>
         <Button
-          variantColor="primary"
+          colorScheme="primary"
           onClick={() => {
             setBillingLoading(true);
             goToBillingPortal();
@@ -106,7 +106,7 @@ const ManageSubscription = () => {
 
       <Button
         onClick={subcribe}
-        variantColor="primary"
+        colorScheme="primary"
         isLoading={isBillingLoading}
       >
         Subscribe to PRO Plan

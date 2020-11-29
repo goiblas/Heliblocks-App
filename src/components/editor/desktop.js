@@ -7,7 +7,7 @@ import { CssEditor, HtmlEditor } from "./codeEditors";
 import ScreenPreview from "./screenPreview";
 import { UserMenu } from "components/menus";
 import Logo from "components/logo";
-import { Box, Flex, useTheme, Stack, Button } from "@chakra-ui/core";
+import { Box, Flex, useTheme, HStack, Button } from "@chakra-ui/react";
 import { Container, Section, Bar } from "react-simple-resizer";
 
 const Divider = ({ style, ...rest }) => {
@@ -38,7 +38,7 @@ const DesktopEditor = () => {
         <Flex height="56px" justifyContent="space-between" alignItems="center">
           <Logo />
           <Title />
-          <Stack isInline spacing={2}>
+          <HStack spacing={2}>
             {draft && (
               <>
                 <Button
@@ -54,12 +54,12 @@ const DesktopEditor = () => {
                 <Box w="4" />
               </>
             )}
-            <Settings mr="2" />
+            <Settings />
             <Save />
             <Flex>
               <UserMenu />
             </Flex>
-          </Stack>
+          </HStack>
         </Flex>
       </Box>
       <Container

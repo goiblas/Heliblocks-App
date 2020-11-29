@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserMenu } from "components/menus";
-import { Flex, Button, Box } from "@chakra-ui/core";
+import { Flex, Button, Box } from "@chakra-ui/react";
 import Logo from "components/logo";
 
 const HeaderDesktop = () => {
@@ -21,7 +21,7 @@ const HeaderDesktop = () => {
           Documentation
         </Box>
         <Box ml="auto" />
-        <Button variantColor="primary" as={Link} to="/create" mr="2">
+        <Button colorScheme="primary" as={Link} to="/create" mr="2">
           Create
         </Button>
         <UserMenu />

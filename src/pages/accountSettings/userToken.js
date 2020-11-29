@@ -10,8 +10,7 @@ import {
   Box,
   Grid,
   Text,
-} from "@chakra-ui/core";
-
+} from "@chakra-ui/react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { generateToken, getToken } from "services/users";
 

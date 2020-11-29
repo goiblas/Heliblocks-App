@@ -17,7 +17,7 @@ import {
   Flex,
   Link,
   useToast,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import SelectTags from "./selectTags";
 import { EditorContext } from "./../editorContext";
 import { AuthContext } from "services/auth";
@@ -140,7 +140,7 @@ const Settings = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variantColor="blue" onClick={saveHandle}>
+            <Button colorScheme="blue" onClick={saveHandle}>
               Save
             </Button>
           </ModalFooter>

@@ -1,6 +1,7 @@
 import React from "react";
-import { IconButton, useToast, Box } from "@chakra-ui/core";
+import { IconButton, useToast, Box } from "@chakra-ui/react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { CopyIcon } from "theme/icons";
 
 const CopyId = ({ id }) => {
   const toast = useToast();
@@ -9,7 +10,7 @@ const CopyId = ({ id }) => {
     toast({
       position: "bottom-left",
       duration: 1100,
-      render: props => {
+      render: (props) => {
         return (
           <Box
             bg="dark.700"
@@ -24,7 +25,7 @@ const CopyId = ({ id }) => {
             Id Copied!
           </Box>
         );
-      }
+      },
     });
   };
   return (
@@ -34,7 +35,7 @@ const CopyId = ({ id }) => {
         size="lg"
         p={[3, 4]}
         minW="0"
-        icon="copy"
+        icon={<CopyIcon />}
         aria-label="Copy id"
       />
     </CopyToClipboard>

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import RadioButtonGroup from "components/radioButtonGroup";
+import ToggleButtons from "components/toggleButtons";
 import PropTypes from "prop-types";
 
+const zoomAvailables = [
+  { label: "100%", value: "1" },
+  { label: "50%", value: "2" },
+  { label: "25%", value: "4" },
+];
 const ZoomOut = ({ children }) => {
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState("1");
 
   return (
     <Wrapper>
@@ -20,17 +25,13 @@ const ZoomOut = ({ children }) => {
         {children}
       </div>
       <ButtonGroup>
-        <RadioButtonGroup defaultValue={zoom} size="xs" onChange={setZoom}>
-          <RadioButtonGroup.Radio data-testid="button-zoom-100" value={1}>
-            100%
-          </RadioButtonGroup.Radio>
-          <RadioButtonGroup.Radio data-testid="button-zoom-50" value={2}>
-            50%
-          </RadioButtonGroup.Radio>
-          <RadioButtonGroup.Radio data-testid="button-zoom-25" value={4}>
-            25%
-          </RadioButtonGroup.Radio>
-        </RadioButtonGroup>
+        <ToggleButtons
+          options={zoomAvailables}
+          name="zoom"
+          value={zoom}
+          onChange={setZoom}
+          size="xs"
+        />
       </ButtonGroup>
     </Wrapper>
   );

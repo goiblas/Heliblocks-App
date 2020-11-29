@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "@react-hook/media-query";
-import { useToast } from "@chakra-ui/core";
+import { useToast } from "@chakra-ui/react";
 import DesktopEditor from "./desktop";
 import MobileEditor from "./mobile";
 import { EditorContext, defaultState } from "./editorContext";

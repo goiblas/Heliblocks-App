@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image } from "@chakra-ui/core";
+import { Image } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from "./index";
 import bg from "./bg-transparent.svg";
@@ -12,7 +12,7 @@ const HeaderCard = ({ image }) => (
 );
 
 HeaderCard.propTypes = {
-  image: PropTypes.string.isRequired
+  image: PropTypes.string.isRequired,
 };
 
 export default HeaderCard;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Flex, Avatar } from "@chakra-ui/core";
+import { Text, Flex, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { getUser } from "services/users";
 
@@ -8,7 +8,7 @@ const Author = ({ id }) => {
   useEffect(() => {
     getUser(id)
       .then(setAuthor)
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, [id]);
 
   if (!author) {

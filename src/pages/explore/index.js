@@ -3,12 +3,12 @@ import algoliasearch from "algoliasearch/lite";
 import Header from "components/header";
 import { InstantSearch, Configure } from "react-instantsearch-dom";
 import InfinityResults from "./infinityResults";
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading } from "@chakra-ui/react";
 import AmountResults from "./amountResults";
 import { Main, Container } from "components/containers";
 import Footer from "components/footer";
 import SearchBox from "./searchBox";
-import { Title } from 'react-head';
+import { Title } from "react-head";
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -16,7 +16,7 @@ const searchClient = algoliasearch(
 );
 
 // https://www.algolia.com/press/?section=brand-guidelines
-const Explore = porps => (
+const Explore = (porps) => (
   <>
     <Title>Explore - Heliblocks</Title>
     <Header />

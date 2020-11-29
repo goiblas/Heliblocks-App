@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { signInWithGithub, AuthContext } from "services/auth";
+import { GithubIcon } from "theme/icons";
 import {
   Modal,
   ModalOverlay,
@@ -10,7 +11,7 @@ import {
   useDisclosure,
   Button,
   Heading,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 const ProtectedButton = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,8 +32,8 @@ const ProtectedButton = (props) => {
                 Need to be register
               </Heading>
               <Button
-                variantColor="primary"
-                leftIcon="github"
+                colorScheme="primary"
+                leftIcon={<GithubIcon />}
                 onClick={signInWithGithub}
               >
                 Login with Github

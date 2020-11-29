@@ -3,12 +3,12 @@ import Header from "components/header";
 import Markdown from "pages/documentation/markdown";
 import Footer from "components/footer";
 import { Container, Main } from "components/containers";
-import { List, Box, Grid, Button, Select } from "@chakra-ui/core";
+import { List, Box, Grid, Button, Select } from "@chakra-ui/react";
 import { docsEs } from "./docs-es";
 import { docsEn } from "./docs-en";
 import { Provider } from "react-slot-fill";
 import { Slot } from "react-slot-fill";
-import { Global, css } from "@emotion/core";
+import { Global, css } from "@emotion/react";
 import { Title } from "react-head";
 
 const languages = {
@@ -73,6 +73,7 @@ const Documentation = () => {
                 <Button
                   as="a"
                   target="_blank"
+                  fontWeight="normal"
                   href={
                     "https://github.com/goiblas/Heliblocks-App/edit/master/src/pages/documentation/" +
                     languages[language].filename

@@ -1,7 +1,6 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
 import CodeViewer from "./codeViewer";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from "@chakra-ui/react";
 import Preview from "components/preview";
 import { Container } from "components/containers";
 import Resizable from "./resizable";
@@ -12,7 +11,7 @@ const TabStyled = React.forwardRef((props, ref) => (
     py="4"
     _selected={{
       color: "primary.600",
-      boxShadow: "inset 0 2px currentColor, 0 -1px currentColor"
+      boxShadow: "inset 0 2px currentColor, 0 -1px currentColor",
     }}
     {...props}
   />
@@ -21,19 +20,24 @@ const HeliblockViewer = ({ html, css, alignment, height, additionalLinks }) => (
   <Container w="100%">
     <Tabs borderRadius="6px" borderWidth="1px" variant="unstyled">
       <TabPanels>
-        <TabPanel>
+        <TabPanel p={0}>
           <Box h={height}>
             <Resizable>
-              <Preview html={html} css={css} alignment={alignment} additionalLinks={additionalLinks} />
+              <Preview
+                html={html}
+                css={css}
+                alignment={alignment}
+                additionalLinks={additionalLinks}
+              />
             </Resizable>
           </Box>
         </TabPanel>
-        <TabPanel>
+        <TabPanel p={0}>
           <Box h={height}>
             <CodeViewer language="html" code={html} />
           </Box>
         </TabPanel>
-        <TabPanel>
+        <TabPanel p={0}>
           <Box h={height}>
             <CodeViewer language="css" code={css} />
           </Box>

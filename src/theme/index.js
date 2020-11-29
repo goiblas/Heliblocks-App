@@ -1,43 +1,23 @@
-import { theme } from "@chakra-ui/core";
-import customIcons from "./icons";
+import { extendTheme } from "@chakra-ui/react";
 
-const customTheme = {
-  ...theme,
-  icons: {
-    ...theme.icons,
-    ...customIcons,
+const customTheme = extendTheme({
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: "normal",
+      },
+    },
   },
   shadows: {
-    ...theme.shadows,
     sm: "0 0 1px #ececed, 0 1px 3px 0 rgba(41, 71, 98, 0.1)",
   },
-  fontSizes: {
-    xs: "0.68rem",
-    sm: "0.8rem",
-    md: "0.875rem",
-    lg: "1rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-    "3xl": "1.875rem",
-    "4xl": "2.25rem",
-    "5xl": "3rem",
-    "6xl": "4rem",
-  },
-  fontWeights: {
-    hairline: 300,
-    thin: 300,
-    light: 300,
-    normal: 400,
-    medium: 400,
-    semibold: 600,
-    bold: 700,
-    extrabold: 700,
-    black: 700,
+  fonts: {
+    body: "'Inter', system-ui, sans-serif",
+    heading: "'Inter', system-ui, sans-serif",
+    mono: "Menlo, monospace",
   },
   colors: {
-    ...theme.colors,
     gray: {
-      ...theme.colors.gray,
       500: "#67768e", // contrasct ratio
     },
     primary: {
@@ -89,11 +69,6 @@ const customTheme = {
       900: "#010e18",
     },
   },
-  fonts: {
-    body: "'Inter', system-ui, sans-serif",
-    heading: "'Inter', system-ui, sans-serif",
-    mono: "Menlo, monospace",
-  },
-};
+});
 
 export default customTheme;

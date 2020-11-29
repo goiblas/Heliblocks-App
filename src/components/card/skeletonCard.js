@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, useTheme } from "@chakra-ui/core";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Box, Skeleton, SkeletonText } from "@chakra-ui/react";
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from ".";
 
 const SkeletonImage = ({ width, height, ...props }) => (
@@ -12,15 +11,12 @@ const SkeletonImage = ({ width, height, ...props }) => (
 );
 
 export const SkeletonCard = () => {
-  const { colors } = useTheme();
   return (
-    <SkeletonTheme color={colors.gray[100]}>
-      <Box data-testid="skeleton-card">
-        <SkeletonImage width={IMAGE_WIDTH} height={IMAGE_HEIGHT} />
-        <Box alignItems="flex-start" py="5">
-          <Skeleton width="66%" />
-        </Box>
+    <Box data-testid="skeleton-card">
+      <SkeletonImage width={IMAGE_WIDTH} height={IMAGE_HEIGHT} />
+      <Box alignItems="flex-start" py="5">
+        <SkeletonText noOfLines={2} spacing={4} />
       </Box>
-    </SkeletonTheme>
+    </Box>
   );
 };

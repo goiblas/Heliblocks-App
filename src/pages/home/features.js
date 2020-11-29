@@ -1,14 +1,11 @@
 import React from "react";
-import { Box, Heading, Icon, Flex, Text } from "@chakra-ui/core";
+import { Box, Heading, Flex, Text } from "@chakra-ui/react";
+import { ReuseIcon, BoxesIcon } from "theme/icons";
 
-const Feature = ({ title, description, icon }) => (
+const Feature = ({ title, description, icon: Icon }) => (
   <Box w={{ md: "45%" }} pb="16">
     <Flex>
-      <Icon
-        name={icon}
-        size={["48px", "56px", null, "78px"]}
-        color="gray.300"
-      />
+      <Icon boxSize={["48px", "56px", null, "78px"]} color="gray.300" />
       <Box ml={["6", null, null, "8"]}>
         <Heading as="h2" fontSize={["xl", null, "2xl", "3xl"]} mb={["2", "4"]}>
           {title}
@@ -34,13 +31,13 @@ const Features = () => {
       <Feature
         title="Works in headless"
         description="Everything WordPress needs to paint the heliblock is contained within the content, so it is a perfect match to use with headless."
-        icon="boxes"
+        icon={BoxesIcon}
       />
 
       <Feature
         title="Save and reuse"
         description="Use the platform, take the power of Block editor and the versatility of CSS variables to customize."
-        icon="reuse"
+        icon={ReuseIcon}
       />
     </Box>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "components/containers";
-import { Text, Flex, Link, Image } from "@chakra-ui/core";
+import { Text, Flex, Link, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import logo from "theme/isotipo-heliblocks-gray.svg";
 

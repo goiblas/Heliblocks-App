@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import Header from "../index";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "@chakra-ui/core";
+import { ThemeProvider } from "@emotion/react";
 import theme from "theme";
 import { AuthContext } from "services/auth";
 

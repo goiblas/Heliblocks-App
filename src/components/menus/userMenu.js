@@ -8,10 +8,11 @@ import {
   Avatar,
   MenuItem,
   Box,
-} from "@chakra-ui/core";
+  MenuDivider,
+} from "@chakra-ui/react";
 import { AuthContext, signOut } from "services/auth";
 import SignIn from "./signIn";
-
+import { DropdownIcon } from "theme/icons";
 export const UserMenu = () => {
   const { isLoaded, user } = useContext(AuthContext);
 
@@ -30,7 +31,7 @@ export const UserMenu = () => {
         ml="1"
         as={Button}
         variant="link"
-        rightIcon="dropdown"
+        rightIcon={<DropdownIcon />}
       >
         <Avatar name={user.displayName} size="sm" src={user.photoURL} />
       </MenuButton>
@@ -41,6 +42,7 @@ export const UserMenu = () => {
         <MenuItem as={Link} to={`/account-settings`}>
           Account settings
         </MenuItem>
+        <MenuDivider />
         <MenuItem data-testid="logout-button" onClick={signOut}>
           Log Out
         </MenuItem>

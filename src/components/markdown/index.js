@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Heading, Box, Link } from "@chakra-ui/core";
+import { Heading, Box, Link } from "@chakra-ui/react";
 
 const Markdown = ({ content }) => {
   const RenderHeading = (heading) => (
