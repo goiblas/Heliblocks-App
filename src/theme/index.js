@@ -16,6 +16,18 @@ const customTheme = extendTheme({
     heading: "'Inter', system-ui, sans-serif",
     mono: "Menlo, monospace",
   },
+  fontSizes: {
+    xs: "0.68rem",
+    sm: "0.8rem",
+    md: "0.875rem",
+    lg: "1rem",
+    xl: "1.25rem",
+    "2xl": "1.5rem",
+    "3xl": "1.875rem",
+    "4xl": "2.25rem",
+    "5xl": "3rem",
+    "6xl": "4rem",
+  },
   colors: {
     gray: {
       500: "#67768e", // contrasct ratio
