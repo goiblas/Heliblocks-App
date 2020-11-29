@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { Box, Skeleton, Stack } from "@chakra-ui/react";
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from ".";
 
 const SkeletonImage = ({ width, height, ...props }) => (
@@ -14,9 +14,10 @@ export const SkeletonCard = () => {
   return (
     <Box data-testid="skeleton-card">
       <SkeletonImage width={IMAGE_WIDTH} height={IMAGE_HEIGHT} />
-      <Box alignItems="flex-start" py="5">
-        <SkeletonText noOfLines={2} spacing={4} />
-      </Box>
+      <Stack spacing={4} py={4}>
+        <Skeleton h={3} />
+        <Skeleton h={3} w="40%" />
+      </Stack>
     </Box>
   );
 };

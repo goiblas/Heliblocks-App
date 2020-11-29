@@ -6,7 +6,6 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Icon,
 } from "@chakra-ui/react";
 import searchByAlgolia from "./search-by-algolia.svg";
 import { SearchIcon } from "theme/icons";
