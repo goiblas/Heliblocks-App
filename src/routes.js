@@ -11,7 +11,6 @@ import View from "pages/view";
 import Create from "pages/create";
 import Privacy from "pages/privacy";
 import Terms from "pages/terms";
-import { Fathom } from "components/analytics";
 
 const ScrollTo = () => {
   const { pathname } = useLocation();
@@ -27,7 +26,6 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollTo />
-      <Fathom />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/create" component={Create} />

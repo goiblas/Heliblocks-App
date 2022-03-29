@@ -15,7 +15,6 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
     "algoliasearch": "^4.8.0",
-    "fathom-client": "^3.0.0",
     "firebase": "^8.1.1",
     "framer-motion": "^2.9.4",
     "js-cookie": "^2.2.1",
