@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "algoliasearch": "^4.5.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "firebase-admin": "^9.3.0",
