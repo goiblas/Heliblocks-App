@@ -18,7 +18,7 @@
     "firebase-functions": "^3.11.0",
     "html-minifier": "^4.0.0",
     "jimp": "^0.16.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "nanoid": "^3.1.16",
     "postcss": "^8.2.10",
     "postcss-selector-parser": "^6.0.4",
