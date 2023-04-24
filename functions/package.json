@@ -19,7 +19,7 @@
     "html-minifier": "^4.0.0",
     "jimp": "^0.16.1",
     "jsonwebtoken": "^8.5.1",
-    "nanoid": "^3.1.16",
+    "nanoid": "^3.1.31",
     "postcss": "^8.2.10",
     "postcss-selector-parser": "^6.0.4",
     "puppeteer": "^5.4.1",
